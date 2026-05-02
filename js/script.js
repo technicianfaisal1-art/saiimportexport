@@ -52,17 +52,22 @@ renderProducts();
 const navbar = document.getElementById('navbar');
 let lastScrollY = window.scrollY;
 
+// Check if we are on the homepage (index.html or root)
+const isHomePage = window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || window.location.pathname === '';
+
 window.addEventListener('scroll', () => {
   const currentScrollY = window.scrollY;
   
   // Background toggle
   navbar.classList.toggle('scrolled', currentScrollY > 60);
   
-  // Hide on scroll down, show on scroll up
-  if (currentScrollY > lastScrollY && currentScrollY > 100) {
-    navbar.classList.add('hidden');
-  } else {
-    navbar.classList.remove('hidden');
+  // Hide on scroll down, show on scroll up (ONLY for subpages)
+  if (!isHomePage) {
+    if (currentScrollY > lastScrollY && currentScrollY > 100) {
+      navbar.classList.add('hidden');
+    } else {
+      navbar.classList.remove('hidden');
+    }
   }
   
   lastScrollY = currentScrollY;
