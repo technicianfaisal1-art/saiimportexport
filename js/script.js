@@ -37,7 +37,7 @@ function renderProducts() {
         <span class="product-tag">${p.tag}</span>
         <h3><a href="product.html?id=${p.id}" style="color:inherit;">${p.name}</a></h3>
         <p>${p.desc}</p>
-        <div style="display:flex;gap:0.5rem;">
+        <div class="product-actions" style="display:flex;gap:0.5rem;">
           <a href="product.html?id=${p.id}" class="product-btn" style="text-align:center;flex:1;">View Details →</a>
           <button class="product-btn" style="background:var(--orange);flex:1;" onclick="openCheckout('${p.id}')">Get Quote</button>
         </div>
