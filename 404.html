@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 Not Found | FARMEXO</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" type="image/jpeg" href="images/farmexo_logo_icon.jpeg">
+    <style>
+        .error-page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem 5%;
+            background: var(--off-white);
+        }
+        .error-code {
+            font-family: var(--serif);
+            font-size: clamp(6rem, 15vw, 10rem);
+            color: var(--green-dark);
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+        .error-message {
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            margin-bottom: 2rem;
+            max-width: 500px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar scrolled">
+        <a href="index.html" class="logo">
+            <img src="images/farmexo_logo_icon.jpeg" alt="FARMEXO Icon" class="nav-logo-img">
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="index.html#products">Products</a></li>
+            <li><a href="blog.html">Insights</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+        <a href="contact.html" class="btn-cta nav-cta">Enquire Now</a>
+    </nav>
+
+    <div class="error-page">
+        <div class="error-code">404</div>
+        <div class="error-message">Oops! The page you are looking for does not exist or has been moved.</div>
+        <a href="index.html" class="btn-cta">Return to Homepage</a>
+    </div>
+
+</body>
+</html>

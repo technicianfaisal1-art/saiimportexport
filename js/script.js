@@ -109,7 +109,7 @@ confirmBtn.addEventListener('click', () => {
 });
 
 // ==================== CHATBOT (GEMINI AI) ====================
-// ⚠️ CONFIGURE: Replace with your Gemini API key from https://aistudio.google.com/apikey
+// ⚠️ CONFIGURE: For local testing, put your key here. For Vercel production, leave empty and use Vercel Env Vars.
 const GEMINI_API_KEY = 'AIzaSyDIBbkhQTK6R63Mhtu6oZDFOUTZ6gzEqOE';
 
 let ALL_PRODUCTS_TEXT = "Products info will be loaded dynamically.";
@@ -252,19 +252,29 @@ async function getGeminiReply(userMsg) {
   const recentHistory = chatHistory.slice(-10);
 
   try {
-    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite-preview:generateContent?key=${GEMINI_API_KEY}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        system_instruction: { parts: [{ text: SYSTEM_PROMPT }] },
-        contents: recentHistory,
-        generationConfig: {
-          temperature: 0.7,
-          maxOutputTokens: 1000,
-          topP: 0.9
-        }
-      })
-    });
+    let res;
+    // If a hardcoded key exists (local testing), use it directly
+    if (GEMINI_API_KEY && GEMINI_API_KEY.trim() !== '' && GEMINI_API_KEY !== 'YOUR_GEMINI_API_KEY_HERE') {
+      res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite-preview:generateContent?key=${GEMINI_API_KEY}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          system_instruction: { parts: [{ text: SYSTEM_PROMPT }] },
+          contents: recentHistory,
+          generationConfig: { temperature: 0.7, maxOutputTokens: 1000, topP: 0.9 }
+        })
+      });
+    } else {
+      // Production on Vercel: Call our secure serverless function
+      res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          system_instruction: { parts: [{ text: SYSTEM_PROMPT }] },
+          contents: recentHistory
+        })
+      });
+    }
 
     if (!res.ok) throw new Error(`API error: ${res.status}`);
 
