@@ -23,6 +23,7 @@ const products = [
 const productContainer = document.getElementById('product-container');
 
 function renderProducts() {
+  if (!productContainer) return;
   products.forEach((p, index) => {
     const delayClass = `animate-delay-${(index % 4) + 1}`;
     const card = document.createElement('div');
@@ -54,8 +55,10 @@ window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', wind
 // ==================== HAMBURGER ====================
 const hamburger = document.getElementById('hamburger');
 const navLinks = document.getElementById('nav-links');
-hamburger.addEventListener('click', () => navLinks.classList.toggle('mobile-open'));
-navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('mobile-open')));
+if (hamburger) {
+  hamburger.addEventListener('click', () => navLinks.classList.toggle('mobile-open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('mobile-open')));
+}
 
 // ==================== SCROLL ANIMATIONS ====================
 const observer = new IntersectionObserver((entries) => {
@@ -91,22 +94,24 @@ const cancelBtn = document.getElementById('cancel-checkout');
 const confirmBtn = document.getElementById('confirm-checkout');
 let selectedProduct = null;
 
-window.openCheckout = function (id) {
-  selectedProduct = products.find(p => p.id === id);
-  modalTitle.textContent = selectedProduct.name;
-  modal.classList.add('active');
-};
-[modalClose, cancelBtn].forEach(b => b.addEventListener('click', () => modal.classList.remove('active')));
-modal.addEventListener('click', e => { if (e.target === modal) modal.classList.remove('active'); });
+if (modal) {
+  window.openCheckout = function (id) {
+    selectedProduct = products.find(p => p.id === id);
+    modalTitle.textContent = selectedProduct.name;
+    modal.classList.add('active');
+  };
+  [modalClose, cancelBtn].forEach(b => b.addEventListener('click', () => modal.classList.remove('active')));
+  modal.addEventListener('click', e => { if (e.target === modal) modal.classList.remove('active'); });
 
-confirmBtn.addEventListener('click', () => {
-  modal.classList.remove('active');
-  openChat();
-  setTimeout(() => {
-    addMsg(`I'm interested in ${selectedProduct.name}. Please share FOB pricing and MOQ details.`, 'user');
-    setTimeout(() => addMsg(`Thank you for your interest in our ${selectedProduct.name}! Our export team will prepare a quote. Could you share your destination port?`, 'bot'), 800);
-  }, 400);
-});
+  confirmBtn.addEventListener('click', () => {
+    modal.classList.remove('active');
+    openChat();
+    setTimeout(() => {
+      addMsg(`I'm interested in ${selectedProduct.name}. Please share FOB pricing and MOQ details.`, 'user');
+      setTimeout(() => addMsg(`Thank you for your interest in our ${selectedProduct.name}! Our export team will prepare a quote. Could you share your destination port?`, 'bot'), 800);
+    }, 400);
+  });
+}
 
 // ==================== CHATBOT (GEMINI AI) ====================
 // ⚠️ CONFIGURE: For local testing, put your key here. For Vercel production, leave empty and use Vercel Env Vars.
