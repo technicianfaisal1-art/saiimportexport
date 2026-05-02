@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact FARMEXO | Request a Quote</title>
+    <meta name="description"
+        content="Get in touch with FARMEXO for premium agricultural exports. Request a custom FOB/CIF quote for Jaggery, Makhana, Maize, and more.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .page-header {
+            padding: 8rem 5% 4rem;
+            background: var(--green-dark);
+            color: #fff;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-family: var(--serif);
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: var(--orange);
+        }
+
+        .page-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 5rem auto;
+            padding: 0 5%;
+        }
+
+        .contact-info h2 {
+            font-family: var(--serif);
+            font-size: 2.5rem;
+            color: var(--green-dark);
+            margin-bottom: 1rem;
+        }
+
+        .contact-info > p {
+            color: var(--text-mid);
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+        }
+
+        .info-card {
+            background: #f9f9f9;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .info-icon {
+            font-size: 1.5rem;
+            background: #fff;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            color: var(--green);
+        }
+
+        .info-text h4 {
+            margin-bottom: 0.3rem;
+            color: var(--text-dark);
+        }
+
+        .info-text p, .info-text a {
+            color: var(--text-mid);
+            font-size: 0.95rem;
+            text-decoration: none;
+        }
+
+        .info-text a:hover {
+            color: var(--orange);
+        }
+
+        .map-container {
+            margin-top: 2rem;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            height: 250px;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .form-status {
+            display: none;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+        
+        .form-status.success {
+            display: block;
+            background: #e6f7eb;
+            color: #2e7d32;
+            border: 1px solid #c8e6c9;
+        }
+        
+        .form-status.error {
+            display: block;
+            background: #fdecea;
+            color: #c62828;
+            border: 1px solid #f8bbd0;
+        }
+
+        @media (max-width: 900px) {
+            .contact-container { grid-template-columns: 1fr; }
+            .page-header h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <a href="index.html" class="logo">
+            <img src="images/farmexo_logo_icon.jpeg" alt="FARMEXO Icon" class="nav-logo-img">
+        </a>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="index.html#products">Products</a></li>
+            <li><a href="index.html#logistics">Logistics</a></li>
+            <li><a href="contact.html" class="nav-active">Contact Us</a></li>
+        </ul>
+        <!-- Language Picker -->
+        <div class="lang-picker notranslate" id="lang-picker" translate="no">
+            <button class="lang-picker-btn" id="lang-picker-btn" aria-label="Change language">
+                <svg class="lang-globe" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10A15.3 15.3 0 0 1 12 2z" />
+                </svg>
+                <span class="lang-picker-label" id="lang-picker-label">English</span>
+                <svg class="lang-chevron" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M7 10l5 5 5-5z" />
+                </svg>
+            </button>
+            <div class="lang-dropdown" id="lang-dropdown">
+                <div class="lang-search-wrap">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2">
+                        <circle cx="11" cy="11" r="8" />
+                        <path d="m21 21-4.35-4.35" />
+                    </svg>
+                    <input type="text" class="lang-search" id="lang-search" placeholder="Search language..." autocomplete="off">
+                </div>
+                <div class="lang-list" id="lang-list"></div>
+            </div>
+        </div>
+        <div id="google_translate_element"></div>
+    </nav>
+
+    <!-- HEADER -->
+    <header class="page-header">
+        <h1>Get in Touch</h1>
+        <p>Ready to import premium agricultural commodities? Our export team is available 24/7 to assist with your requirements.</p>
+    </header>
+
+    <!-- CONTACT SECTION -->
+    <section class="contact-container">
+        <div class="contact-info">
+            <h2>Head Office</h2>
+            <p>We are strategically located in India to ensure rapid procurement from farmers and swift dispatch from major ports.</p>
+            
+            <div class="info-card">
+                <div class="info-icon">📍</div>
+                <div class="info-text">
+                    <h4>Address</h4>
+                    <p>FARMEXO Headquarters,<br>Mumbai, Maharashtra, India 400001</p>
+                </div>
+            </div>
+            
+            <div class="info-card">
+                <div class="info-icon">📧</div>
+                <div class="info-text">
+                    <h4>Email</h4>
+                    <a href="mailto:exports@farmexo.com">exports@farmexo.com</a>
+                </div>
+            </div>
+            
+            <div class="info-card">
+                <div class="info-icon">📞</div>
+                <div class="info-text">
+                    <h4>Phone / WhatsApp</h4>
+                    <a href="tel:+916386854875">+91 63868 54875</a>
+                </div>
+            </div>
+
+            <div class="map-container">
+                <!-- Embedded Google Map of Mumbai (Generic) -->
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1m3!1d241317.11609951666!2d72.74109995736151!3d19.082197838562304!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c6306644edc1%3A0x5da4ed8f8d648c69!2sMumbai%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+
+        <div class="contact-form-wrapper">
+            <h3 style="font-family: var(--serif); font-size: 2rem; color: var(--green-dark); margin-bottom: 1.5rem;">Request a Quote</h3>
+            <div id="contact-page-status" class="form-status"></div>
+            
+            <form id="contact-page-form" action="https://formsubmit.co/faisal.khan1192519@gmail.com" method="POST">
+                <input type="hidden" name="_subject" value="🌾 New FARMEXO Inquiry from Contact Page">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_template" value="table">
+                <input type="hidden" name="_autoresponse" value="Thank you for contacting FARMEXO! 🌾&#10;&#10;We have received your inquiry and our export team is reviewing your requirements.&#10;&#10;You will receive a detailed Proforma Invoice (PI) within 24 hours with:&#10;✅ FOB / CIF pricing for your destination port&#10;✅ Product specifications & packaging options&#10;✅ Payment terms (LC / T/T)&#10;✅ Estimated shipping schedule&#10;&#10;📧 exports@farmexo.com&#10;📞 +91 63868 54875 (WhatsApp)&#10;&#10;Warm regards,&#10;FARMEXO Export Team">
+                <input type="text" name="_honey" style="display:none">
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="fname">First Name</label>
+                        <input type="text" id="fname" name="First Name" class="form-control" required placeholder="John">
+                    </div>
+                    <div class="form-group">
+                        <label for="lname">Last Name</label>
+                        <input type="text" id="lname" name="Last Name" class="form-control" required placeholder="Doe">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="company">Company Name</label>
+                    <input type="text" id="company" name="Company" class="form-control" placeholder="Optional">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Business Email</label>
+                    <input type="email" id="email" name="Email" class="form-control" required placeholder="john@company.com">
+                </div>
+                
+                <div class="form-group">
+                    <label>Products of Interest</label>
+                    <div class="checkbox-grid">
+                        <label class="checkbox-label"><input type="checkbox" name="Products" value="Jaggery"> Jaggery</label>
+                        <label class="checkbox-label"><input type="checkbox" name="Products" value="Makhana"> Makhana</label>
+                        <label class="checkbox-label"><input type="checkbox" name="Products" value="Maize"> Maize</label>
+                        <label class="checkbox-label"><input type="checkbox" name="Products" value="Potato"> Potato</label>
+                        <label class="checkbox-label"><input type="checkbox" name="Products" value="Besan"> Besan</label>
+                        <label class="checkbox-label"><input type="checkbox" name="Products" value="Mustard Oil"> Mustard Oil</label>
+                        <label class="checkbox-label"><input type="checkbox" name="Products" value="Wheat"> Wheat</label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Detailed Requirements</label>
+                    <textarea id="message" name="Requirements" class="form-control" required placeholder="Please provide quantity, destination port (e.g. Jebel Ali, Dubai), and packaging preferences..."></textarea>
+                </div>
+                
+                <button type="submit" id="contact-page-btn" class="btn-cta btn-full">Submit Inquiry →</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="index.html" class="logo footer-logo">
+                    <img src="images/farmexo_logo_full.jpeg" alt="FARMEXO Logo" class="footer-logo-img">
+                </a>
+                <p>India's trusted exporter of premium agricultural commodities. Quality, trust, and reliability since 2016.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="index.html#products">Products</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="mailto:exports@farmexo.com">exports@farmexo.com</a></li>
+                    <li><a href="tel:+916386854875">+91 63868 54875</a></li>
+                    <li><a href="#">Mumbai, India</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 FARMEXO. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/product-data.js"></script>
+    <script src="js/script.js"></script>
+    <script>
+        // AJAX form submission for the contact page form
+        const contactPageForm = document.getElementById('contact-page-form');
+        const statusDiv = document.getElementById('contact-page-status');
+        const submitBtn = document.getElementById('contact-page-btn');
+
+        if(contactPageForm) {
+            contactPageForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                submitBtn.innerHTML = 'Sending...';
+                submitBtn.disabled = true;
+
+                const formData = new FormData(this);
+
+                // Set _replyto so owner can Reply directly to the buyer
+                const buyerEmail = formData.get('Email') || '';
+                if (buyerEmail) formData.append('_replyto', buyerEmail);
+
+                // Build quotation template
+                const buyerName = ((formData.get('First Name') || '') + ' ' + (formData.get('Last Name') || '')).trim();
+                const buyerProducts = formData.getAll('Products').join(', ') || 'Not specified';
+
+                const quotationTemplate = `\n━━━━━━━━━━━━━━━━━━━━━━━━━━━\n📋 READY-TO-SEND QUOTATION TEMPLATE\n━━━━━━━━━━━━━━━━━━━━━━━━━━━\n(Hit Reply and fill the blanks)\n\nDear ${buyerName},\n\nThank you for your interest in FARMEXO products.\n\nPROFORMA INVOICE\n──────────────────────\nProduct(s): ${buyerProducts}\nQuantity: _______ MT\nUnit Price (FOB): USD _______ / MT\nUnit Price (CIF): USD _______ / MT\nTotal Value: USD _______\n──────────────────────\nIncoterm: FOB / CIF\nPort of Loading: Nhava Sheva / Mundra\nPort of Discharge: _______\nPackaging: _______\nPayment Terms: LC at Sight / T/T 30% Advance\nValidity: 7 days from date of quote\nEstimated Shipment: _______ days from confirmation\n\nCertifications: FSSAI | APEDA | ISO 22000 | HACCP\n\nBest regards,\nFARMEXO Export Team\n━━━━━━━━━━━━━━━━━━━━━━━━━━━`;
+
+                formData.append('--- QUOTATION TEMPLATE ---', quotationTemplate);
+
+                fetch(this.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                }).then(response => {
+                    if (response.ok) {
+                        statusDiv.className = 'form-status success';
+                        statusDiv.innerText = '✅ Inquiry Sent Successfully! Our team will contact you shortly.';
+                        contactPageForm.reset();
+                    } else {
+                        throw new Error('Failed to send email');
+                    }
+                }).catch(error => {
+                    statusDiv.className = 'form-status error';
+                    statusDiv.innerText = '❌ Something went wrong. Please try emailing us directly at exports@farmexo.com.';
+                }).finally(() => {
+                    submitBtn.innerHTML = 'Submit Inquiry →';
+                    submitBtn.disabled = false;
+                    setTimeout(() => { statusDiv.style.display = 'none'; }, 5000);
+                });
+            });
+        }
+    </script>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: '',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+</body>
+</html>

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About FARMEXO | Trusted Indian Agricultural Exporter</title>
+    <meta name="description"
+        content="Learn about FARMEXO's history, mission, and global footprint as India's trusted exporter of premium agricultural commodities.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .page-header {
+            padding: 8rem 5% 4rem;
+            background: var(--green-dark);
+            color: #fff;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-family: var(--serif);
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: var(--orange);
+        }
+
+        .page-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .about-section {
+            padding: 5rem 5%;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-family: var(--serif);
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--green-dark);
+        }
+
+        .about-text p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--text-mid);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+
+        .core-values {
+            background: #f4fcf7;
+            padding: 5rem 5%;
+            text-align: center;
+        }
+        
+        .core-values h2 {
+            font-family: var(--serif);
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--green-dark);
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .value-card {
+            background: #fff;
+            padding: 2.5rem 2rem;
+            border-radius: 16px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .value-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .value-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--green-dark);
+        }
+
+        .value-card p {
+            color: var(--text-mid);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .certifications {
+            padding: 5rem 5%;
+            text-align: center;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .certifications h2 {
+            font-family: var(--serif);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--green-dark);
+        }
+
+        .cert-grid {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .cert-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .cert-badge {
+            width: 100px;
+            height: 100px;
+            background: #f9f9f9;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--green);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            font-weight: bold;
+            border: 2px solid var(--green-light);
+        }
+
+        @media (max-width: 768px) {
+            .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .page-header h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <a href="index.html" class="logo">
+            <img src="images/farmexo_logo_icon.jpeg" alt="FARMEXO Icon" class="nav-logo-img">
+        </a>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html" class="nav-active">About Us</a></li>
+            <li><a href="index.html#products">Products</a></li>
+            <li><a href="index.html#logistics">Logistics</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+        <!-- Language Picker -->
+        <div class="lang-picker notranslate" id="lang-picker" translate="no">
+            <button class="lang-picker-btn" id="lang-picker-btn" aria-label="Change language">
+                <svg class="lang-globe" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10A15.3 15.3 0 0 1 12 2z" />
+                </svg>
+                <span class="lang-picker-label" id="lang-picker-label">English</span>
+                <svg class="lang-chevron" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M7 10l5 5 5-5z" />
+                </svg>
+            </button>
+            <div class="lang-dropdown" id="lang-dropdown">
+                <div class="lang-search-wrap">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2">
+                        <circle cx="11" cy="11" r="8" />
+                        <path d="m21 21-4.35-4.35" />
+                    </svg>
+                    <input type="text" class="lang-search" id="lang-search" placeholder="Search language..." autocomplete="off">
+                </div>
+                <div class="lang-list" id="lang-list"></div>
+            </div>
+        </div>
+        <div id="google_translate_element"></div>
+        <a href="contact.html" class="btn-cta nav-cta">Request a Shipment →</a>
+    </nav>
+
+    <!-- HEADER -->
+    <header class="page-header">
+        <h1>Our Story</h1>
+        <p>Bridging the gap between Indian farmers and global markets with uncompromising quality and trust.</p>
+    </header>
+
+    <!-- ABOUT SECTION -->
+    <section class="about-section">
+        <div class="about-grid">
+            <div class="about-text">
+                <h2>Who We Are</h2>
+                <p>Established with a vision to take India's finest agricultural produce to the world, FARMEXO has grown into a trusted name in the global export market. We specialize in sourcing, processing, and exporting premium commodities directly from the heartlands of India.</p>
+                <p>Our deep-rooted relationships with local farming communities allow us to ensure fair trade practices while maintaining strict quality control from farm to port. Whether it is the golden sweetness of our Jaggery or the nutritional excellence of our Makhana, we deliver nothing but the best.</p>
+            </div>
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1595859702812-706037e5f96f?auto=format&fit=crop&q=80" alt="Farming fields in India">
+            </div>
+        </div>
+    </section>
+
+    <!-- CORE VALUES -->
+    <section class="core-values">
+        <h2>Our Core Values</h2>
+        <div class="values-grid">
+            <div class="value-card">
+                <div class="value-icon">🌾</div>
+                <h3>Uncompromising Quality</h3>
+                <p>Every shipment undergoes rigorous multi-stage quality checks. We strictly adhere to international food safety standards.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">🤝</div>
+                <h3>Farmer Empowerment</h3>
+                <p>We source directly from farmer cooperatives, ensuring they receive fair compensation while we secure the freshest produce.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">🚢</div>
+                <h3>Reliable Logistics</h3>
+                <p>From seamless customs clearance to timely vessel boarding, our logistics network ensures your cargo arrives safely and on time.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CERTIFICATIONS -->
+    <section class="certifications">
+        <h2>Quality & Certifications</h2>
+        <p style="color: var(--text-mid); font-size: 1.1rem;">We maintain strict compliance with global food safety standards to guarantee peace of mind for our B2B partners.</p>
+        <div class="cert-grid">
+            <div class="cert-item">
+                <div class="cert-badge">APEDA</div>
+                <strong>APEDA Registered</strong>
+            </div>
+            <div class="cert-item">
+                <div class="cert-badge">fssai</div>
+                <strong>FSSAI Certified</strong>
+            </div>
+            <div class="cert-item">
+                <div class="cert-badge">ISO</div>
+                <strong>ISO 22000</strong>
+            </div>
+            <div class="cert-item">
+                <div class="cert-badge">HACCP</div>
+                <strong>HACCP Compliant</strong>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="index.html" class="logo footer-logo">
+                    <img src="images/farmexo_logo_full.jpeg" alt="FARMEXO Logo" class="footer-logo-img">
+                </a>
+                <p>India's trusted exporter of premium agricultural commodities. Quality, trust, and reliability since 2016.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="index.html#products">Products</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="mailto:exports@farmexo.com">exports@farmexo.com</a></li>
+                    <li><a href="tel:+916386854875">+91 63868 54875</a></li>
+                    <li><a href="#">Mumbai, India</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 FARMEXO. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/product-data.js"></script>
+    <script src="js/script.js"></script>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: '',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+</body>
+</html>
