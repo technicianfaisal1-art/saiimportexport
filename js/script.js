@@ -23,9 +23,10 @@ const products = [
 const productContainer = document.getElementById('product-container');
 
 function renderProducts() {
-  products.forEach(p => {
+  products.forEach((p, index) => {
+    const delayClass = `animate-delay-${(index % 4) + 1}`;
     const card = document.createElement('div');
-    card.className = 'product-card animate-in';
+    card.className = `product-card animate-in ${delayClass}`;
     card.innerHTML = `
       <a href="product.html?id=${p.id}" class="product-card-img">
         <img src="${PRODUCT_IMAGES[p.id]}" alt="${p.name}" loading="lazy">
@@ -60,7 +61,7 @@ navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => na
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.15 });
-document.querySelectorAll('.animate-in').forEach(el => observer.observe(el));
+document.querySelectorAll('.animate-in, .animate-scale, .animate-left, .animate-right').forEach(el => observer.observe(el));
 
 // ==================== STAT COUNTER ====================
 let statsCounted = false;
