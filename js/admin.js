@@ -32,7 +32,7 @@ loginForm.addEventListener('submit', async (e) => {
     
     try {
         // Check supabase is initialized
-        if (typeof supabase === 'undefined') {
+        if (typeof saiDB === 'undefined') {
             alert('ERROR: Supabase client not initialized. Check console.');
             btn.innerText = 'Log In';
             return;
@@ -77,7 +77,7 @@ async function loadProducts() {
     tableBody.innerHTML = '<tr><td colspan="5" style="text-align: center;">Loading...</td></tr>';
     
     // Fetch from Supabase
-    const { data, error } = await supabase
+    const { data, error } = await saiDB
         .from('products')
         .select('*')
         .order('id', { ascending: true });
@@ -186,7 +186,7 @@ productForm.addEventListener('submit', async (e) => {
     };
     
     // Upsert to Supabase
-    const { error } = await supabase
+    const { error } = await saiDB
         .from('products')
         .upsert(productData);
         
@@ -204,7 +204,7 @@ productForm.addEventListener('submit', async (e) => {
 async function deleteProduct(id) {
     if (!confirm(`Are you sure you want to delete ${id}?`)) return;
     
-    const { error } = await supabase
+    const { error } = await saiDB
         .from('products')
         .delete()
         .eq('id', id);
