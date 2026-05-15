@@ -14,7 +14,7 @@ const PRODUCT_DETAILS = {
     ],
     image: 'images/1121-basmati.webp',
     specs: {
-      price: '$0.66 / kg',
+      price: '$0.99 - $1.07 / kg',
       moq: '25 MT',
       hsCode: '1006.30',
       shelfLife: '24 months',
@@ -59,7 +59,7 @@ const PRODUCT_DETAILS = {
     ],
     image: 'images/1509-basmati.webp',
     specs: {
-      price: '$1.10 / kg',
+      price: '$0.89 - $0.95 / kg',
       moq: '25 MT',
       hsCode: '1006.30',
       shelfLife: '24 months',
@@ -104,7 +104,7 @@ const PRODUCT_DETAILS = {
     ],
     image: 'images/sona-masoori.webp',
     specs: {
-      price: '$0.65 / kg',
+      price: '$0.48 / kg',
       moq: '25 MT',
       hsCode: '1006.30',
       shelfLife: '24 months',
@@ -149,7 +149,7 @@ const PRODUCT_DETAILS = {
     ],
     image: 'images/pusa-basmati.webp',
     specs: {
-      price: '$0.75 / kg',
+      price: '$0.96 - $0.97 / kg',
       moq: '25 MT',
       hsCode: '1006.30',
       shelfLife: '24 months',
@@ -194,7 +194,7 @@ const PRODUCT_DETAILS = {
     ],
     image: 'images/1401-basmati.webp',
     specs: {
-      price: '$1.16 / kg',
+      price: '$1.00 - $1.01 / kg',
       moq: '25 MT',
       hsCode: '1006.30',
       shelfLife: '24 months',
@@ -239,7 +239,7 @@ const PRODUCT_DETAILS = {
     ],
     image: 'images/swarna-raw.webp',
     specs: {
-      price: '$0.96 / kg',
+      price: '$0.37 / kg',
       moq: '25 MT',
       hsCode: '1006.30',
       shelfLife: '24 months',
@@ -284,7 +284,7 @@ const PRODUCT_DETAILS = {
     ],
     image: 'images/ir64-parboiled.webp',
     specs: {
-      price: '$0.73 / kg',
+      price: '$0.38 / kg',
       moq: '25 MT',
       hsCode: '1006.30',
       shelfLife: '24 months',
@@ -329,7 +329,7 @@ const PRODUCT_DETAILS = {
     ],
     image: 'images/jeerakasala.webp',
     specs: {
-      price: '$1.04 / kg',
+      price: '$1.77 - $1.80 / kg',
       moq: '25 MT',
       hsCode: '1006.30',
       shelfLife: '24 months',
@@ -374,7 +374,7 @@ const PRODUCT_DETAILS = {
     ],
     image: 'images/broken-rice.webp',
     specs: {
-      price: '$0.50 / kg',
+      price: '$0.33 / kg',
       moq: '25 MT',
       hsCode: '1006.40',
       shelfLife: '24 months',
@@ -419,7 +419,7 @@ const PRODUCT_DETAILS = {
     ],
     image: 'images/sona-masoori-old.webp',
     specs: {
-      price: '$0.69 / kg',
+      price: '$0.51 / kg',
       moq: '25 MT',
       hsCode: '1006.30',
       shelfLife: '24 months',
