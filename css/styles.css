@@ -257,6 +257,13 @@ body { top:0!important; position:static!important; }
 #goog-gt-tt, .goog-te-balloon-frame { display:none!important; }
 /* Collapse the top bar Google injects — but do NOT use display:none or visibility:hidden */
 body > .skiptranslate { height:0!important; overflow:hidden!important; position:fixed!important; top:-100px!important; }
+/* Aggressively hide new Google Translate popups & headers */
+.VIpgJd-ZVi9od-aZ2wEe-wOHMyf, 
+.VIpgJd-ZVi9od-aZ2wEe-wOHMyf-ti6hGc,
+iframe.goog-te-banner-frame,
+div#goog-gt-tt {
+    display: none !important;
+}
 
 /* ANIMATIONS */
 @keyframes fadeInUp { from { opacity:0; transform:translateY(40px); } to { opacity:1; transform:translateY(0); } }
