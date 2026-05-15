@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | SAI Import Export Agro</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- Supabase CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+        body {
+            background: #f4f6f4;
+        }
+
+        .admin-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        /* Login Screen */
+        #login-screen {
+            max-width: 400px;
+            margin: 100px auto;
+            background: white;
+            padding: 40px;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        #login-screen h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--green-dark);
+        }
+
+        .error-msg {
+            color: #dc3545;
+            font-size: 0.85rem;
+            margin-top: 10px;
+            display: none;
+        }
+
+        /* Dashboard */
+        #dashboard {
+            display: none;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            background: white;
+            padding: 20px 30px;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .admin-header h1 {
+            margin: 0;
+            color: var(--green-dark);
+            font-size: 1.8rem;
+        }
+
+        /* Product Table */
+        .table-wrapper {
+            background: white;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th,
+        td {
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background: var(--green-light);
+            color: var(--green-dark);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        td {
+            font-size: 0.9rem;
+            color: var(--text-dark);
+        }
+
+        td img {
+            width: 50px;
+            height: 50px;
+            border-radius: var(--radius-sm);
+            object-fit: cover;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-edit {
+            background: var(--orange);
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        .btn-delete {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        /* Modal */
+        #product-modal {
+            display: none;
+        }
+
+        .modal-body {
+            text-align: left;
+            max-height: 70vh;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .modal-body .form-group {
+            margin-bottom: 15px;
+        }
+
+        .modal-content {
+            max-width: 600px;
+        }
+
+        /* Utility classes to replace inline styles */
+        .admin-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .table-loading {
+            text-align: center;
+        }
+
+        .modal-header-title {
+            margin-bottom: 20px;
+        }
+
+        .modal-section-title {
+            margin: 20px 0 10px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+        }
+
+        .mt-15 {
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="admin-container">
+
+        <!-- LOGIN SCREEN -->
+        <div id="login-screen">
+            <h2>Admin Login</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" class="form-control" title="Admin Email"
+                        placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" class="form-control" title="Admin Password"
+                        placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="btn-cta btn-full" id="login-btn">Log In</button>
+                <div id="login-error" class="error-msg">Invalid login credentials.</div>
+            </form>
+        </div>
+
+        <!-- DASHBOARD -->
+        <div id="dashboard">
+            <div class="admin-header">
+                <h1>Rice Catalog Manager</h1>
+                <div class="admin-actions">
+                    <button class="btn-cta" onclick="openModal()">+ Add Product</button>
+                    <button class="btn-outline-dark" id="logout-btn">Log Out</button>
+                </div>
+            </div>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>ID / Key</th>
+                            <th>Product Name</th>
+                            <th>Category</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="product-table-body">
+                        <!-- Products loaded here -->
+                        <tr class="table-loading">
+                            <td colspan="5">Loading products...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- PRODUCT MODAL -->
+    <div class="modal-overlay" id="product-modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">×</button>
+            <h3 id="modal-title" class="modal-header-title">Add New Product</h3>
+            <div class="modal-body">
+                <form id="product-form">
+                    <input type="hidden" id="edit-id">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="p_id">Product ID (e.g. 1121_sella)</label>
+                            <input type="text" id="p_id" class="form-control" title="Product ID" placeholder="Unique ID"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label for="p_name">Name (e.g. 1121 Basmati Sella)</label>
+                            <input type="text" id="p_name" class="form-control" title="Product Name"
+                                placeholder="Product Name" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="p_img">Image Path (e.g. images/1121-basmati.png)</label>
+                        <input type="text" id="p_img" class="form-control" title="Image Path"
+                            placeholder="images/filename.png" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="p_tag">Category Tag</label>
+                            <input type="text" id="p_tag" class="form-control" title="Category Tag"
+                                placeholder="e.g. Basmati Rice" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="p_short_desc">Short Description</label>
+                            <input type="text" id="p_short_desc" class="form-control" title="Short Description"
+                                placeholder="Short summary" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="p_desc">Detailed Description</label>
+                        <textarea id="p_desc" class="form-control" rows="3" title="Detailed Description"
+                            placeholder="Full product description" required></textarea>
+                    </div>
+
+                    <h4 class="modal-section-title">Specifications (JSON Format)</h4>
+                    <div class="form-group">
+                        <label for="p_specs">Specs Data (Ensure valid JSON)</label>
+                        <textarea id="p_specs" class="form-control" rows="4" title="Specifications JSON"
+                            placeholder='{"AGL": "8.30 mm", "Moisture": "12% Max"}' required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-cta btn-full mt-15" id="save-btn">Save Product</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/supabase-client.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+
+</html>

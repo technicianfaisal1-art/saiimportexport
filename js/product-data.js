@@ -1,325 +1,443 @@
-// ==================== EXTENDED PRODUCT DATA ====================
+// ==================== SAI IMPORT EXPORT AGRO PRODUCT DATA ====================
 const PRODUCT_DETAILS = {
 
-  'jaggery': {
-    id: 'jaggery',
-    name: 'Premium Golden Jaggery',
-    tag: 'Sweetener',
-    heroTagline: 'Pure Indian Sweetness for the World',
-    shortDesc: '100% natural, chemical-free cane jaggery in blocks & powder. Rich in iron and minerals.',
+  '1121-basmati': {
+    id: '1121-basmati',
+    name: '1121 Basmati Rice',
+    tag: 'Basmati',
+    heroTagline: 'The King of Basmati Rice',
+    shortDesc: 'Extra-long grain 1121 Basmati rice available in White/Creamy Sella, Steam, and Golden Sella.',
     longDesc: [
-      'FARMEXO\'s Premium Golden Jaggery is sourced directly from sugarcane farms across Maharashtra and Uttar Pradesh. Produced using traditional methods without any chemical processing, our jaggery retains its natural minerals, iron content, and distinctive rich flavor that has made Indian jaggery sought-after worldwide.',
-      'Each batch undergoes rigorous quality testing at our FSSAI-certified facilities to ensure consistent color, texture, and sweetness. Our jaggery is free from artificial colors, preservatives, and adulterants — making it ideal for health-conscious consumers and the organic food market.',
-      'Available in solid blocks (500g, 1kg, 5kg) and fine powder form, our jaggery is packaged in food-grade materials to preserve freshness during long-distance shipping. We offer private labeling for retailers and bulk packaging for industrial buyers.'
+      'SAI Import Export Agro offers premium 1121 Basmati Rice, globally recognized for its extraordinary grain length (up to 8.35mm to 8.40mm) which elongates significantly upon cooking. This variety is prized for its exquisite aroma, delicate flavor, and non-sticky texture, making it the top choice for Biryani and premium culinary applications.',
+      'We supply 1121 Basmati in multiple variants to suit your market needs: White/Creamy Sella (parboiled for extra strength and separate grains), Steam (steamed to lock in nutrients and flavor), and Golden Sella (parboiled to achieve a beautiful golden hue and maximum cooking yield).',
+      'Our 1121 Basmati goes through rigorous sortex cleaning and aging to ensure zero impurities, consistent grain length, and optimal moisture content. It is a staple in Middle Eastern, European, and American markets.'
     ],
-    image: 'images/jaggery.png',
+    image: 'images/1121-basmati.png',
     specs: {
-      moq: '5 MT',
-      hsCode: '1701.99',
-      shelfLife: '18 months',
-      origin: 'Maharashtra, Uttar Pradesh',
-      grade: 'A (Export Grade)',
-      loadPerContainer: '24–26 MT (20ft FCL)'
+      moq: '25 MT',
+      hsCode: '1006.30',
+      shelfLife: '24 months',
+      origin: 'India',
+      grade: 'Premium Export Grade',
+      loadPerContainer: '24 MT (20ft FCL)'
     },
     specTable: [
-      { param: 'Sucrose Content', value: '> 70%' },
-      { param: 'Moisture Content', value: '< 5%' },
-      { param: 'Color', value: 'Golden to Dark Brown' },
-      { param: 'Form', value: 'Blocks (Gur) & Powder' },
-      { param: 'Ash Content', value: '< 4%' },
-      { param: 'Invert Sugar', value: '< 10%' },
-      { param: 'Lead (Pb)', value: '< 0.5 ppm' },
-      { param: 'Packaging Sizes', value: '500g / 1kg / 5kg / 25kg / 50kg' },
-      { param: 'Shelf Life', value: '18 months from manufacturing' },
-      { param: 'Storage', value: 'Cool, dry place away from direct sunlight' }
+      { param: 'Average Grain Length', value: '8.30mm - 8.40mm' },
+      { param: 'Moisture', value: '12.5% Max' },
+      { param: 'Broken Grains', value: '1% Max' },
+      { param: 'Discolor/Damage', value: '1% Max' },
+      { param: 'Foreign Matter', value: 'Nil' },
+      { param: 'Sortex', value: '100% Clean' },
+      { param: 'Variants', value: 'White Sella, Golden Sella, Steam' },
+      { param: 'Packaging', value: '10kg / 25kg / 50kg' }
     ],
     packaging: [
-      { type: 'PP Bags', sizes: '25kg / 50kg', icon: '📦', desc: 'Food-grade polypropylene with inner liner' },
-      { type: 'Jute Bags', sizes: '50kg', icon: '🧶', desc: 'Eco-friendly jute packaging for organic markets' },
-      { type: 'Retail Packs', sizes: '500g / 1kg', icon: '🛒', desc: 'Consumer-ready pouches with your branding' },
-      { type: 'Private Label', sizes: 'Custom', icon: '🏷️', desc: 'Your brand name, logo & design on packaging' }
+      { type: 'BOPP Bags', sizes: '10kg / 25kg / 50kg', icon: '📦', desc: 'Durable, moisture-resistant BOPP bags' },
+      { type: 'Jute Bags', sizes: '25kg / 50kg', icon: '🧶', desc: 'Premium traditional jute packaging' },
+      { type: 'Non-Woven Bags', sizes: '10kg / 25kg', icon: '🛍️', desc: 'Breathable fabric bags for retail' },
+      { type: 'Private Label', sizes: 'Custom', icon: '🏷️', desc: 'Your brand name, logo & design' }
     ],
     whyChoose: [
-      { title: 'Farm Direct Sourcing', desc: 'We work directly with 200+ sugarcane farmers, eliminating middlemen and ensuring fresh, authentic jaggery at competitive prices.', icon: '🌾' },
-      { title: 'Lab Tested Purity', desc: 'Every batch is tested for sucrose content, moisture, heavy metals, and microbiology at NABL-accredited laboratories.', icon: '🔬' },
-      { title: 'Flexible Packaging', desc: 'From bulk 50kg bags to retail-ready 500g pouches with your private label — we customize to your market needs.', icon: '📦' },
-      { title: 'Reliable Supply', desc: 'With 5000+ MT annual capacity and cold-storage facilities, we guarantee year-round supply without interruption.', icon: '🚛' }
+      { title: 'Extra-Long Grain', desc: 'Guaranteed average grain length of 8.30mm+, elongating to over 20mm when cooked.', icon: '📏' },
+      { title: 'Aged for Aroma', desc: 'Aged perfectly to enhance the authentic basmati aroma and reduce moisture content.', icon: '⏳' },
+      { title: 'Sortex Cleaned', desc: '100% sortex clean ensuring zero dust, stones, or broken grains.', icon: '✨' },
+      { title: 'Bulk Supply', desc: 'Reliable capacity for large B2B orders with a minimum 25 tons (MT) per shipment.', icon: '🚢' }
     ]
   },
 
-  'makhana': {
-    id: 'makhana',
-    name: 'Roasted Makhana (Fox Nuts)',
-    tag: 'Superfood',
-    heroTagline: 'India\'s Ancient Superfood, Now Global',
-    shortDesc: 'Premium Phool Makhana from Bihar. High protein, low calorie. Available roasted or raw.',
+  '1509-basmati': {
+    id: '1509-basmati',
+    name: '1509 Basmati Rice',
+    tag: 'Basmati',
+    heroTagline: 'Premium Basmati Value',
+    shortDesc: 'High-quality 1509 Basmati rice offering excellent grain length and value. White/Creamy Sella, Golden Sella, and Steam.',
     longDesc: [
-      'FARMEXO\'s Makhana (Fox Nuts / Lotus Seeds) is sourced from the pristine ponds of Bihar\'s Mithilanchal region — the world\'s largest producing area. Our Phool Makhana is handpicked, sun-dried, and carefully graded to deliver the largest, whitest pops with a satisfying crunch.',
-      'Makhana is a powerhouse superfood — rich in protein, calcium, and antioxidants while being naturally gluten-free, low in fat, and cholesterol-free. It has seen explosive global demand as a healthy snacking alternative and is widely used in Asian cuisine, desserts, and health food products.',
-      'We offer Makhana in multiple grades (4-Sutta, 3-Sutta, Lawa) and forms (raw, roasted plain, flavored). Our state-of-the-art sorting facility uses optical grading machines to ensure uniform size and color in every shipment.'
+      'The 1509 Basmati Rice is an exceptional variety that offers the characteristic long grain and aroma of premium basmati at a more competitive price point. With an average grain length of around 8.20mm to 8.40mm, it provides an excellent alternative to the 1121 variety without compromising on the visual appeal or taste.',
+      'At SAI Import Export Agro, we supply 1509 Basmati in White/Creamy Sella, Golden Sella, and Steam variants. The Sella varieties are parboiled to ensure the grains remain separate and fluffy after cooking, making them ideal for catering, restaurants, and everyday premium meals.',
+      'Our 1509 Basmati is meticulously processed using advanced milling and sortex technology. It is highly demanded across the Gulf, Levant, and African markets for its excellent cooking characteristics and affordability.'
     ],
-    image: 'images/makhana.png',
+    image: 'images/1509-basmati.png',
     specs: {
-      moq: '2 MT',
-      hsCode: '0802.90',
-      shelfLife: '12 months',
-      origin: 'Bihar (Mithilanchal)',
-      grade: '4-Sutta Premium',
-      loadPerContainer: '6–8 MT (20ft FCL)'
+      moq: '25 MT',
+      hsCode: '1006.30',
+      shelfLife: '24 months',
+      origin: 'India',
+      grade: 'Premium Export Grade',
+      loadPerContainer: '24 MT (20ft FCL)'
     },
     specTable: [
-      { param: 'Protein Content', value: '9.7g per 100g' },
-      { param: 'Fat Content', value: '< 0.1%' },
-      { param: 'Moisture Content', value: '< 10%' },
-      { param: 'Size Grade', value: '4-Sutta (18mm+) / 3-Sutta (14-18mm)' },
-      { param: 'Color', value: 'Bright White to Off-White' },
-      { param: 'Form', value: 'Raw / Roasted / Flavored' },
-      { param: 'Allergens', value: 'Gluten-free, Nut-free' },
-      { param: 'Packaging Sizes', value: '200g / 500g / 1kg / 10kg / 25kg' },
-      { param: 'Shelf Life', value: '12 months (nitrogen-flushed)' },
-      { param: 'Storage', value: 'Cool, dry, airtight environment' }
-    ],
-    packaging: [
-      { type: 'Vacuum Packs', sizes: '200g / 500g / 1kg', icon: '🫧', desc: 'Nitrogen-flushed pouches for maximum freshness' },
-      { type: 'PP Bags', sizes: '10kg / 25kg', icon: '📦', desc: 'Bulk bags with inner food-grade liner' },
-      { type: 'Retail Jars', sizes: '200g / 500g', icon: '🫙', desc: 'PET jars with branded labels' },
-      { type: 'Private Label', sizes: 'Custom', icon: '🏷️', desc: 'Complete custom packaging design' }
-    ],
-    whyChoose: [
-      { title: 'Bihar Origin Guarantee', desc: 'Direct sourcing from Bihar\'s Mithilanchal region — the world\'s premium makhana belt with generations of harvesting expertise.', icon: '🌿' },
-      { title: 'Optical Sorting', desc: 'Advanced color-sorting machines ensure uniform size, color, and zero broken pieces in every batch.', icon: '🔍' },
-      { title: 'Superfood Demand', desc: 'Riding the global health food wave — makhana exports grew 300% in the last 5 years. Position your brand early.', icon: '📈' },
-      { title: 'Value-Added Options', desc: 'We can supply roasted, salted, or custom-flavored makhana ready for retail shelves.', icon: '✨' }
-    ]
-  },
-
-  'maize': {
-    id: 'maize',
-    name: 'Farm Fresh Maize',
-    tag: 'Grain',
-    heroTagline: 'Golden Indian Maize, Global Quality',
-    shortDesc: 'Golden maize with <14% moisture. For human consumption and animal feed.',
-    longDesc: [
-      'FARMEXO exports premium Indian maize (corn) cultivated in the fertile plains of Bihar, Madhya Pradesh, and Karnataka. Our yellow maize features a bright golden color, high starch content, and consistently low moisture levels that meet international feed and food-grade standards.',
-      'Indian maize is prized globally for its superior nutritional profile, making it ideal for corn flour production, animal feed formulation, starch manufacturing, and ethanol production. We supply both FAQ (Fair Average Quality) and premium sorted maize to meet diverse buyer requirements.',
-      'Our maize undergoes multi-stage cleaning, de-stoning, and moisture testing before export. Each consignment is accompanied by SGS/Bureau Veritas inspection certificates and phytosanitary documentation for hassle-free customs clearance at destination.'
-    ],
-    image: 'images/maize.png',
-    specs: {
-      moq: '10 MT',
-      hsCode: '1005.90',
-      shelfLife: '12 months',
-      origin: 'Bihar, Madhya Pradesh, Karnataka',
-      grade: 'FAQ / Premium Sorted',
-      loadPerContainer: '26–28 MT (20ft FCL)'
-    },
-    specTable: [
-      { param: 'Moisture Content', value: '< 14%' },
-      { param: 'Broken / Damaged', value: '< 2%' },
-      { param: 'Foreign Matter', value: '< 1%' },
-      { param: 'Aflatoxin', value: '< 20 ppb (EU compliant)' },
-      { param: 'Color', value: 'Bright Golden Yellow' },
-      { param: 'Protein Content', value: '8–9%' },
-      { param: 'Oil Content', value: '3.5–4.5%' },
-      { param: 'Packaging Sizes', value: '25kg / 50kg PP bags' },
-      { param: 'Shelf Life', value: '12 months' },
-      { param: 'Usage', value: 'Food / Feed / Starch / Ethanol' }
+      { param: 'Average Grain Length', value: '8.20mm - 8.40mm' },
+      { param: 'Moisture', value: '12.5% Max' },
+      { param: 'Broken Grains', value: '1% - 2% Max' },
+      { param: 'Discolor/Damage', value: '1% Max' },
+      { param: 'Foreign Matter', value: 'Nil' },
+      { param: 'Sortex', value: '100% Clean' },
+      { param: 'Variants', value: 'White Sella, Golden Sella, Steam' },
+      { param: 'Packaging', value: '10kg / 25kg / 50kg' }
     ],
     packaging: [
       { type: 'PP Bags', sizes: '25kg / 50kg', icon: '📦', desc: 'Standard woven polypropylene bags' },
-      { type: 'Jute Bags', sizes: '50kg / 100kg', icon: '🧶', desc: 'For markets preferring natural packaging' },
-      { type: 'Bulk / Loose', sizes: 'Container load', icon: '🚢', desc: 'Bulk loading with container liner for cost efficiency' },
-      { type: 'Private Label', sizes: 'Custom', icon: '🏷️', desc: 'Branded bags as per buyer specification' }
+      { type: 'BOPP Bags', sizes: '10kg / 25kg / 50kg', icon: '🛍️', desc: 'High-quality printed BOPP bags' },
+      { type: 'Jute Bags', sizes: '25kg / 50kg', icon: '🧶', desc: 'Traditional export packaging' },
+      { type: 'Private Label', sizes: 'Custom', icon: '🏷️', desc: 'Custom branding for your market' }
     ],
     whyChoose: [
-      { title: 'Multi-Season Supply', desc: 'India\'s dual cropping (Kharif + Rabi) ensures year-round maize availability without seasonal gaps.', icon: '📅' },
-      { title: 'Competitive Pricing', desc: 'India ranks among the world\'s top 5 maize producers — offering excellent quality at globally competitive FOB prices.', icon: '💰' },
-      { title: 'Third-Party Inspected', desc: 'SGS, Bureau Veritas, or buyer-nominated inspection at loading port for complete quality assurance.', icon: '✅' },
-      { title: 'Multi-Purpose Grade', desc: 'We supply food-grade (human consumption) and feed-grade maize to match your specific end-use requirements.', icon: '🌽' }
+      { title: 'Excellent Value', desc: 'Offers the premium look and feel of long-grain basmati at a highly competitive price.', icon: '💰' },
+      { title: 'High Yield', desc: 'Excellent elongation and volume expansion upon cooking, perfect for commercial kitchens.', icon: '📈' },
+      { title: 'Sortex Cleaned', desc: 'Processed through state-of-the-art color sorters for flawless, uniform grains.', icon: '🔍' },
+      { title: 'Multiple Variants', desc: 'Available in Steam, White Sella, and Golden Sella to match regional preferences.', icon: '🍚' }
     ]
   },
 
-  'potato': {
-    id: 'potato',
-    name: 'Export Quality Potatoes',
-    tag: 'Vegetable',
-    heroTagline: 'Fresh Indian Potatoes, Cold-Chain Delivered',
-    shortDesc: 'Carefully sorted, disease-free potatoes. Excellent shelf life. Cold-stored.',
+  'sona-masoori': {
+    id: 'sona-masoori',
+    name: 'Sona Masoori Rice',
+    tag: 'Non-Basmati',
+    heroTagline: 'Light, Aromatic, and Everyday Perfect',
+    shortDesc: 'Premium Sona Masoori steam non-basmati rice. Lightweight, low starch, and easily digestible.',
     longDesc: [
-      'FARMEXO exports premium Indian potatoes sourced from the cold-storage belt of Uttar Pradesh, West Bengal, and Punjab. Our potatoes are carefully sorted by size, washed, and graded to meet the stringent quality requirements of international fresh produce markets.',
-      'India is the world\'s second-largest potato producer, and our varieties — including Pukhraj, Jyoti, and Chandramukhi — are known for their firm texture, low sugar content, and excellent cooking properties. Whether you need table potatoes, processing varieties for chips, or seed potatoes, we supply them all.',
-      'Our cold-chain infrastructure ensures potatoes are stored at optimal 2–4°C temperature from harvest to port, maintaining freshness and extending shelf life. Each shipment includes phytosanitary certificates and undergoes pre-shipment quality inspection.'
+      'Sona Masoori is a medium-grain, lightweight, and aromatic non-basmati rice that is a staple in many Indian households and highly popular globally. Known as the "Pearls of South India," it is a cross between the Sona and Masoori varieties, offering the best traits of both.',
+      'SAI Import Export Agro provides premium Sona Masoori Steam Rice. The steaming process hardens the grain, reducing breakage during milling and cooking, while retaining its natural aroma and nutrients. It is low in starch, making it a healthier choice and easy to digest.',
+      'Ideal for everyday cooking, sweet dishes like pongal, or savory meals like idli and dosa batter preparation, our Sona Masoori is meticulously cleaned, sorted, and packed to preserve its freshness and authentic taste.'
     ],
-    image: 'images/potato.png',
-    specs: {
-      moq: '20 MT',
-      hsCode: '0701.90',
-      shelfLife: '3–4 months (cold stored)',
-      origin: 'Uttar Pradesh, West Bengal, Punjab',
-      grade: 'A (Export Grade, Sorted)',
-      loadPerContainer: '24–26 MT (Reefer 20ft)'
-    },
-    specTable: [
-      { param: 'Size Range', value: '35mm–55mm / 55mm–75mm / 75mm+' },
-      { param: 'Skin Condition', value: 'Clean, smooth, no sprouts' },
-      { param: 'Defect Tolerance', value: '< 5% (cuts, green, misshapen)' },
-      { param: 'Dry Matter', value: '> 18%' },
-      { param: 'Storage Temperature', value: '2–4°C (cold chain)' },
-      { param: 'Varieties Available', value: 'Pukhraj, Jyoti, Chandramukhi, 3797' },
-      { param: 'Pesticide Residue', value: 'EU MRL compliant' },
-      { param: 'Packaging', value: '10kg / 25kg / 50kg mesh / PP bags' },
-      { param: 'Shipping', value: 'Reefer containers (2–4°C)' },
-      { param: 'Usage', value: 'Table / Processing (Chips) / Seed' }
-    ],
-    packaging: [
-      { type: 'Mesh Bags', sizes: '10kg / 25kg / 50kg', icon: '🥔', desc: 'Breathable mesh bags for fresh produce ventilation' },
-      { type: 'PP Bags', sizes: '25kg / 50kg', icon: '📦', desc: 'Woven polypropylene with ventilation holes' },
-      { type: 'Cartons', sizes: '10kg / 20kg', icon: '📤', desc: 'Corrugated cartons for premium retail markets' },
-      { type: 'Custom Packing', sizes: 'As required', icon: '🏷️', desc: 'Buyer-specific packing as per destination market' }
-    ],
-    whyChoose: [
-      { title: 'Cold-Chain Integrity', desc: 'End-to-end cold storage from farm to reefer container ensures zero quality loss and maximum shelf life.', icon: '❄️' },
-      { title: 'Size Grading', desc: 'Optical and manual sorting by size (small/medium/large) ensures uniformity in every shipment.', icon: '📏' },
-      { title: 'Multiple Varieties', desc: 'From table potatoes (Pukhraj) to processing varieties (3797 for chips) — we supply exactly what your market needs.', icon: '🥔' },
-      { title: 'Year-Round Availability', desc: 'India\'s massive cold-storage network (180M MT capacity) enables 12-month supply from a single season harvest.', icon: '📆' }
-    ]
-  },
-
-  'besan': {
-    id: 'besan',
-    name: 'Fine Gram Flour (Besan)',
-    tag: 'Flour',
-    heroTagline: 'India\'s Finest Gram Flour for Global Kitchens',
-    shortDesc: 'Finely milled from premium chana dal. Vibrant golden color, nutty aroma.',
-    longDesc: [
-      'FARMEXO\'s Besan (Chickpea / Gram Flour) is finely milled from handpicked Desi Chana Dal sourced from the pulse-growing heartlands of Madhya Pradesh and Rajasthan. Our besan features a vibrant golden color, smooth texture, and the characteristic nutty aroma that defines premium quality.',
-      'Besan is a cornerstone ingredient in South Asian, Middle Eastern, and Mediterranean cuisines — used in everything from pakoras and ladoos to flatbreads and batters. Its high protein content (20%+) and gluten-free nature make it increasingly popular in Western health food markets as a flour alternative.',
-      'Our milling facility uses precision stone grinding followed by micro-sieving to achieve a uniformly fine particle size. Each batch is tested for protein content, moisture, and microbiological safety before packaging in food-grade, moisture-proof bags.'
-    ],
-    image: 'images/besan.png',
-    specs: {
-      moq: '5 MT',
-      hsCode: '1106.10',
-      shelfLife: '12 months',
-      origin: 'Madhya Pradesh, Rajasthan',
-      grade: 'Premium Milled',
-      loadPerContainer: '22–24 MT (20ft FCL)'
-    },
-    specTable: [
-      { param: 'Protein Content', value: '> 20%' },
-      { param: 'Moisture Content', value: '< 10%' },
-      { param: 'Fat Content', value: '5–6%' },
-      { param: 'Fiber Content', value: '3–4%' },
-      { param: 'Particle Size', value: '< 200 mesh (fine)' },
-      { param: 'Color', value: 'Vibrant Golden Yellow' },
-      { param: 'Allergens', value: 'Gluten-free' },
-      { param: 'Packaging Sizes', value: '500g / 1kg / 5kg / 25kg / 50kg' },
-      { param: 'Shelf Life', value: '12 months in sealed packaging' },
-      { param: 'Usage', value: 'Cooking / Baking / Batter / Health Foods' }
-    ],
-    packaging: [
-      { type: 'PP Bags', sizes: '25kg / 50kg', icon: '📦', desc: 'Laminated inner liner for moisture protection' },
-      { type: 'Retail Pouches', sizes: '500g / 1kg / 5kg', icon: '🛒', desc: 'Consumer-ready stand-up pouches' },
-      { type: 'Paper Bags', sizes: '25kg', icon: '📃', desc: 'Multi-wall kraft paper for organic/health markets' },
-      { type: 'Private Label', sizes: 'Custom', icon: '🏷️', desc: 'Full custom branding and pack design' }
-    ],
-    whyChoose: [
-      { title: 'Premium Desi Chana', desc: 'We use only Desi variety chickpeas (not Kabuli) — delivering the authentic golden color and nutty flavor buyers expect.', icon: '🫘' },
-      { title: 'Precision Milling', desc: 'Stone grinding + micro-sieving produces a silk-smooth texture with consistent < 200 mesh particle size.', icon: '⚙️' },
-      { title: 'Gluten-Free Certified', desc: 'Perfect for the booming gluten-free market — our besan is naturally gluten-free and tested to < 20 ppm.', icon: '🌿' },
-      { title: 'Bulk + Retail Ready', desc: 'Whether you need 50kg bags for food service or 500g pouches for supermarket shelves, we deliver both.', icon: '📦' }
-    ]
-  },
-
-  'mustard-oil': {
-    id: 'mustard-oil',
-    name: 'Cold-Pressed Mustard Oil',
-    tag: 'Oil',
-    heroTagline: 'Pure Kachchi Ghani, Rich in Tradition',
-    shortDesc: 'Pure Kachchi Ghani mustard oil. Rich in Omega-3 & 6. Pungent, authentic flavor.',
-    longDesc: [
-      'FARMEXO\'s Cold-Pressed Mustard Oil is produced using the traditional "Kachchi Ghani" method — where mustard seeds are crushed at low temperatures in wooden/stone presses. This cold-pressing technique preserves the oil\'s natural pungency, dark amber color, and full nutritional profile.',
-      'Our mustard oil is rich in monounsaturated fatty acids (MUFA), Omega-3 & Omega-6 fatty acids, and natural antioxidants. It has been a staple cooking oil in Indian, Bangladeshi, and Nepali households for centuries and is gaining popularity in global markets for its unique flavor and health benefits.',
-      'Sourced from premium quality mustard seeds grown in Rajasthan and Madhya Pradesh, our oil is filtered, lab-tested for purity (acid value, peroxide value, erucic acid content), and packaged in food-grade HDPE/PET containers or tin cans to prevent oxidation during transit.'
-    ],
-    image: 'images/mustard_oil.png',
-    specs: {
-      moq: '3 MT',
-      hsCode: '1514.19',
-      shelfLife: '12 months',
-      origin: 'Rajasthan, Madhya Pradesh',
-      grade: 'Grade I (Agmark)',
-      loadPerContainer: '18–20 MT (20ft FCL)'
-    },
-    specTable: [
-      { param: 'Extraction Method', value: 'Cold-Pressed (Kachchi Ghani)' },
-      { param: 'Acid Value', value: '< 1.0 mg KOH/g' },
-      { param: 'Peroxide Value', value: '< 10 meq/kg' },
-      { param: 'Erucic Acid', value: '< 2% (Low Erucic available)' },
-      { param: 'Color', value: 'Dark Amber to Golden' },
-      { param: 'Pungency', value: 'Strong (characteristic)' },
-      { param: 'Moisture & Impurities', value: '< 0.25%' },
-      { param: 'Packaging', value: '1L / 5L PET, 15L Tin, 200L Drum' },
-      { param: 'Shelf Life', value: '12 months from pressing' },
-      { param: 'Usage', value: 'Cooking / Pickling / Massage / Industrial' }
-    ],
-    packaging: [
-      { type: 'PET Bottles', sizes: '1L / 2L / 5L', icon: '🫗', desc: 'Consumer-ready bottles with tamper-evident caps' },
-      { type: 'Tin Cans', sizes: '5L / 15L', icon: '🥫', desc: 'Food-grade tin for extended shelf life' },
-      { type: 'HDPE Drums', sizes: '50L / 200L', icon: '🛢️', desc: 'Industrial drums for bulk/B2B buyers' },
-      { type: 'Flexitanks', sizes: '20,000L', icon: '🚢', desc: 'Most cost-effective for full container loads' }
-    ],
-    whyChoose: [
-      { title: 'Kachchi Ghani Authentic', desc: 'Traditional cold-pressing retains natural pungency, nutrients, and flavor that refined oils simply cannot match.', icon: '🫒' },
-      { title: 'Health Superfood', desc: 'Rich in MUFA, Omega-3, Omega-6 and natural antioxidants — validated by modern nutrition science.', icon: '💚' },
-      { title: 'Low Erucic Available', desc: 'We offer both traditional and Low Erucic Acid Mustard (LEAR) oil to comply with EU and global regulations.', icon: '📋' },
-      { title: 'Versatile Packaging', desc: 'From 1L retail bottles to 20,000L flexitanks — we package for every market segment.', icon: '📦' }
-    ]
-  },
-
-  'wheat': {
-    id: 'wheat',
-    name: 'Premium Indian Wheat',
-    tag: 'Grain',
-    heroTagline: 'High-Protein Indian Wheat, Mill-Ready',
-    shortDesc: 'High-protein wheat, rigorously cleaned and sorted. Perfect for milling.',
-    longDesc: [
-      'FARMEXO exports premium Indian wheat sourced from the breadbasket states of Punjab, Haryana, Madhya Pradesh, and Uttar Pradesh. Our wheat is known for its high protein content (11–13%), golden amber color, and excellent milling characteristics that produce superior quality flour.',
-      'India is the world\'s second-largest wheat producer, and our Lok-1, Sharbati, and HD varieties are highly sought after by flour mills across Southeast Asia, Africa, and the Middle East. We supply both milling-grade wheat for atta/maida production and feed-grade wheat at competitive prices.',
-      'Every shipment goes through a 7-stage cleaning process — pre-cleaning, de-stoning, magnetic separation, gravity separation, aspiration, indent cylinder separation, and optical sorting — ensuring < 0.5% foreign matter and zero live infestations. All lots are fumigated with aluminum phosphide as per IPPC standards.'
-    ],
-    image: 'images/wheat.png',
+    image: 'images/sona-masoori.png',
     specs: {
       moq: '25 MT',
-      hsCode: '1001.99',
-      shelfLife: '12 months',
-      origin: 'Punjab, Haryana, MP, UP',
-      grade: 'FAQ / Premium Sorted',
-      loadPerContainer: '26–28 MT (20ft FCL)'
+      hsCode: '1006.30',
+      shelfLife: '24 months',
+      origin: 'India',
+      grade: 'Premium Sortex Clean',
+      loadPerContainer: '24 MT (20ft FCL)'
     },
     specTable: [
-      { param: 'Protein Content', value: '11–13%' },
-      { param: 'Moisture Content', value: '< 12%' },
-      { param: 'Gluten (Wet)', value: '> 28%' },
-      { param: 'Test Weight', value: '> 76 kg/hl' },
-      { param: 'Broken / Shriveled', value: '< 3%' },
-      { param: 'Foreign Matter', value: '< 0.5%' },
-      { param: 'Damaged Grains', value: '< 1.5%' },
-      { param: 'Varieties', value: 'Lok-1, Sharbati, HD-2967, PBW-550' },
-      { param: 'Fumigation', value: 'Aluminum Phosphide (IPPC compliant)' },
-      { param: 'Usage', value: 'Milling (Atta/Maida) / Feed / Semolina' }
+      { param: 'Grain Type', value: 'Medium Grain' },
+      { param: 'Moisture', value: '13% Max' },
+      { param: 'Broken Grains', value: '5% Max' },
+      { param: 'Discolor/Damage', value: '1% Max' },
+      { param: 'Foreign Matter', value: 'Nil' },
+      { param: 'Sortex', value: '100% Clean' },
+      { param: 'Variant', value: 'Steam' },
+      { param: 'Packaging', value: '10kg / 25kg / 50kg' }
     ],
     packaging: [
-      { type: 'PP Bags', sizes: '25kg / 50kg', icon: '📦', desc: 'Standard woven polypropylene with stitched closure' },
-      { type: 'Jute Bags', sizes: '50kg / 100kg', icon: '🧶', desc: 'Traditional jute for markets requiring natural packaging' },
-      { type: 'Bulk Loading', sizes: 'Full container', icon: '🚢', desc: 'Container liner with bulk loading for cost savings' },
-      { type: 'Private Label', sizes: 'Custom', icon: '🏷️', desc: 'Branded bags with your design and markings' }
+      { type: 'Non-Woven Bags', sizes: '10kg / 20kg', icon: '🛍️', desc: 'Popular choice for retail Sona Masoori' },
+      { type: 'PP Bags', sizes: '25kg / 50kg', icon: '📦', desc: 'Bulk packaging for wholesale' },
+      { type: 'BOPP Bags', sizes: '10kg / 25kg', icon: '✨', desc: 'Premium printed packaging' },
+      { type: 'Private Label', sizes: 'Custom', icon: '🏷️', desc: 'Fully branded as per buyer requirements' }
     ],
     whyChoose: [
-      { title: 'High Protein Content', desc: 'Indian wheat delivers 11–13% protein — ideal for strong, elastic dough and premium flour production.', icon: '🌾' },
-      { title: '7-Stage Cleaning', desc: 'Our advanced cleaning line removes stones, dust, weed seeds, and damaged grains — delivering mill-ready wheat.', icon: '⚙️' },
-      { title: 'Competitive FOB Pricing', desc: 'India\'s massive wheat production (110M MT/year) translates to some of the most competitive prices globally.', icon: '💰' },
-      { title: 'Global Compliance', desc: 'Fumigation, phytosanitary, and inspection certificates included. EU aflatoxin and pesticide MRL compliant.', icon: '📋' }
+      { title: 'Low Starch', desc: 'Naturally low in starch, making it lighter and healthier for daily consumption.', icon: '🥗' },
+      { title: 'Versatile Usage', desc: 'Perfect for everyday meals, South Indian dishes, and festive preparations.', icon: '🍛' },
+      { title: 'Easily Digestible', desc: 'A preferred choice for all age groups due to its light nature.', icon: '🌱' },
+      { title: 'Quality Assured', desc: '100% sortex cleaned to remove all impurities and ensure uniform grain size.', icon: '✅' }
+    ]
+  },
+
+  'pusa-basmati': {
+    id: 'pusa-basmati',
+    name: 'Pusa Steam Basmati Rice',
+    tag: 'Basmati',
+    heroTagline: 'Aromatic & Slender Basmati',
+    shortDesc: 'Pusa Steam Basmati Rice known for its distinct aroma, slender grains, and excellent cooking qualities.',
+    longDesc: [
+      'Pusa Basmati is a highly sought-after variety of Indian basmati rice, celebrated for its captivating aroma, slender grains, and delicious taste. It offers a slightly shorter grain length compared to 1121, but compensates with a richer flavor profile and a more pronounced natural fragrance.',
+      'Our Pusa Steam Basmati Rice undergoes a specialized steaming process before milling. This locks in the essential nutrients, hardens the grain to prevent breakage during cooking, and ensures the grains remain separate, non-sticky, and fluffy when served.',
+      'SAI Import Export Agro sources the finest Pusa Basmati from the fertile regions of Northern India. It is a favorite in both domestic and international markets, particularly for preparing traditional dishes like Pulao and Biryani where aroma is paramount.'
+    ],
+    image: 'images/pusa-basmati.png',
+    specs: {
+      moq: '25 MT',
+      hsCode: '1006.30',
+      shelfLife: '24 months',
+      origin: 'India',
+      grade: 'Premium Export Grade',
+      loadPerContainer: '24 MT (20ft FCL)'
+    },
+    specTable: [
+      { param: 'Average Grain Length', value: '7.40mm - 7.50mm' },
+      { param: 'Moisture', value: '12.5% Max' },
+      { param: 'Broken Grains', value: '1% Max' },
+      { param: 'Discolor/Damage', value: '1% Max' },
+      { param: 'Foreign Matter', value: 'Nil' },
+      { param: 'Aroma', value: 'Strong, Natural' },
+      { param: 'Variant', value: 'Steam' },
+      { param: 'Packaging', value: '10kg / 25kg / 50kg' }
+    ],
+    packaging: [
+      { type: 'Jute Bags', sizes: '25kg / 50kg', icon: '🧶', desc: 'Traditional packaging to preserve aroma' },
+      { type: 'BOPP Bags', sizes: '10kg / 25kg / 50kg', icon: '🛍️', desc: 'Moisture-proof, durable bags' },
+      { type: 'PP Bags', sizes: '25kg / 50kg', icon: '📦', desc: 'Standard woven bags for bulk' },
+      { type: 'Private Label', sizes: 'Custom', icon: '🏷️', desc: 'Custom printed bags available' }
+    ],
+    whyChoose: [
+      { title: 'Rich Aroma', desc: 'Known for its intense, natural basmati fragrance that enhances any dish.', icon: '🌿' },
+      { title: 'Fluffy Texture', desc: 'Steaming process ensures grains cook perfectly separate and non-sticky.', icon: '☁️' },
+      { title: 'Authentic Taste', desc: 'Delivers the traditional, rich taste of classic Indian basmati.', icon: '🍽️' },
+      { title: 'Strict Quality Control', desc: 'Double sortexed to guarantee purity and consistent grain quality.', icon: '🔬' }
+    ]
+  },
+
+  '1401-basmati': {
+    id: '1401-basmati',
+    name: '1401 Steam Basmati Rice',
+    tag: 'Basmati',
+    heroTagline: 'The Perfect Blend of Length & Aroma',
+    shortDesc: '1401 Steam Basmati Rice offering an excellent balance of grain length, strong aroma, and taste.',
+    longDesc: [
+      'The 1401 Basmati Rice is an improved, high-yielding variety that beautifully combines the exceptional grain length of 1121 with the rich, traditional aroma of older basmati varieties. It is increasingly becoming the rice of choice for discerning buyers worldwide.',
+      'SAI Import Export Agro\'s 1401 Steam Basmati Rice is carefully processed. The steaming treatment helps the grains retain their natural vitamins and minerals while strengthening them. Upon cooking, the rice expands remarkably, offering a delightful visual presentation and a soft, delectable texture.',
+      'This variety is perfectly suited for Middle Eastern cuisines, Indian festive dishes, and fine dining establishments that demand both visual appeal and authentic basmati flavor in every serving.'
+    ],
+    image: 'images/1401-basmati.png',
+    specs: {
+      moq: '25 MT',
+      hsCode: '1006.30',
+      shelfLife: '24 months',
+      origin: 'India',
+      grade: 'Premium Sortex Clean',
+      loadPerContainer: '24 MT (20ft FCL)'
+    },
+    specTable: [
+      { param: 'Average Grain Length', value: '7.70mm - 7.90mm' },
+      { param: 'Moisture', value: '12.5% Max' },
+      { param: 'Broken Grains', value: '1% Max' },
+      { param: 'Discolor/Damage', value: '1% Max' },
+      { param: 'Foreign Matter', value: 'Nil' },
+      { param: 'Sortex', value: '100% Clean' },
+      { param: 'Variant', value: 'Steam' },
+      { param: 'Packaging', value: '10kg / 25kg / 50kg' }
+    ],
+    packaging: [
+      { type: 'BOPP Bags', sizes: '10kg / 25kg', icon: '🛍️', desc: 'Premium retail-ready packaging' },
+      { type: 'Jute Bags', sizes: '25kg / 50kg', icon: '🧶', desc: 'Breathable traditional packaging' },
+      { type: 'PP Bags', sizes: '25kg / 50kg', icon: '📦', desc: 'Cost-effective bulk packaging' },
+      { type: 'Private Label', sizes: 'Custom', icon: '🏷️', desc: 'Tailored branding solutions' }
+    ],
+    whyChoose: [
+      { title: 'Balanced Profile', desc: 'The ideal combination of long grains and strong, authentic basmati aroma.', icon: '⚖️' },
+      { title: 'High Cooking Yield', desc: 'Expands significantly during cooking, making it highly economical for catering.', icon: '📈' },
+      { title: 'Nutrient Retention', desc: 'Steaming process locks in essential nutrients for a healthier meal.', icon: '💪' },
+      { title: 'Export Ready', desc: 'Processed to meet the highest international food safety and quality standards.', icon: '🌍' }
+    ]
+  },
+
+  'swarna-raw': {
+    id: 'swarna-raw',
+    name: 'Swarna Raw Rice 5% Broken',
+    tag: 'Non-Basmati',
+    heroTagline: 'High-Quality Short Grain Rice',
+    shortDesc: 'Swarna Raw Rice with 5% broken grains. A popular, affordable short-grain non-basmati rice.',
+    longDesc: [
+      'Swarna Raw Rice is a highly popular short-grain, non-basmati rice variety grown extensively in India. Known for its affordable price point, health benefits, and excellent cooking qualities, it is a daily dietary staple for millions across South Asia and Africa.',
+      'Our Swarna Raw Rice is offered with a maximum of 5% broken grains, ensuring a high-quality product that looks good and cooks well. Being a raw rice (un-parboiled), it cooks relatively quickly, has a soft texture, and a mild, pleasant flavor that pairs well with a variety of curries and gravies.',
+      'SAI Import Export Agro ensures that our Swarna rice is thoroughly cleaned, de-stoned, and sortexed to remove impurities, providing a clean, ready-to-cook product suitable for mass consumption, government tenders, and retail markets.'
+    ],
+    image: 'images/swarna-raw.png',
+    specs: {
+      moq: '25 MT',
+      hsCode: '1006.30',
+      shelfLife: '24 months',
+      origin: 'India',
+      grade: 'Standard Export Grade',
+      loadPerContainer: '26 MT (20ft FCL)'
+    },
+    specTable: [
+      { param: 'Grain Type', value: 'Short Grain' },
+      { param: 'Moisture', value: '14% Max' },
+      { param: 'Broken Grains', value: '5% Max' },
+      { param: 'Discolor/Damage', value: '2% Max' },
+      { param: 'Foreign Matter', value: '0.5% Max' },
+      { param: 'Variant', value: 'Raw (White)' },
+      { param: 'Sortex', value: '100% Clean' },
+      { param: 'Packaging', value: '25kg / 50kg' }
+    ],
+    packaging: [
+      { type: 'PP Bags', sizes: '25kg / 50kg', icon: '📦', desc: 'Standard woven polypropylene bags' },
+      { type: 'Non-Woven Bags', sizes: '25kg', icon: '🛍️', desc: 'Better presentation for wholesale markets' },
+      { type: 'Bulk Bags', sizes: '1 MT Jumbo Bags', icon: '🏗️', desc: 'For industrial and repackaging use' },
+      { type: 'Private Label', sizes: 'Custom', icon: '🏷️', desc: 'Buyer branding available' }
+    ],
+    whyChoose: [
+      { title: 'Highly Affordable', desc: 'A cost-effective rice variety perfect for mass consumption and large-scale catering.', icon: '💰' },
+      { title: 'Healthy Option', desc: 'Known to have a lower glycemic index compared to some other white rice varieties.', icon: '❤️' },
+      { title: 'Soft Texture', desc: 'Cooks quickly and results in a soft, easily digestible texture.', icon: '☁️' },
+      { title: 'Consistent Supply', desc: 'Widely cultivated, ensuring steady availability and stable pricing year-round.', icon: '📅' }
+    ]
+  },
+
+  'ir64-parboiled': {
+    id: 'ir64-parboiled',
+    name: 'IR 64 Parboiled Rice 5% Broken',
+    tag: 'Non-Basmati',
+    heroTagline: 'The Global Staple for Bulk Markets',
+    shortDesc: 'IR 64 Parboiled Rice with 5% broken grains. Long-grain non-basmati, highly nutritious and durable.',
+    longDesc: [
+      'IR 64 Parboiled Rice is one of the most exported non-basmati rice varieties from India. It is a long-grain rice that is favored for its affordability, excellent cooking characteristics, and nutritional value, making it a staple in many African, Asian, and Middle Eastern countries.',
+      'The parboiling process (partially boiling the rice in its husk) drives nutrients from the bran into the grain, making IR 64 Parboiled rice more nutritious than regular white rice. It also hardens the grain, making it highly resistant to overcooking and ensuring the grains remain separate and firm.',
+      'SAI Import Export Agro supplies premium IR 64 Parboiled Rice with a maximum of 5% broken grains. It is meticulously sortexed for a uniform golden-yellow color and free from impurities, making it ideal for daily consumption, catering, and institutional feeding.'
+    ],
+    image: 'images/ir64-parboiled.png',
+    specs: {
+      moq: '25 MT',
+      hsCode: '1006.30',
+      shelfLife: '24 months',
+      origin: 'India',
+      grade: 'Premium Sortex Clean',
+      loadPerContainer: '26 MT (20ft FCL)'
+    },
+    specTable: [
+      { param: 'Average Grain Length', value: '5.80mm - 6.20mm' },
+      { param: 'Moisture', value: '14% Max' },
+      { param: 'Broken Grains', value: '5% Max' },
+      { param: 'Discolor/Damage', value: '1% - 2% Max' },
+      { param: 'Foreign Matter', value: '0.5% Max' },
+      { param: 'Variant', value: 'Parboiled (Golden/Yellowish)' },
+      { param: 'Sortex', value: '100% Clean' },
+      { param: 'Packaging', value: '25kg / 50kg' }
+    ],
+    packaging: [
+      { type: 'PP Bags', sizes: '25kg / 50kg', icon: '📦', desc: 'Standard woven polypropylene for bulk export' },
+      { type: 'BOPP Bags', sizes: '25kg', icon: '🛍️', desc: 'Printed bags for regional distribution' },
+      { type: 'Jumbo Bags', sizes: '1 MT', icon: '🏗️', desc: 'For bulk buyers and repackagers' },
+      { type: 'Private Label', sizes: 'Custom', icon: '🏷️', desc: 'Custom printed bags with your logo' }
+    ],
+    whyChoose: [
+      { title: 'Nutrient Rich', desc: 'Parboiling retains essential vitamins and minerals, offering better nutritional value.', icon: '💪' },
+      { title: 'Perfect Cooking', desc: 'Hardened grains do not turn mushy, staying separate and firm after cooking.', icon: '🍽️' },
+      { title: 'Economical', desc: 'An affordable long-grain option for price-sensitive bulk markets.', icon: '📉' },
+      { title: 'High Durability', desc: 'Parboiled rice has an extended shelf life and better resistance to weevils.', icon: '🛡️' }
+    ]
+  },
+
+  'jeerakasala': {
+    id: 'jeerakasala',
+    name: 'Jeerakasala Rice',
+    tag: 'Specialty',
+    heroTagline: 'The Biryani Rice of the South',
+    shortDesc: 'Jeerakasala (Kaima) Rice, a highly aromatic short-grain rice famous for Malabar Biryani.',
+    longDesc: [
+      'Jeerakasala Rice, also known as Kaima Rice or Wayanadan Kaima, is a premium short-grain specialty rice highly prized in Southern India, particularly in Kerala. It is renowned for its unique, captivating aroma and delicate flavor, which significantly enhances any dish it is used in.',
+      'Unlike the long-grained basmati used in Northern Indian biryanis, Jeerakasala is the quintessential rice for authentic Malabar and Thalassery Biryanis. The small, firm grains absorb spices and ghee beautifully, creating a rich, flavorful, and aromatic culinary experience.',
+      'SAI Import Export Agro sources authentic Jeerakasala rice, ensuring it is aged perfectly to enhance its fragrance and reduce moisture. It is a premium offering for diaspora markets, specialty Indian grocery stores, and authentic South Indian restaurants worldwide.'
+    ],
+    image: 'images/jeerakasala.png',
+    specs: {
+      moq: '25 MT',
+      hsCode: '1006.30',
+      shelfLife: '24 months',
+      origin: 'India (Kerala region)',
+      grade: 'Premium Specialty Grade',
+      loadPerContainer: '24 MT (20ft FCL)'
+    },
+    specTable: [
+      { param: 'Grain Type', value: 'Short Grain' },
+      { param: 'Moisture', value: '13% Max' },
+      { param: 'Broken Grains', value: '2% Max' },
+      { param: 'Aroma', value: 'Strong, Distinctive' },
+      { param: 'Foreign Matter', value: 'Nil' },
+      { param: 'Sortex', value: '100% Clean' },
+      { param: 'Variant', value: 'Raw / Aged' },
+      { param: 'Packaging', value: '5kg / 10kg / 25kg' }
+    ],
+    packaging: [
+      { type: 'Non-Woven Bags', sizes: '5kg / 10kg', icon: '🛍️', desc: 'Premium retail packaging' },
+      { type: 'Jute Bags', sizes: '10kg / 25kg', icon: '🧶', desc: 'Traditional bags to retain aroma' },
+      { type: 'PP Bags', sizes: '25kg', icon: '📦', desc: 'Standard wholesale packaging' },
+      { type: 'Private Label', sizes: 'Custom', icon: '🏷️', desc: 'Branded packaging for specialty stores' }
+    ],
+    whyChoose: [
+      { title: 'Unique Aroma', desc: 'Possesses a distinct, natural fragrance that defines authentic Malabar cuisine.', icon: '🌿' },
+      { title: 'Flavor Absorption', desc: 'Small grains absorb spices and flavors better than long-grain varieties.', icon: '🥘' },
+      { title: 'Specialty Niche', desc: 'A high-demand premium product for specific regional and diaspora markets.', icon: '⭐' },
+      { title: 'Aged to Perfection', desc: 'Carefully aged to ensure optimal cooking characteristics and maximum aroma.', icon: '⏳' }
+    ]
+  },
+
+  'broken-rice': {
+    id: 'broken-rice',
+    name: '100% Broken Raw White Rice',
+    tag: 'Broken',
+    heroTagline: 'Premium Grade Broken Rice',
+    shortDesc: '100% Broken Raw White Rice, Silky Sortexed. Ideal for industrial use, brewing, and animal feed.',
+    longDesc: [
+      'Our 100% Broken Raw White Rice consists of grains that break during the milling process. Despite being broken, it retains the same high nutritional value and taste as whole grain rice. It is an economical and highly versatile commodity in the global market.',
+      'SAI Import Export Agro provides silky sortexed broken rice, meaning it undergoes rigorous cleaning to remove discolored grains, dust, and foreign particles, resulting in a clean, bright white product. We offer various sizes of broken rice depending on buyer requirements.',
+      'This product is widely used for human consumption (in porridges or traditional dishes), in the brewing industry for beer production, for manufacturing rice flour and noodles, and as a high-quality ingredient in premium animal and pet feed.'
+    ],
+    image: 'images/broken-rice.png',
+    specs: {
+      moq: '25 MT',
+      hsCode: '1006.40',
+      shelfLife: '24 months',
+      origin: 'India',
+      grade: 'Silky Sortex Clean',
+      loadPerContainer: '26 MT (20ft FCL)'
+    },
+    specTable: [
+      { param: 'Broken Percentage', value: '100%' },
+      { param: 'Moisture', value: '14% Max' },
+      { param: 'Discolor/Damage', value: '1% Max' },
+      { param: 'Foreign Matter', value: '0.5% Max' },
+      { param: 'Sortex', value: '100% Clean (Silky)' },
+      { param: 'Variant', value: 'Raw White' },
+      { param: 'Chalky Grains', value: '5% Max' },
+      { param: 'Packaging', value: '25kg / 50kg' }
+    ],
+    packaging: [
+      { type: 'PP Bags', sizes: '25kg / 50kg', icon: '📦', desc: 'Standard woven polypropylene bags' },
+      { type: 'Jumbo Bags', sizes: '1 MT', icon: '🏗️', desc: 'Bulk bags for industrial/brewing clients' },
+      { type: 'Bulk in Container', sizes: 'Full Load', icon: '🚢', desc: 'Loose loading in container liners' },
+      { type: 'Private Label', sizes: 'Custom', icon: '🏷️', desc: 'Custom printed bags available' }
+    ],
+    whyChoose: [
+      { title: 'Cost-Effective', desc: 'An economical alternative for applications where whole grain shape is not required.', icon: '💰' },
+      { title: 'Silky Sortexed', desc: 'Thoroughly cleaned and polished for a bright white, premium appearance.', icon: '✨' },
+      { title: 'Versatile Application', desc: 'Suitable for food processing, brewing, flour milling, and animal feed.', icon: '🏭' },
+      { title: 'High Volume Supply', desc: 'Consistent, large-volume availability for industrial buyers.', icon: '📈' }
+    ]
+  },
+
+  'sona-masoori-old': {
+    id: 'sona-masoori-old',
+    name: 'Sona Masoori Raw Rice (Old Crop)',
+    tag: 'Non-Basmati',
+    heroTagline: 'Aged for Perfect Cooking',
+    shortDesc: 'Aged/Old Crop Sona Masoori Raw Rice. Lower moisture, better yield, and non-sticky texture.',
+    longDesc: [
+      'Sona Masoori Raw Rice (Old Crop) is premium rice that has been carefully aged for 12 to 18 months in controlled warehouse conditions. The aging process is crucial for high-quality rice as it significantly reduces the moisture content and changes the physicochemical properties of the grain.',
+      'Unlike new crop rice which can turn sticky and mushy when cooked, our Old Crop Sona Masoori cooks perfectly. The grains remain separate, fluffy, and expand significantly, offering a much higher yield per kilogram. It also absorbs flavors and gravies much more effectively.',
+      'SAI Import Export Agro ensures that our aged Sona Masoori is stored safely to prevent any infestation while developing its mature characteristics. It is the preferred choice for households and restaurants that demand the perfect, non-sticky rice for everyday meals.'
+    ],
+    image: 'images/sona-masoori-old.png',
+    specs: {
+      moq: '25 MT',
+      hsCode: '1006.30',
+      shelfLife: '24 months',
+      origin: 'India',
+      grade: 'Premium Aged (12+ Months)',
+      loadPerContainer: '24 MT (20ft FCL)'
+    },
+    specTable: [
+      { param: 'Grain Type', value: 'Medium Grain' },
+      { param: 'Age', value: '12 - 18 Months' },
+      { param: 'Moisture', value: '12% Max' },
+      { param: 'Broken Grains', value: '5% Max' },
+      { param: 'Discolor/Damage', value: '1% Max' },
+      { param: 'Foreign Matter', value: 'Nil' },
+      { param: 'Variant', value: 'Raw (Aged)' },
+      { param: 'Packaging', value: '10kg / 25kg / 50kg' }
+    ],
+    packaging: [
+      { type: 'Non-Woven Bags', sizes: '10kg / 25kg', icon: '🛍️', desc: 'Premium retail bags denoting "Old Crop"' },
+      { type: 'PP Bags', sizes: '25kg / 50kg', icon: '📦', desc: 'Standard bulk packaging' },
+      { type: 'Jute Bags', sizes: '25kg', icon: '🧶', desc: 'Traditional packaging for aged rice' },
+      { type: 'Private Label', sizes: 'Custom', icon: '🏷️', desc: 'Custom branding for your market' }
+    ],
+    whyChoose: [
+      { title: 'Perfectly Aged', desc: 'Aged for over a year to ensure a non-sticky, fluffy texture upon cooking.', icon: '⏳' },
+      { title: 'Higher Yield', desc: 'Aged rice expands more when cooked, providing more servings per kilogram.', icon: '📈' },
+      { title: 'Better Absorption', desc: 'Absorbs water and flavors better, enhancing the taste of curries and dishes.', icon: '🍛' },
+      { title: 'Premium Quality', desc: 'Sortex cleaned and carefully stored to maintain the highest export standards.', icon: '⭐' }
     ]
   }
 

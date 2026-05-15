@@ -1,56 +1,63 @@
 const BLOG_POSTS = [
     {
-        id: "indian-wheat-export-trends-2026",
-        title: "Indian Wheat Export Trends: What Buyers Need to Know in 2026",
-        date: "October 15, 2026",
-        category: "Market Trends",
-        image: "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&q=80",
-        excerpt: "An in-depth analysis of the recent shifts in Indian wheat export policies and how global buyers can secure their supply chains for the upcoming season.",
+        id: "1121-vs-1509-basmati-guide",
+        title: "1121 Basmati vs 1509 Basmati: A Complete Buyer's Guide",
+        date: "May 10, 2026",
+        category: "Product Guide",
+        image: "images/1121-basmati.png",
+        excerpt: "Understanding the key differences in grain length, aroma, and price between the two most popular Indian Basmati rice varieties to make the best purchasing decision.",
         content: `
-            <p>India, traditionally one of the world's largest agricultural producers, has seen significant shifts in its wheat export policies over the last few years. As we move through the harvest season of 2026, global buyers are closely monitoring the situation.</p>
+            <p>For international buyers of premium Indian rice, choosing between <strong>1121 Basmati</strong> and <strong>1509 Basmati</strong> is one of the most common dilemmas. Both are exceptional varieties, but they cater to slightly different market needs.</p>
+            <h3>1121 Basmati: The King of Length</h3>
+            <p>1121 Basmati is globally renowned for its extraordinary grain length. Before cooking, grains measure between 8.30mm and 8.40mm, and they can elongate to over 20mm when cooked. It offers a fluffy, non-sticky texture and a delicate aroma. It is the premium choice for high-end restaurants, special occasions, and luxury retail brands.</p>
+            <h3>1509 Basmati: Premium Value</h3>
+            <p>1509 Basmati was developed as an early-maturing, high-yielding alternative. It boasts an impressive grain length (8.20mm - 8.40mm) very close to 1121, but it is more affordable. While its aroma is slightly milder than traditional basmati, its excellent cooking yield and cost-effectiveness make it incredibly popular for commercial catering and everyday premium consumption.</p>
+            <h3>Which Should You Choose?</h3>
+            <ul>
+                <li><strong>Choose 1121</strong> if your market demands the absolute best in grain length and presentation, and price is less of a constraint.</li>
+                <li><strong>Choose 1509</strong> if you need a high-quality, long-grain basmati that offers excellent value and high volume yield for commercial use.</li>
+            </ul>
+            <p>At SAI Import Export Agro, we supply both varieties in Steam, White Sella, and Golden Sella variants, sortex cleaned to perfection.</p>
+        `
+    },
+    {
+        id: "indian-rice-export-trends-2026",
+        title: "Indian Rice Export Trends: What Buyers Need to Know in 2026",
+        date: "April 28, 2026",
+        category: "Market Trends",
+        image: "images/hero_bg.png",
+        excerpt: "An in-depth analysis of the recent shifts in Indian rice export policies, monsoon impacts, and how global buyers can secure their supply chains.",
+        content: `
+            <p>India remains the world's largest exporter of rice, playing a critical role in global food security. As we move through 2026, several factors are shaping the export landscape that B2B buyers must monitor.</p>
             <h3>Understanding the Current Supply</h3>
-            <p>With favorable monsoon conditions, the wheat yield in major producing states like Punjab, Haryana, and Madhya Pradesh has exceeded initial estimates. This bumper crop is expected to ease domestic prices and potentially open up larger export quotas.</p>
+            <p>With favorable monsoon conditions across key rice-producing states like Punjab, Haryana, and Andhra Pradesh, both Basmati and Non-Basmati yields have been robust. This healthy crop size is helping to stabilize prices after previous years of volatility.</p>
             <h3>What Global Buyers Should Do</h3>
             <ul>
-                <li><strong>Lock in Contracts Early:</strong> With volatile global markets, securing FOB or CIF contracts early in the harvest season guarantees better pricing.</li>
-                <li><strong>Monitor Government Notifications:</strong> Export duties can shift based on domestic inflation. Working with a reliable exporter like FARMEXO ensures you navigate customs and quotas seamlessly.</li>
-                <li><strong>Quality Inspections:</strong> Always insist on SGS or equivalent third-party inspections to verify moisture content and protein levels before vessel boarding.</li>
+                <li><strong>Lock in Contracts Early:</strong> With volatile global freight markets, securing FOB or CIF contracts early in the harvest season guarantees better pricing and secures shipping vessel space.</li>
+                <li><strong>Monitor Government Policies:</strong> Export duties or Minimum Export Prices (MEP) can shift based on India's domestic inflation. Working with a reliable exporter like SAI Import Export Agro ensures you navigate customs and quotas seamlessly.</li>
+                <li><strong>Quality Inspections:</strong> Always insist on SGS or equivalent third-party inspections to verify moisture content and broken percentage before vessel boarding.</li>
             </ul>
-            <p>At FARMEXO, we actively monitor these trends to provide our international partners with the most competitive pricing and uninterrupted supply lines.</p>
+            <p>At SAI Import Export Agro, our dedicated export team actively monitors these trends to provide our international partners with competitive pricing and uninterrupted supply lines.</p>
         `
     },
     {
-        id: "benefits-of-phool-makhana",
-        title: "The Rise of Phool Makhana: India's Superfood Taking Over Global Markets",
-        date: "September 28, 2026",
-        category: "Product Spotlight",
-        image: "images/makhana.png",
-        excerpt: "Fox nuts, or Phool Makhana, are seeing explosive demand in North America and Europe. Discover why this gluten-free snack is the next big B2B import opportunity.",
+        id: "sona-masoori-vs-basmati",
+        title: "Sona Masoori vs Basmati: Which Rice is Right for Your Market?",
+        date: "April 15, 2026",
+        category: "Product Comparison",
+        image: "images/sona-masoori.png",
+        excerpt: "Comparing the aromatic, long-grain Basmati with the lightweight, medium-grain Sona Masoori to help importers target the right consumer demographics.",
         content: `
-            <p>Sourced primarily from the wetlands of Bihar, India, Phool Makhana (Fox Nuts or Gorgon Nuts) is rapidly transforming from a traditional Indian snack into a global superfood sensation.</p>
-            <h3>Why the Sudden Global Demand?</h3>
-            <p>As consumer preferences in Europe and North America shift towards plant-based, gluten-free, and high-protein snacks, Makhana fits the profile perfectly. It is low in cholesterol, high in antioxidants, and serves as an excellent alternative to popcorn or potato chips.</p>
-            <h3>Importing Makhana: Key Considerations</h3>
-            <p>When importing Makhana for retail or wholesale distribution, B2B buyers must pay attention to grading. The size (measured in millimeters, typically ranging from 12mm to 20mm+) and the stark whiteness of the nut determine its premium quality.</p>
-            <p>FARMEXO exports exclusively Grade A Phool Makhana, ensuring minimal breakage and optimal crunch, securely packed in moisture-resistant bulk packaging.</p>
-        `
-    },
-    {
-        id: "understanding-incoterms",
-        title: "FOB vs CIF: Which Incoterm is Best for Agricultural Imports?",
-        date: "September 10, 2026",
-        category: "Export Guide",
-        image: "https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?auto=format&fit=crop&q=80",
-        excerpt: "Navigating international shipping terms can be tricky. We break down the differences between FOB and CIF to help you make the best decision for your next shipment.",
-        content: `
-            <p>When requesting a quote for agricultural commodities, one of the most critical decisions a buyer must make is choosing the right Incoterm. The two most common terms we use at FARMEXO are FOB (Free On Board) and CIF (Cost, Insurance, and Freight).</p>
-            <h3>FOB (Free On Board)</h3>
-            <p>Under FOB terms, FARMEXO is responsible for the goods only until they are loaded onto the shipping vessel at the Indian port (e.g., Nhava Sheva or Mundra). Once loaded, all costs and risks—including ocean freight, insurance, and unloading—transfer to the buyer.</p>
-            <p><em>Best for:</em> Experienced importers who have strong relationships with freight forwarders and can secure cheaper ocean freight rates themselves.</p>
-            <h3>CIF (Cost, Insurance, and Freight)</h3>
-            <p>Under CIF, FARMEXO handles everything: we cover the cost of the goods, the marine insurance, and the ocean freight all the way to your destination port (e.g., Jebel Ali, Dubai).</p>
-            <p><em>Best for:</em> Buyers who prefer a hassle-free transaction where the exporter handles the logistics complexities.</p>
-            <p>Unsure which to choose? Our export specialists can provide dual quotes (FOB and CIF) so you can compare costs directly.</p>
+            <p>When sourcing rice from India, Basmati and Sona Masoori are two of the most requested varieties. However, they serve very different culinary purposes and consumer demographics.</p>
+            <h3>Basmati: The Aromatic Luxury</h3>
+            <p>Grown primarily in the foothills of the Himalayas, Basmati is a long-grain rice famous for its nutty flavor and distinct floral aroma. When cooked, the grains remain separate and fluffy.</p>
+            <p><em>Best for:</em> Middle Eastern, European, and American markets; high-end retail; dishes like Biryani and Pulao.</p>
+            <h3>Sona Masoori: The Everyday Staple</h3>
+            <p>Cultivated largely in Southern India, Sona Masoori is a medium-grain, lightweight, and low-starch non-basmati rice. It is easily digestible and highly versatile.</p>
+            <p><em>Best for:</em> South Asian diaspora markets, Southeast Asia; everyday cooking, idli/dosa batter, and sweet dishes.</p>
+            <h3>Import Strategy</h3>
+            <p>If you are supplying Indian grocery stores globally, stocking <strong>both</strong> is essential. North Indian consumers will look for Basmati, while South Indian consumers will consider Sona Masoori an absolute necessity.</p>
+            <p>SAI Import Export Agro supplies premium grades of both Basmati (1121, 1509, Pusa) and Sona Masoori (Steam and Old Crop Raw) in bulk and retail packaging.</p>
         `
     }
 ];

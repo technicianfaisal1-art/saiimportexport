@@ -1,52 +1,79 @@
 // ==================== PRODUCT DATA ====================
 const PRODUCT_IMAGES = {
-  'jaggery': 'images/jaggery.png',
-  'makhana': 'images/makhana.png',
-  'maize': 'images/maize.png',
-  'potato': 'images/potato.png',
-  'besan': 'images/besan.png',
-  'mustard-oil': 'images/mustard_oil.png',
-  'wheat': 'images/wheat.png'
+  '1121-basmati': 'images/1121-basmati.png',
+  '1509-basmati': 'images/1509-basmati.png',
+  'sona-masoori': 'images/sona-masoori.png',
+  'pusa-basmati': 'images/pusa-basmati.png',
+  '1401-basmati': 'images/1401-basmati.png',
+  'swarna-raw': 'images/swarna-raw.png',
+  'ir64-parboiled': 'images/ir64-parboiled.png',
+  'jeerakasala': 'images/jeerakasala.png',
+  'broken-rice': 'images/broken-rice.png',
+  'sona-masoori-old': 'images/sona-masoori-old.png'
 };
 
-const products = [
-  { id:'jaggery', name:'Premium Golden Jaggery', tag:'Sweetener', desc:'100% natural, chemical-free cane jaggery in blocks & powder. Rich in iron and minerals. MOQ: 5 MT.' },
-  { id:'makhana', name:'Roasted Makhana (Fox Nuts)', tag:'Superfood', desc:'Premium Phool Makhana from Bihar. High protein, low calorie. Available roasted or raw. MOQ: 2 MT.' },
-  { id:'maize', name:'Farm Fresh Maize', tag:'Grain', desc:'Golden maize with <14% moisture. For human consumption and animal feed. MOQ: 10 MT.' },
-  { id:'potato', name:'Export Quality Potatoes', tag:'Vegetable', desc:'Carefully sorted, disease-free potatoes. Excellent shelf life. Cold-stored. MOQ: 20 MT.' },
-  { id:'besan', name:'Fine Gram Flour (Besan)', tag:'Flour', desc:'Finely milled from premium chana dal. Vibrant golden color, nutty aroma. MOQ: 5 MT.' },
-  { id:'mustard-oil', name:'Cold-Pressed Mustard Oil', tag:'Oil', desc:'Pure Kachchi Ghani mustard oil. Rich in Omega-3 & 6. Pungent, authentic flavor. MOQ: 3 MT.' },
-  { id:'wheat', name:'Premium Indian Wheat', tag:'Grain', desc:'High-protein wheat, rigorously cleaned and sorted. Perfect for milling. MOQ: 25 MT.' }
+let products = [
+  { id:'1121-basmati', name:'1121 Basmati Rice', tag:'Basmati', desc:'Extra-long grain 1121 Basmati. White Sella, Golden Sella & Steam. MOQ: 25 MT.', img: 'images/1121-basmati.png' },
+  { id:'1509-basmati', name:'1509 Basmati Rice', tag:'Basmati', desc:'High yield long-grain 1509 Basmati. Excellent value. MOQ: 25 MT.', img: 'images/1509-basmati.png' },
+  { id:'sona-masoori', name:'Sona Masoori Rice', tag:'Non-Basmati', desc:'Premium lightweight, aromatic medium-grain rice. Steam & Raw. MOQ: 25 MT.', img: 'images/sona-masoori.png' },
+  { id:'pusa-basmati', name:'Pusa Basmati Rice', tag:'Basmati', desc:'Aromatic slender grains with excellent cooking qualities. MOQ: 25 MT.', img: 'images/pusa-basmati.png' },
+  { id:'1401-basmati', name:'1401 Basmati Rice', tag:'Basmati', desc:'Perfect blend of grain length and authentic aroma. MOQ: 25 MT.', img: 'images/1401-basmati.png' },
+  { id:'swarna-raw', name:'Swarna Raw Rice', tag:'Non-Basmati', desc:'High-quality affordable short-grain non-basmati rice. MOQ: 25 MT.', img: 'images/swarna-raw.png' },
+  { id:'ir64-parboiled', name:'IR 64 Parboiled', tag:'Non-Basmati', desc:'Global staple long-grain parboiled rice. Highly durable. MOQ: 25 MT.', img: 'images/ir64-parboiled.png' },
+  { id:'jeerakasala', name:'Jeerakasala Rice', tag:'Specialty', desc:'The Biryani Rice of the South. Highly aromatic short-grain. MOQ: 25 MT.', img: 'images/jeerakasala.png' },
+  { id:'broken-rice', name:'100% Broken White Rice', tag:'Broken', desc:'Silky sortexed broken rice for industrial use and feed. MOQ: 25 MT.', img: 'images/broken-rice.png' },
+  { id:'sona-masoori-old', name:'Aged Sona Masoori', tag:'Non-Basmati', desc:'Aged 12-18 months. Non-sticky texture and high yield. MOQ: 25 MT.', img: 'images/sona-masoori-old.png' }
 ];
 
 // ==================== RENDER PRODUCTS ====================
 const productContainer = document.getElementById('product-container');
 
+async function fetchProducts() {
+  try {
+    // Attempt to fetch live products from Supabase
+    if (typeof supabase !== 'undefined') {
+      const { data, error } = await supabase.from('products').select('*');
+      if (data && data.length > 0) {
+        products = data;
+      }
+    }
+  } catch (err) {
+    console.warn("Supabase not connected. Using local fallback products.");
+  }
+  renderProducts();
+}
+
 function renderProducts() {
   if (!productContainer) return;
+  productContainer.innerHTML = ''; // Clear container
+  
   products.forEach((p, index) => {
+    // Resolve image source (dynamic from DB or local fallback)
+    const imgSrc = p.img || PRODUCT_IMAGES[p.id];
+    
     const delayClass = `animate-delay-${(index % 4) + 1}`;
     const card = document.createElement('div');
     card.className = `product-card animate-in ${delayClass}`;
     card.innerHTML = `
       <a href="product.html?id=${p.id}" class="product-card-img">
-        <img src="${PRODUCT_IMAGES[p.id]}" alt="${p.name}" loading="lazy">
+        <img src="${imgSrc}" alt="${p.name}" loading="lazy">
         <div class="product-img-overlay"><span>View Details →</span></div>
       </a>
       <div class="product-card-body">
         <span class="product-tag">${p.tag}</span>
         <h3><a href="product.html?id=${p.id}" style="color:inherit;">${p.name}</a></h3>
         <p>${p.desc}</p>
-        <div class="product-actions" style="display:flex;gap:0.5rem;">
-          <a href="product.html?id=${p.id}" class="product-btn" style="text-align:center;flex:1;">View Details →</a>
-          <button class="product-btn" style="background:var(--orange);flex:1;" onclick="openCheckout('${p.id}')">Get Quote</button>
+        <div class="product-actions">
+          <a href="product.html?id=${p.id}" class="product-btn">View Details</a>
+          <button class="product-btn primary-btn" onclick="openCheckout('${p.id}')">Get Quote</button>
         </div>
       </div>`;
     productContainer.appendChild(card);
   });
 }
 
-renderProducts();
+// Initialize products
+fetchProducts();
 
 // ==================== NAVBAR SCROLL ====================
 const navbar = document.getElementById('navbar');
@@ -58,8 +85,11 @@ const isHomePage = window.location.pathname.endsWith('index.html') || window.loc
 window.addEventListener('scroll', () => {
   const currentScrollY = window.scrollY;
   
-  // Background toggle
-  navbar.classList.toggle('scrolled', currentScrollY > 60);
+  // Background toggle + top bar hide
+  const scrolled = currentScrollY > 60;
+  navbar.classList.toggle('scrolled', scrolled);
+  const topBar = document.getElementById('top-bar');
+  if (topBar) topBar.style.transform = scrolled ? 'translateY(-100%)' : 'translateY(0)';
   
   // Hide on scroll down, show on scroll up (ONLY for subpages)
   if (!isHomePage) {
@@ -150,7 +180,7 @@ Why Choose Us for this: ${p.whyChoose.map(w => w.title).join(', ')}
 `).join('\n');
 }
 
-const SYSTEM_PROMPT = `You are the AI sales assistant for FARMEXO, a leading Indian exporter of premium agricultural commodities. You are helpful, professional, and highly knowledgeable.
+const SYSTEM_PROMPT = `You are the AI sales assistant for SAI Import Export Agro, a leading Indian exporter of premium rice. You are helpful, professional, and highly knowledgeable.
 
 IMPORTANT: You must always reply in the SAME language the user is speaking.
 
@@ -162,7 +192,7 @@ Company & Export Information:
 - Certifications: FSSAI, APEDA registered, ISO 22000, HACCP Compliant
 - Payment terms: LC at sight, T/T (30% advance)
 - Incoterms: FOB, CIF, CFR available
-- Contact: exports@farmexo.com | +91 63868 54875
+- Contact: exports@saiimportexportagro.com | +91 63868 54875
 
 Rules:
 - Keep responses concise (2-4 sentences max). Do not write long paragraphs.
@@ -238,23 +268,21 @@ function removeTyping() {
 
 // Static fallback replies (used when API key not set or API fails)
 const fallbackReplies = {
-  'makhana': 'Our Makhana is sourced from Bihar — Grade A Phool Makhana. MOQ is 2 MT. Would you like a custom quote?',
-  'jaggery': 'We offer organic and conventional jaggery in blocks & powder. MOQ starts at 5 MT.',
-  'maize': 'Our golden maize has <14% moisture content. MOQ: 10 MT. Available for both human consumption and animal feed.',
-  'potato': 'We export carefully sorted, disease-free potatoes from cold storage. MOQ: 20 MT.',
-  'besan': 'Our fine gram flour is milled from premium chana dal with vibrant golden color. MOQ: 5 MT.',
-  'mustard': 'Pure Kachchi Ghani cold-pressed mustard oil, rich in Omega-3 & 6. MOQ: 3 MT.',
-  'wheat': 'High-protein premium Indian wheat, rigorously cleaned. MOQ: 25 MT.',
-  'oil': 'We export cold-pressed Mustard Oil (MOQ: 3 MT). Rich in Omega-3 & 6 fatty acids.',
-  'moq': 'MOQ varies: Makhana 2MT, Jaggery 5MT, Besan 5MT, Maize 10MT, Wheat 25MT, Potato 20MT.',
-  'shipping': 'We ship from Nhava Sheva (Mumbai), Mundra, Haldia, and Chennai ports.',
-  'port': 'Our main export ports are Nhava Sheva (Mumbai), Mundra, Haldia, and Chennai.',
-  'price': 'Pricing depends on product, quantity, and destination. Share your requirements and we\'ll prepare a custom FOB/CIF quote!',
-  'quote': 'To prepare a quote I need: 1) Product, 2) Quantity, 3) Destination port. You can also email us at exports@farmexo.com',
+  '1121': 'Our 1121 Basmati has an extraordinary grain length (8.30mm+). Available in Sella and Steam. MOQ is 25 MT.',
+  '1509': '1509 Basmati offers excellent length and value. Available in Sella and Steam. MOQ is 25 MT.',
+  'sona': 'We supply premium Sona Masoori (Steam and Old Crop Raw). Excellent for daily use. MOQ is 25 MT.',
+  'swarna': 'Our Swarna Raw rice is a highly affordable short-grain variety. MOQ is 25 MT.',
+  'ir64': 'We export premium IR 64 Parboiled rice, a global staple. MOQ is 25 MT.',
+  'broken': 'We offer silky sortexed 100% broken white rice for industrial/feed use. MOQ is 25 MT.',
+  'moq': 'Our Minimum Order Quantity (MOQ) for all rice varieties is 25 MT (One 20ft container).',
+  'shipping': 'We ship from Nhava Sheva, Mundra, Haldia, and Chennai ports.',
+  'port': 'Our main export ports are Nhava Sheva, Mundra, Haldia, and Chennai.',
+  'price': "Pricing depends on product, quantity, and destination. Share your requirements and we'll prepare a custom FOB/CIF quote!",
+  'quote': 'To prepare a quote I need: 1) Product, 2) Quantity, 3) Destination port. You can also email us at exports@saiimportexportagro.com',
   'payment': 'We accept LC at sight and T/T (30% advance, 70% against BL copy).',
   'certificate': 'We hold FSSAI, APEDA registration, and ISO 22000 certifications.',
-  'hello': 'Hello! Welcome to FARMEXO. How can I help you today? 😊',
-  'hi': 'Hi there! 👋 Ask me about any of our products — Jaggery, Makhana, Maize, and more!'
+  'hello': 'Hello! Welcome to SAI Import Export Agro. How can I help you today? 😊',
+  'hi': 'Hi there! 👋 Ask me about any of our premium rice varieties — 1121 Basmati, Sona Masoori, and more!'
 };
 
 function getFallbackReply(msg) {
@@ -262,7 +290,7 @@ function getFallbackReply(msg) {
   for (const [key, reply] of Object.entries(fallbackReplies)) {
     if (lower.includes(key)) return reply;
   }
-  return "Thanks for your message! For detailed inquiries, please email us at exports@farmexo.com or call +91 63868 54875. I can also help with product info, MOQ, or shipping details!";
+  return "Thanks for your message! For detailed inquiries, please email us at exports@saiimportexportagro.com or call +91 63868 54875. I can also help with product info, MOQ, or shipping details!";
 }
 
 async function getGeminiReply(userMsg) {
@@ -321,7 +349,7 @@ async function getGeminiReply(userMsg) {
 let leadState = -1;
 let leadData = { name: '', email: '', products: [], requirements: '' };
 
-const CHAT_PRODUCTS = ['Jaggery', 'Makhana', 'Maize', 'Potato', 'Besan', 'Mustard Oil', 'Wheat'];
+const CHAT_PRODUCTS = ['1121 Basmati', '1509 Basmati', 'Sona Masoori', 'Swarna Raw', 'IR 64 Parboiled', 'Other Rice'];
 
 function showProductCheckboxes() {
   const wrapper = document.createElement('div');
@@ -447,11 +475,11 @@ async function sendMessage() {
         // ========== VALIDATION PASSED — SEND EMAIL ==========
 
         const formData = new FormData();
-        formData.append('_subject', '🤖 AI Chatbot Lead — FARMEXO');
+        formData.append('_subject', '🤖 AI Chatbot Lead — SAI Import Export Agro');
         formData.append('_captcha', 'false');
         formData.append('_template', 'table');
         formData.append('_replyto', leadEmail);
-        formData.append('_autoresponse', `Thank you for chatting with FARMEXO! 🌾\n\nWe have noted your requirements and our export team is preparing a personalized quotation for you.\n\nYou will hear from us within 24 hours.\n\n📧 exports@farmexo.com\n📞 +91 63868 54875\n\nWarm regards,\nFARMEXO Export Team`);
+        formData.append('_autoresponse', `Thank you for chatting with SAI Import Export Agro! 🍚\n\nWe have noted your requirements and our export team is preparing a personalized quotation for you.\n\nYou will hear from us within 24 hours.\n\n📧 exports@saiimportexportagro.com\n📞 +91 63868 54875\n\nWarm regards,\nSAI Import Export Agro Export Team`);
         formData.append('Name', leadName);
         formData.append('Email', leadEmail);
         formData.append('Requirements', leadReqs);
@@ -464,7 +492,7 @@ async function sendMessage() {
 
 Dear ${leadName},
 
-Thank you for your interest in FARMEXO products. Please find below our quotation:
+Thank you for your interest in SAI Import Export Agro products. Please find below our quotation:
 
 PROFORMA INVOICE
 ──────────────────────
@@ -485,7 +513,7 @@ Estimated Shipment: _______ days from confirmation
 Certifications: FSSAI | APEDA | ISO 22000 | HACCP
 
 Best regards,
-FARMEXO Export Team
+SAI Import Export Agro Export Team
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━`;
 
         formData.append('--- QUOTATION TEMPLATE ---', chatQuotation);
@@ -547,7 +575,7 @@ if (contactForm) {
 
 Dear ${buyerName.trim()},
 
-Thank you for your interest in FARMEXO products. Please find below our quotation:
+Thank you for your interest in SAI Import Export Agro products. Please find below our quotation:
 
 PROFORMA INVOICE
 ──────────────────────
@@ -570,10 +598,10 @@ Certifications Included:
 ✅ Phytosanitary Certificate ✅ Certificate of Origin
 
 For any questions, contact us:
-📧 exports@farmexo.com | 📞 +91 63868 54875
+📧 exports@saiimportexportagro.com | 📞 +91 63868 54875
 
 Best regards,
-FARMEXO Export Team
+SAI Import Export Agro Export Team
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━`;
 
     formData.append('--- QUOTATION TEMPLATE ---', quotationTemplate);
