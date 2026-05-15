@@ -52,6 +52,16 @@ async function loadHeroSection() {
 
 document.addEventListener('DOMContentLoaded', () => {
   loadHeroSection();
+
+  // "More..." toggle for Product Interest checkboxes in contact forms
+  const moreBtn = document.getElementById('more-products-btn');
+  const moreGrid = document.getElementById('more-products-grid');
+  if (moreBtn && moreGrid) {
+    moreBtn.addEventListener('click', () => {
+      moreBtn.style.display = 'none';
+      moreGrid.style.display = '';
+    });
+  }
 });
 
 // ==================== RENDER PRODUCTS ====================
