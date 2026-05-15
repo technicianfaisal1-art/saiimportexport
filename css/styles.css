@@ -261,9 +261,13 @@ body > .skiptranslate { height:0!important; overflow:hidden!important; position:
 .VIpgJd-ZVi9od-aZ2wEe-wOHMyf, 
 .VIpgJd-ZVi9od-aZ2wEe-wOHMyf-ti6hGc,
 iframe.goog-te-banner-frame,
-div#goog-gt-tt {
+div#goog-gt-tt,
+.goog-tooltip,
+.goog-tooltip:hover {
     display: none !important;
 }
+.goog-text-highlight { background-color: transparent !important; box-shadow: none !important; }
+html { margin-top: 0 !important; top: 0 !important; }
 
 /* ANIMATIONS */
 @keyframes fadeInUp { from { opacity:0; transform:translateY(40px); } to { opacity:1; transform:translateY(0); } }

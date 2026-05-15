@@ -296,9 +296,13 @@ const sendBtn = document.getElementById('send-chat');
 
 let chatHistory = [];
 
-function openChat() { chatWindow.classList.add('active'); }
-chatToggle.addEventListener('click', () => chatWindow.classList.toggle('active'));
-closeChat.addEventListener('click', () => chatWindow.classList.remove('active'));
+function openChat() { if (chatWindow) chatWindow.classList.add('active'); }
+if (chatToggle) {
+  chatToggle.addEventListener('click', () => chatWindow.classList.toggle('active'));
+}
+if (closeChat) {
+  closeChat.addEventListener('click', () => chatWindow.classList.remove('active'));
+}
 
 function addMsg(text, sender) {
   const d = document.createElement('div');
@@ -602,8 +606,12 @@ document.querySelectorAll('.quick-btn').forEach(btn => {
 });
 
 // Send button & Enter key
-sendBtn.addEventListener('click', sendMessage);
-chatField.addEventListener('keypress', e => { if (e.key === 'Enter') sendMessage(); });
+if (sendBtn) {
+  sendBtn.addEventListener('click', sendMessage);
+}
+if (chatField) {
+  chatField.addEventListener('keypress', e => { if (e.key === 'Enter') sendMessage(); });
+}
 
 // ==================== CONTACT FORM (AJAX FormSubmit) ====================
 // ==================== CONTACT FORM (Supabase + WhatsApp + FormSubmit) ====================
