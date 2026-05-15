@@ -78,12 +78,28 @@
   document.getElementById('pdp-tagline').textContent = p.heroTagline || '';
   document.getElementById('pdp-short-desc').textContent = p.shortDesc;
 
-  // Price
-  if (p.specs && p.specs.price) {
+  // Price & Variants
+  if (p.specs && p.specs.variants && p.specs.variants.length > 0) {
+    // Hide default simple price
+    document.getElementById('pdp-price-wrapper').classList.add('hidden');
+    // Show variants section
+    document.getElementById('pdp-variants-section').classList.remove('hidden');
+    
+    // Render variants table
+    const tbody = document.getElementById('pdp-variants-tbody');
+    tbody.innerHTML = p.specs.variants.map((v, i) => `
+      <tr class="${i % 2 === 0 ? 'even' : 'odd'}">
+        <td><strong>${v.name}</strong></td>
+        <td style="color:var(--orange); font-weight:600;">${v.price}</td>
+      </tr>
+    `).join('');
+  } else if (p.specs && p.specs.price) {
     document.getElementById('pdp-price').textContent = p.specs.price;
     document.getElementById('pdp-price-wrapper').classList.remove('hidden');
+    document.getElementById('pdp-variants-section')?.classList.add('hidden');
   } else {
     document.getElementById('pdp-price-wrapper').classList.add('hidden');
+    document.getElementById('pdp-variants-section')?.classList.add('hidden');
   }
 
   // Update WhatsApp link with product name

@@ -60,28 +60,48 @@ const productContainer = document.getElementById('product-container');
 async function renderProducts() {
   if (!productContainer) return;
   
-  let productsToRender = Object.values(PRODUCT_DETAILS).map(p => ({
-    id: p.id,
-    name: p.name,
-    tag: p.tag,
-    desc: p.shortDesc,
-    price: p.specs?.price || '',
-    img: p.image
-  }));
+  let productsToRender = Object.values(PRODUCT_DETAILS).map(p => {
+    let displayPrice = p.specs?.price || '';
+    if (p.specs?.variants && p.specs.variants.length > 0) {
+      if (p.specs.variants.length === 1) {
+        displayPrice = p.specs.variants[0].price;
+      } else {
+        displayPrice = p.specs.variants.length + ' variants available';
+      }
+    }
+    return {
+      id: p.id,
+      name: p.name,
+      tag: p.tag,
+      desc: p.shortDesc,
+      price: displayPrice,
+      img: p.image
+    };
+  });
   
   // Try to fetch from Supabase if keys are set
   if (saiDB && typeof SUPABASE_URL !== 'undefined' && SUPABASE_URL !== 'YOUR_SUPABASE_URL_HERE') {
     try {
       const { data, error } = await saiDB.from('products').select('*');
       if (!error && data && data.length > 0) {
-        productsToRender = data.map(p => ({
-          id: p.id,
-          name: p.name,
-          tag: p.tag,
-          desc: p.short_desc || p.description,
-          price: p.specs?.price || '',
-          img: p.img
-        }));
+        productsToRender = data.map(p => {
+          let displayPrice = p.specs?.price || '';
+          if (p.specs?.variants && p.specs.variants.length > 0) {
+            if (p.specs.variants.length === 1) {
+              displayPrice = p.specs.variants[0].price;
+            } else {
+              displayPrice = p.specs.variants.length + ' variants available';
+            }
+          }
+          return {
+            id: p.id,
+            name: p.name,
+            tag: p.tag,
+            desc: p.short_desc || p.description,
+            price: displayPrice,
+            img: p.img
+          };
+        });
       }
     } catch (e) {
       console.warn("Supabase fetch failed, using local fallback.", e);

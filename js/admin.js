@@ -78,13 +78,28 @@ async function loadProducts() {
     loadOverviewStats();
     if (!currentProducts.length) { tbody.innerHTML = '<tr><td colspan="6" style="text-align:center">No products. Add one!</td></tr>'; return; }
     tbody.innerHTML = currentProducts.map(function(p) {
-        return '<tr><td><img src="'+p.img+'" alt="'+p.name+'"></td><td>'+p.id+'</td><td><strong>'+p.name+'</strong></td><td><span class="badge badge-published">'+p.tag+'</span></td><td>'+(p.specs&&p.specs.price||'N/A')+'</td><td><div class="actions"><button class="btn-sm btn-edit" onclick="editProduct(\''+p.id+'\')">Edit</button><button class="btn-sm btn-delete" onclick="deleteProduct(\''+p.id+'\')">Del</button></div></td></tr>';
+        var priceDisplay = 'N/A';
+        if (p.specs && p.specs.variants && p.specs.variants.length > 0) {
+            if (p.specs.variants.length === 1) priceDisplay = p.specs.variants[0].price;
+            else priceDisplay = p.specs.variants.length + ' variants';
+        } else if (p.specs && p.specs.price) {
+            priceDisplay = p.specs.price;
+        }
+        return '<tr><td><img src="'+p.img+'" alt="'+p.name+'"></td><td>'+p.id+'</td><td><strong>'+p.name+'</strong></td><td><span class="badge badge-published">'+p.tag+'</span></td><td>'+priceDisplay+'</td><td><div class="actions"><button class="btn-sm btn-edit" onclick="editProduct(\''+p.id+'\')">Edit</button><button class="btn-sm btn-delete" onclick="deleteProduct(\''+p.id+'\')">Del</button></div></td></tr>';
     }).join('');
 }
 
 function openProductModal(isEdit) {
     document.getElementById('product-modal').classList.add('active');
-    if (!isEdit) { document.getElementById('product-modal-title').innerText = 'Add New Product'; productForm.reset(); document.getElementById('edit-id').value = ''; document.getElementById('p_id').readOnly = false; clearImageUpload(); }
+    if (!isEdit) { 
+        document.getElementById('product-modal-title').innerText = 'Add New Product'; 
+        productForm.reset(); 
+        document.getElementById('edit-id').value = ''; 
+        document.getElementById('p_id').readOnly = false; 
+        document.getElementById('variants-container').innerHTML = ''; // Clear variants
+        addVariantRow(); // Add one default empty row
+        clearImageUpload(); 
+    }
 }
 function closeProductModal() { document.getElementById('product-modal').classList.remove('active'); }
 
@@ -97,12 +112,23 @@ function editProduct(id) {
     document.getElementById('p_name').value = p.name;
     document.getElementById('p_img').value = p.img;
     document.getElementById('p_tag').value = p.tag;
-    document.getElementById('p_price').value = p.specs&&p.specs.price||'';
     document.getElementById('p_seo_title').value = p.specs&&p.specs.seo_title||'';
     document.getElementById('p_seo_desc').value = p.specs&&p.specs.seo_desc||'';
     document.getElementById('p_short_desc').value = p.short_desc;
     document.getElementById('p_desc').value = p.description;
-    document.getElementById('p_specs').value = JSON.stringify(p.specs, null, 2);
+    
+    // Populate Variants
+    var vContainer = document.getElementById('variants-container');
+    vContainer.innerHTML = '';
+    if (p.specs && p.specs.variants && Array.isArray(p.specs.variants)) {
+        p.specs.variants.forEach(function(v) { addVariantRow(v.name, v.price); });
+    }
+    
+    // Clean specs JSON from variants/seo to show raw other specs
+    var cleanSpecs = Object.assign({}, p.specs);
+    delete cleanSpecs.variants; delete cleanSpecs.seo_title; delete cleanSpecs.seo_desc; delete cleanSpecs.price;
+    document.getElementById('p_specs').value = JSON.stringify(cleanSpecs, null, 2);
+    
     clearImageUpload();
     openProductModal(true);
 }
@@ -123,9 +149,18 @@ productForm.addEventListener('submit', async function(e) {
         if (url) document.getElementById('p_img').value = url;
     }
     var specs = {};
-    try { specs = JSON.parse(document.getElementById('p_specs').value); } catch(e) { alert('Invalid JSON!'); btn.innerText = 'Save Product'; return; }
-    var price = document.getElementById('p_price').value;
-    if (price) specs.price = price; else delete specs.price;
+    try { specs = JSON.parse(document.getElementById('p_specs').value); } catch(e) { alert('Invalid JSON in Specs! Must be {}'); btn.innerText = 'Save Product'; return; }
+    
+    // Extract Variants
+    var variantRows = document.querySelectorAll('.variant-row');
+    var variants = [];
+    variantRows.forEach(function(row) {
+        var n = row.querySelector('.var-name').value.trim();
+        var p = row.querySelector('.var-price').value.trim();
+        if (n || p) variants.push({name: n, price: p});
+    });
+    if (variants.length > 0) specs.variants = variants;
+    
     var seo_title = document.getElementById('p_seo_title').value;
     if (seo_title) specs.seo_title = seo_title; else delete specs.seo_title;
     var seo_desc = document.getElementById('p_seo_desc').value;
@@ -138,6 +173,21 @@ productForm.addEventListener('submit', async function(e) {
     btn.innerText = 'Save Product';
     if (r.error) alert('Error: ' + r.error.message); else { pendingImageFile = null; closeProductModal(); loadProducts(); }
 });
+
+// Dynamic Variants Logic
+function addVariantRow(name, price) {
+    var vContainer = document.getElementById('variants-container');
+    var row = document.createElement('div');
+    row.className = 'variant-row';
+    row.style = 'display:flex; gap:10px; margin-bottom:8px;';
+    row.innerHTML = `
+        <input type="text" class="form-control var-name" placeholder="Variant (e.g. Steam)" value="${name || ''}">
+        <input type="text" class="form-control var-price" placeholder="Price (e.g. $1.07)" value="${price || ''}">
+        <button type="button" class="btn-delete" style="padding:0 10px;" onclick="this.parentElement.remove()">✕</button>
+    `;
+    vContainer.appendChild(row);
+}
+
 
 // ==================== IMAGE UPLOAD ====================
 document.getElementById('img-upload-area').addEventListener('click', function() { document.getElementById('img-file-input').click(); });
