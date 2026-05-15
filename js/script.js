@@ -52,17 +52,53 @@ async function loadHeroSection() {
 
 document.addEventListener('DOMContentLoaded', () => {
   loadHeroSection();
+  buildProductInterestCheckboxes();
+});
 
-  // "More..." toggle for Product Interest checkboxes in contact forms
-  const moreBtn = document.getElementById('more-products-btn');
-  const moreGrid = document.getElementById('more-products-grid');
-  if (moreBtn && moreGrid) {
+// Dynamically build Product Interest checkboxes from PRODUCT_DETAILS
+function buildProductInterestCheckboxes() {
+  const container = document.getElementById('product-interest-container');
+  if (!container || typeof PRODUCT_DETAILS === 'undefined') return;
+
+  const allProducts = Object.values(PRODUCT_DETAILS).map(p => p.name);
+  const VISIBLE_COUNT = 5;
+  const mainProducts = allProducts.slice(0, VISIBLE_COUNT);
+  const moreProducts = allProducts.slice(VISIBLE_COUNT);
+
+  // Build main grid
+  const mainGrid = document.createElement('div');
+  mainGrid.className = 'checkbox-grid';
+  mainProducts.forEach(name => {
+    mainGrid.innerHTML += `<label class="checkbox-label"><input type="checkbox" name="Products" value="${name}"> ${name}</label>`;
+  });
+
+  // Add "More..." toggle if extra products exist
+  if (moreProducts.length > 0) {
+    const moreBtn = document.createElement('label');
+    moreBtn.className = 'checkbox-label more-toggle';
+    moreBtn.style.cssText = 'color:var(--green); font-weight:600; cursor:pointer;';
+    moreBtn.textContent = '+ More...';
+    mainGrid.appendChild(moreBtn);
+
+    // Build hidden extra grid
+    const moreGrid = document.createElement('div');
+    moreGrid.className = 'checkbox-grid';
+    moreGrid.style.cssText = 'display:none; margin-top:8px;';
+    moreProducts.forEach(name => {
+      moreGrid.innerHTML += `<label class="checkbox-label"><input type="checkbox" name="Products" value="${name}"> ${name}</label>`;
+    });
+
     moreBtn.addEventListener('click', () => {
       moreBtn.style.display = 'none';
       moreGrid.style.display = '';
     });
+
+    container.appendChild(mainGrid);
+    container.appendChild(moreGrid);
+  } else {
+    container.appendChild(mainGrid);
   }
-});
+}
 
 // ==================== RENDER PRODUCTS ====================
 const productContainer = document.getElementById('product-container');
