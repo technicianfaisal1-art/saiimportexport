@@ -555,28 +555,27 @@ sendBtn.addEventListener('click', sendMessage);
 chatField.addEventListener('keypress', e => { if (e.key === 'Enter') sendMessage(); });
 
 // ==================== CONTACT FORM (AJAX FormSubmit) ====================
-// Submits form in the background without redirecting the user to formsubmit.co
-const contactForm = document.getElementById('contact-form');
-if (contactForm) {
-  contactForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const btn = e.target.querySelector('button[type="submit"]');
-    const originalText = btn.textContent;
-    btn.textContent = 'Sending...';
-    btn.disabled = true;
+// ==================== CONTACT FORM (Supabase + WhatsApp + FormSubmit) ====================
+async function handleContactSubmit(e, formElement) {
+  e.preventDefault();
+  const btn = e.target.querySelector('button[type="submit"]');
+  const originalText = btn.textContent;
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
 
-    const formData = new FormData(contactForm);
+  const formData = new FormData(formElement);
 
-    // Set _replyto so owner can Reply directly to the buyer
-    const buyerEmail = formData.get('Email') || '';
-    if (buyerEmail) formData.append('_replyto', buyerEmail);
+  // Set _replyto so owner can Reply directly to the buyer
+  const buyerEmail = formData.get('Email') || '';
+  if (buyerEmail) formData.append('_replyto', buyerEmail);
 
-    // Add pre-filled quotation template for easy owner reply
-    const buyerName = (formData.get('First Name') || '') + ' ' + (formData.get('Last Name') || '');
-    const buyerProducts = formData.getAll('Products').join(', ') || 'Not specified';
-    const buyerReqs = formData.get('Requirements') || '';
+  // Add pre-filled quotation template for easy owner reply
+  const buyerName = (formData.get('First Name') || '') + ' ' + (formData.get('Last Name') || '');
+  const buyerProducts = formData.getAll('Products').join(', ') || 'Not specified';
+  const buyerReqs = formData.get('Requirements') || '';
+  const buyerCompany = formData.get('Company') || '';
 
-    const quotationTemplate = `
+  const quotationTemplate = `
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━
 📋 READY-TO-SEND QUOTATION TEMPLATE
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -613,37 +612,69 @@ Best regards,
 SAI Import Export Agro Export Team
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━`;
 
-    formData.append('--- QUOTATION TEMPLATE ---', quotationTemplate);
+  formData.append('--- QUOTATION TEMPLATE ---', quotationTemplate);
 
-    try {
-      const response = await fetch(contactForm.action, {
-        method: 'POST',
-        body: formData,
-        headers: {
-          'Accept': 'application/json'
-        }
+  try {
+    // 1. Send to FormSubmit
+    const formSubmitPromise = fetch(formElement.action, {
+      method: 'POST',
+      body: formData,
+      headers: { 'Accept': 'application/json' }
+    });
+
+    // 2. Save to Supabase Database (Admin Inbox)
+    let supabasePromise = Promise.resolve();
+    if (typeof saiDB !== 'undefined') {
+      supabasePromise = saiDB.from('enquiries').insert({
+        name: buyerName.trim(),
+        email: buyerEmail,
+        phone: formData.get('Phone') || null, // if added in future
+        company: buyerCompany || null,
+        products: buyerProducts,
+        message: buyerReqs,
+        status: 'new'
       });
-
-      if (response.ok) {
-        btn.textContent = '✅ Inquiry Sent Successfully!';
-        btn.style.background = '#1a5c38';
-        contactForm.reset();
-      } else {
-        throw new Error('Network response was not ok');
-      }
-    } catch (error) {
-      console.error('Error submitting form:', error);
-      btn.textContent = '❌ Failed — Try Again';
-      btn.style.background = '#c0392b';
     }
 
-    setTimeout(() => {
-      btn.textContent = originalText;
-      btn.style.background = '';
-      btn.disabled = false;
-    }, 4000);
-  });
+    // 3. Send WhatsApp Notification via CallMeBot
+    let waPromise = Promise.resolve();
+    if (typeof saiDB !== 'undefined') {
+      waPromise = saiDB.from('site_settings').select('*').eq('key', 'whatsapp').single().then(res => {
+        if (res.data && res.data.value && res.data.value.phone && res.data.value.apikey) {
+          const waPhone = res.data.value.phone.replace(/[^0-9]/g, '');
+          const waApi = res.data.value.apikey;
+          const waMsg = encodeURIComponent(`*🔔 New Enquiry on Website!*\n\n*👤 Name:* ${buyerName.trim()}\n*📧 Email:* ${buyerEmail}\n*🏢 Company:* ${buyerCompany || 'N/A'}\n*📦 Products:* ${buyerProducts}\n\n*💬 Message:*\n${buyerReqs}`);
+          const waUrl = `https://api.callmebot.com/whatsapp.php?phone=${waPhone}&text=${waMsg}&apikey=${waApi}`;
+          return fetch(waUrl, { mode: 'no-cors' }); // no-cors because callmebot doesn't set CORS headers
+        }
+      }).catch(err => console.error("WhatsApp API Error:", err));
+    }
+
+    // Wait for everything
+    await Promise.all([formSubmitPromise, supabasePromise, waPromise]);
+
+    btn.textContent = '✅ Inquiry Sent Successfully!';
+    btn.style.background = '#1a5c38';
+    formElement.reset();
+
+  } catch (error) {
+    console.error('Error submitting form:', error);
+    btn.textContent = '❌ Failed — Try Again';
+    btn.style.background = '#c0392b';
+  }
+
+  setTimeout(() => {
+    btn.textContent = originalText;
+    btn.style.background = '';
+    btn.disabled = false;
+  }, 4000);
 }
+
+const contactForm = document.getElementById('contact-form');
+if (contactForm) contactForm.addEventListener('submit', (e) => handleContactSubmit(e, contactForm));
+
+const contactPageForm = document.getElementById('contact-page-form');
+if (contactPageForm) contactPageForm.addEventListener('submit', (e) => handleContactSubmit(e, contactPageForm));
 
 // ==================== ACTIVE NAV LINK ====================
 const sections = document.querySelectorAll('section[id]');

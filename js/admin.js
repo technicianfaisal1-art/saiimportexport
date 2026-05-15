@@ -37,7 +37,7 @@ document.getElementById('logout-btn').addEventListener('click', async function()
 
 async function showDashboard() {
     loginScreen.style.display = 'none'; dashboard.style.display = 'block';
-    loadProducts(); loadEnquiries(); loadBlogPosts(); loadHeroSettings();
+    loadProducts(); loadEnquiries(); loadBlogPosts(); loadHeroSettings(); loadWhatsAppSettings();
 }
 
 // ==================== TABS ====================
@@ -77,6 +77,8 @@ function editProduct(id) {
     document.getElementById('p_img').value = p.img;
     document.getElementById('p_tag').value = p.tag;
     document.getElementById('p_price').value = p.specs&&p.specs.price||'';
+    document.getElementById('p_seo_title').value = p.specs&&p.specs.seo_title||'';
+    document.getElementById('p_seo_desc').value = p.specs&&p.specs.seo_desc||'';
     document.getElementById('p_short_desc').value = p.short_desc;
     document.getElementById('p_desc').value = p.description;
     document.getElementById('p_specs').value = JSON.stringify(p.specs, null, 2);
@@ -103,6 +105,10 @@ productForm.addEventListener('submit', async function(e) {
     try { specs = JSON.parse(document.getElementById('p_specs').value); } catch(e) { alert('Invalid JSON!'); btn.innerText = 'Save Product'; return; }
     var price = document.getElementById('p_price').value;
     if (price) specs.price = price; else delete specs.price;
+    var seo_title = document.getElementById('p_seo_title').value;
+    if (seo_title) specs.seo_title = seo_title; else delete specs.seo_title;
+    var seo_desc = document.getElementById('p_seo_desc').value;
+    if (seo_desc) specs.seo_desc = seo_desc; else delete specs.seo_desc;
     var r = await saiDB.from('products').upsert({
         id: document.getElementById('p_id').value, name: document.getElementById('p_name').value,
         tag: document.getElementById('p_tag').value, short_desc: document.getElementById('p_short_desc').value,
@@ -275,6 +281,25 @@ async function saveHeroSettings() {
     };
     var r = await saiDB.from('site_settings').upsert({ key: 'hero', value: data, updated_at: new Date().toISOString() });
     if (r.error) alert('Error: ' + r.error.message); else alert('✅ Hero settings saved!');
+}
+
+// ==================== WHATSAPP SETTINGS ====================
+async function loadWhatsAppSettings() {
+    var r = await saiDB.from('site_settings').select('*').eq('key', 'whatsapp').single();
+    if (r.data && r.data.value) {
+        var v = r.data.value;
+        document.getElementById('wa_phone').value = v.phone || '';
+        document.getElementById('wa_apikey').value = v.apikey || '';
+    }
+}
+
+async function saveWhatsAppSettings() {
+    var data = {
+        phone: document.getElementById('wa_phone').value,
+        apikey: document.getElementById('wa_apikey').value
+    };
+    var r = await saiDB.from('site_settings').upsert({ key: 'whatsapp', value: data, updated_at: new Date().toISOString() });
+    if (r.error) alert('Error: ' + r.error.message); else alert('✅ WhatsApp settings saved!');
 }
 
 // Hero image upload

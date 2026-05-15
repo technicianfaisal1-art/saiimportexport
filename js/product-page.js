@@ -39,8 +39,8 @@
   }
 
   // SEO — Title & Meta
-  document.getElementById('page-title').textContent = `${p.name} Exporter India | SAI Import Export Agro`;
-  document.getElementById('page-desc').setAttribute('content', `${p.shortDesc} Export from India with SAI. ${p.specs?.moq || ''} MOQ.`);
+  document.getElementById('page-title').textContent = p.specs?.seo_title || `${p.name} Exporter India | SAI Import Export Agro`;
+  document.getElementById('page-desc').setAttribute('content', p.specs?.seo_desc || `${p.shortDesc} Export from India with SAI. ${p.specs?.moq || ''} MOQ.`);
 
   // Breadcrumb
   document.getElementById('breadcrumb-name').textContent = p.name;

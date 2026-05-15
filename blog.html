@@ -146,6 +146,8 @@
         }
     </style>
     <link rel="icon" type="image/jpeg" href="images/sai_logo_icon.webp">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2d5a3c">
 </head>
 
 <body>
@@ -314,5 +316,11 @@
     </script>
     <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js');
+        }
+    </script>
 </body>
 </html>
