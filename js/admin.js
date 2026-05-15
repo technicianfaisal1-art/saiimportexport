@@ -38,7 +38,7 @@ loginForm.addEventListener('submit', async (e) => {
             return;
         }
 
-        const { data, error } = await supabase.auth.signInWithPassword({
+        const { data, error } = await saiDB.auth.signInWithPassword({
             email: email,
             password: password,
         });
@@ -62,7 +62,7 @@ loginForm.addEventListener('submit', async (e) => {
 
 // Logout
 document.getElementById('logout-btn').addEventListener('click', async () => {
-    await supabase.auth.signOut();
+    await saiDB.auth.signOut();
     window.location.reload();
 });
 
@@ -83,7 +83,7 @@ async function loadProducts() {
         .order('id', { ascending: true });
         
     if (error) {
-        tableBody.innerHTML = `<tr><td colspan="5" style="color:red; text-align: center;">Error loading data: ${error.message}. <br>Make sure you have created the 'products' table in Supabase.</td></tr>`;
+        tableBody.innerHTML = `<tr><td colspan="5" style="color:red; text-align: center;">Error loading data: ${error.message}. <br>Make sure you have created the 'products' table in saiDB.</td></tr>`;
         return;
     }
     

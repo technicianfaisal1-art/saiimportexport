@@ -32,7 +32,7 @@ async function renderProducts() {
   // Try to fetch from Supabase if keys are set
   if (typeof supabase !== 'undefined' && typeof SUPABASE_URL !== 'undefined' && SUPABASE_URL !== 'YOUR_SUPABASE_URL_HERE') {
     try {
-      const { data, error } = await supabase.from('products').select('*');
+      const { data, error } = await saiDB.from('products').select('*');
       if (!error && data && data.length > 0) {
         productsToRender = data.map(p => ({
           id: p.id,

@@ -10,7 +10,7 @@
   // Try to fetch from Supabase if keys are set
   if (typeof supabase !== 'undefined' && typeof SUPABASE_URL !== 'undefined' && SUPABASE_URL !== 'YOUR_SUPABASE_URL_HERE') {
     try {
-      const { data, error } = await supabase.from('products').select('*').eq('id', productId).single();
+      const { data, error } = await saiDB.from('products').select('*').eq('id', productId).single();
       if (!error && data) {
         p = {
           ...(p || { longDesc: [], packaging: [], whyChoose: [], specTable: [] }), // Merge local static assets if available
