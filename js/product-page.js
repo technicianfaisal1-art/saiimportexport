@@ -39,8 +39,33 @@
   }
 
   // SEO — Title & Meta
-  document.getElementById('page-title').textContent = p.specs?.seo_title || `${p.name} Exporter India | SAI Import Export Agro`;
-  document.getElementById('page-desc').setAttribute('content', p.specs?.seo_desc || `${p.shortDesc} Export from India with SAI. ${p.specs?.moq || ''} MOQ.`);
+  const titleText = p.specs?.seo_title || `${p.name} Exporter India | SAI Import Export Agro`;
+  const descText = p.specs?.seo_desc || `${p.shortDesc} Export from India with SAI. ${p.specs?.moq || ''} MOQ.`;
+  const imgUrl = window.location.origin + '/' + p.image;
+  const currentUrl = window.location.href;
+
+  document.getElementById('page-title').textContent = titleText;
+  document.getElementById('page-desc').setAttribute('content', descText);
+
+  // Update Open Graph Tags
+  const ogTitle = document.getElementById('og-title');
+  if(ogTitle) ogTitle.setAttribute('content', titleText);
+  const ogDesc = document.getElementById('og-desc');
+  if(ogDesc) ogDesc.setAttribute('content', descText);
+  const ogImage = document.getElementById('og-image');
+  if(ogImage) ogImage.setAttribute('content', imgUrl);
+  const ogUrl = document.getElementById('og-url');
+  if(ogUrl) ogUrl.setAttribute('content', currentUrl);
+  
+  // Update Twitter Tags
+  const twTitle = document.getElementById('tw-title');
+  if(twTitle) twTitle.setAttribute('content', titleText);
+  const twDesc = document.getElementById('tw-desc');
+  if(twDesc) twDesc.setAttribute('content', descText);
+  const twImage = document.getElementById('tw-image');
+  if(twImage) twImage.setAttribute('content', imgUrl);
+  const twUrl = document.getElementById('tw-url');
+  if(twUrl) twUrl.setAttribute('content', currentUrl);
 
   // Breadcrumb
   document.getElementById('breadcrumb-name').textContent = p.name;
