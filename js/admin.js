@@ -40,12 +40,31 @@ async function showDashboard() {
     loadProducts(); loadEnquiries(); loadBlogPosts(); loadHeroSettings(); loadWhatsAppSettings();
 }
 
-// ==================== TABS ====================
+// ==================== TABS & SIDEBAR ====================
 function switchTab(name) {
     document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
-    document.querySelectorAll('.admin-tabs button').forEach(function(b) { b.classList.remove('active'); });
-    document.getElementById('tab-' + name).classList.add('active');
-    event.target.closest('button').classList.add('active');
+    document.querySelectorAll('.sidebar-nav .nav-btn').forEach(function(b) { b.classList.remove('active'); });
+    var targetPanel = document.getElementById('tab-' + name);
+    if(targetPanel) targetPanel.classList.add('active');
+    var targetBtn = document.getElementById('nav-' + name);
+    if(targetBtn) targetBtn.classList.add('active');
+    
+    // Close sidebar on mobile after clicking
+    if (window.innerWidth <= 768) {
+        document.getElementById('sidebar').classList.remove('open');
+    }
+}
+
+function toggleSidebar() {
+    var sidebar = document.getElementById('sidebar');
+    sidebar.classList.toggle('open');
+}
+
+async function loadOverviewStats() {
+    // These will be updated dynamically as data loads
+    document.getElementById('stat-products').innerText = currentProducts.length;
+    document.getElementById('stat-enquiries').innerText = currentEnquiries.length;
+    document.getElementById('stat-blogs').innerText = currentPosts.length;
 }
 
 // ==================== PRODUCTS ====================
@@ -55,6 +74,7 @@ async function loadProducts() {
     var r = await saiDB.from('products').select('*').order('id');
     if (r.error) { tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:red">Error: '+r.error.message+'</td></tr>'; return; }
     currentProducts = r.data;
+    loadOverviewStats();
     if (!currentProducts.length) { tbody.innerHTML = '<tr><td colspan="6" style="text-align:center">No products. Add one!</td></tr>'; return; }
     tbody.innerHTML = currentProducts.map(function(p) {
         return '<tr><td><img src="'+p.img+'" alt="'+p.name+'"></td><td>'+p.id+'</td><td><strong>'+p.name+'</strong></td><td><span class="badge badge-published">'+p.tag+'</span></td><td>'+(p.specs&&p.specs.price||'N/A')+'</td><td><div class="actions"><button class="btn-sm btn-edit" onclick="editProduct(\''+p.id+'\')">Edit</button><button class="btn-sm btn-delete" onclick="deleteProduct(\''+p.id+'\')">Del</button></div></td></tr>';
@@ -173,6 +193,7 @@ async function loadEnquiries() {
     var r = await saiDB.from('enquiries').select('*').order('created_at', { ascending: false });
     if (r.error) { tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:red">'+r.error.message+'</td></tr>'; return; }
     currentEnquiries = r.data;
+    loadOverviewStats();
     var newCount = currentEnquiries.filter(function(e) { return e.status === 'new'; }).length;
     var badge = document.getElementById('enquiry-badge');
     if (newCount > 0) { badge.style.display = 'inline'; badge.innerText = newCount; } else { badge.style.display = 'none'; }
@@ -214,6 +235,7 @@ async function loadBlogPosts() {
     var r = await saiDB.from('blog_posts').select('*').order('created_at', { ascending: false });
     if (r.error) { tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:red">'+r.error.message+'</td></tr>'; return; }
     currentPosts = r.data;
+    loadOverviewStats();
     if (!currentPosts.length) { tbody.innerHTML = '<tr><td colspan="5" style="text-align:center">No posts yet. Create one!</td></tr>'; return; }
     tbody.innerHTML = currentPosts.map(function(p) {
         var d = new Date(p.created_at).toLocaleDateString('en-IN', { day:'2-digit', month:'short', year:'numeric' });
