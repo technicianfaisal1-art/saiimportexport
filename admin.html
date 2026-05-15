@@ -133,8 +133,21 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>Image Path (e.g. images/1121-basmati.webp)</label>
-                        <input type="text" id="p_img" class="form-control" required>
+                        <label>Product Image</label>
+                        <input type="text" id="p_img" class="form-control" placeholder="Auto-filled on upload or enter URL" required>
+                        <div id="img-upload-area" style="margin-top:10px;border:2px dashed #4a7c59;border-radius:12px;padding:25px;text-align:center;cursor:pointer;background:#f0f7f2;transition:all 0.3s ease;">
+                            <div id="img-upload-prompt">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#4a7c59" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+                                <p style="margin:8px 0 0;color:#4a7c59;font-weight:600;">Click or drag image here</p>
+                                <p style="margin:4px 0 0;color:#888;font-size:0.8rem;">Auto-compressed to WebP • Max 400px width</p>
+                            </div>
+                            <div id="img-preview-box" style="display:none;">
+                                <img id="img-preview" style="max-width:200px;max-height:150px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.15);">
+                                <p id="img-size-info" style="margin:8px 0 0;color:#4a7c59;font-size:0.85rem;font-weight:600;"></p>
+                                <button type="button" onclick="clearImageUpload()" style="margin-top:6px;background:#e74c3c;color:#fff;border:none;padding:4px 14px;border-radius:6px;cursor:pointer;font-size:0.8rem;">✕ Remove</button>
+                            </div>
+                        </div>
+                        <input type="file" id="img-file-input" accept="image/*" style="display:none;">
                     </div>
                     <div class="form-group">
                         <label for="p_short_desc">Short Description</label>

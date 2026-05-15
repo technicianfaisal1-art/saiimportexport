@@ -152,53 +152,7 @@ function editProduct(id) {
     openModal(true);
 }
 
-// Save Product
-productForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const btn = document.getElementById('save-btn');
-    btn.innerText = 'Saving...';
-    
-    let specsData = {};
-    try {
-        specsData = JSON.parse(document.getElementById('p_specs').value);
-    } catch (e) {
-        alert("Invalid JSON format in Specifications!");
-        btn.innerText = 'Save Product';
-        return;
-    }
-    
-    // Merge explicit price field into specs
-    const priceVal = document.getElementById('p_price').value;
-    if (priceVal) {
-        specsData.price = priceVal;
-    } else {
-        delete specsData.price;
-    }
-    
-    const productData = {
-        id: document.getElementById('p_id').value,
-        name: document.getElementById('p_name').value,
-        tag: document.getElementById('p_tag').value,
-        short_desc: document.getElementById('p_short_desc').value,
-        description: document.getElementById('p_desc').value,
-        img: document.getElementById('p_img').value,
-        specs: specsData
-    };
-    
-    // Upsert to Supabase
-    const { error } = await saiDB
-        .from('products')
-        .upsert(productData);
-        
-    btn.innerText = 'Save Product';
-    
-    if (error) {
-        alert(`Error saving product: ${error.message}`);
-    } else {
-        closeModal();
-        loadProducts(); // Refresh
-    }
-});
+
 
 // Delete Product
 async function deleteProduct(id) {
@@ -215,6 +169,179 @@ async function deleteProduct(id) {
         loadProducts(); // Refresh
     }
 }
+
+// ==================== IMAGE UPLOAD SYSTEM ====================
+var pendingImageFile = null; // Holds compressed blob ready for upload
+
+// Click to upload
+document.getElementById('img-upload-area').addEventListener('click', function() {
+    document.getElementById('img-file-input').click();
+});
+
+// Drag and drop
+var uploadArea = document.getElementById('img-upload-area');
+uploadArea.addEventListener('dragover', function(e) {
+    e.preventDefault();
+    uploadArea.style.borderColor = '#2d5a3c';
+    uploadArea.style.background = '#ddf0e3';
+});
+uploadArea.addEventListener('dragleave', function() {
+    uploadArea.style.borderColor = '#4a7c59';
+    uploadArea.style.background = '#f0f7f2';
+});
+uploadArea.addEventListener('drop', function(e) {
+    e.preventDefault();
+    uploadArea.style.borderColor = '#4a7c59';
+    uploadArea.style.background = '#f0f7f2';
+    if (e.dataTransfer.files.length > 0) {
+        processImageFile(e.dataTransfer.files[0]);
+    }
+});
+
+// File input change
+document.getElementById('img-file-input').addEventListener('change', function(e) {
+    if (e.target.files.length > 0) {
+        processImageFile(e.target.files[0]);
+    }
+});
+
+// Compress image to WebP using Canvas API
+function compressImage(file, maxWidth, quality) {
+    return new Promise(function(resolve) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            var img = new Image();
+            img.onload = function() {
+                var canvas = document.createElement('canvas');
+                var ratio = Math.min(maxWidth / img.width, 1);
+                canvas.width = img.width * ratio;
+                canvas.height = img.height * ratio;
+                var ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                canvas.toBlob(function(blob) {
+                    resolve(blob);
+                }, 'image/webp', quality);
+            };
+            img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    });
+}
+
+// Process selected image
+async function processImageFile(file) {
+    if (!file.type.startsWith('image/')) {
+        alert('Please select an image file');
+        return;
+    }
+
+    var originalSize = (file.size / 1024).toFixed(1);
+    document.getElementById('img-size-info').innerText = 'Compressing...';
+    document.getElementById('img-upload-prompt').style.display = 'none';
+    document.getElementById('img-preview-box').style.display = 'block';
+
+    // Compress to WebP, max 400px width, 60% quality
+    var compressed = await compressImage(file, 400, 0.6);
+    var compressedSize = (compressed.size / 1024).toFixed(1);
+    var savings = Math.round((1 - compressed.size / file.size) * 100);
+
+    pendingImageFile = compressed;
+
+    // Show preview
+    var previewUrl = URL.createObjectURL(compressed);
+    document.getElementById('img-preview').src = previewUrl;
+    document.getElementById('img-size-info').innerText = 
+        originalSize + 'KB → ' + compressedSize + 'KB (' + savings + '% smaller) ✓ WebP';
+}
+
+function clearImageUpload() {
+    pendingImageFile = null;
+    document.getElementById('img-upload-prompt').style.display = 'block';
+    document.getElementById('img-preview-box').style.display = 'none';
+    document.getElementById('img-file-input').value = '';
+    document.getElementById('img-preview').src = '';
+    document.getElementById('img-size-info').innerText = '';
+}
+
+// Upload image to Supabase Storage
+async function uploadImageToStorage(productId) {
+    if (!pendingImageFile) return null;
+    
+    var fileName = productId + '.webp';
+    var filePath = 'products/' + fileName;
+    
+    // Upload to Supabase Storage
+    var result = await saiDB.storage.from('product-images').upload(filePath, pendingImageFile, {
+        contentType: 'image/webp',
+        upsert: true
+    });
+    
+    if (result.error) {
+        console.error('Upload error:', result.error);
+        alert('Image upload failed: ' + result.error.message);
+        return null;
+    }
+    
+    // Get public URL
+    var urlResult = saiDB.storage.from('product-images').getPublicUrl(filePath);
+    return urlResult.data.publicUrl;
+}
+
+// ==================== MODIFIED SAVE (with image upload) ====================
+// Override the original form submit to include image upload
+productForm.removeEventListener('submit', productForm._handler);
+productForm.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    var btn = document.getElementById('save-btn');
+    btn.innerText = 'Saving...';
+    
+    // Upload image first if pending
+    if (pendingImageFile) {
+        var pid = document.getElementById('p_id').value;
+        btn.innerText = 'Uploading image...';
+        var imageUrl = await uploadImageToStorage(pid);
+        if (imageUrl) {
+            document.getElementById('p_img').value = imageUrl;
+        }
+    }
+
+    var specsData = {};
+    try {
+        specsData = JSON.parse(document.getElementById('p_specs').value);
+    } catch (err) {
+        alert("Invalid JSON format in Specifications!");
+        btn.innerText = 'Save Product';
+        return;
+    }
+
+    var priceVal = document.getElementById('p_price').value;
+    if (priceVal) {
+        specsData.price = priceVal;
+    } else {
+        delete specsData.price;
+    }
+
+    var productData = {
+        id: document.getElementById('p_id').value,
+        name: document.getElementById('p_name').value,
+        tag: document.getElementById('p_tag').value,
+        short_desc: document.getElementById('p_short_desc').value,
+        description: document.getElementById('p_desc').value,
+        img: document.getElementById('p_img').value,
+        specs: specsData
+    };
+
+    var result = await saiDB.from('products').upsert(productData);
+    btn.innerText = 'Save Product';
+
+    if (result.error) {
+        alert('Error saving product: ' + result.error.message);
+    } else {
+        pendingImageFile = null;
+        closeModal();
+        loadProducts();
+    }
+});
 
 // Boot up
 document.addEventListener('DOMContentLoaded', init);
