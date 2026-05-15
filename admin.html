@@ -158,8 +158,17 @@
     </div>
 
     <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="js/supabase-client.js?v=3"></script>
-    <script src="js/admin.js?v=3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.8/dist/umd/supabase-js.min.js"></script>
+    <script>
+        // Initialize Supabase Client inline to avoid loading race conditions
+        const SUPABASE_URL = 'https://zztjtewhxpckqgmqimtq.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp6dGp0ZXdoeHBja3FnbXFpbXRxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg4NTU1OTksImV4cCI6MjA5NDQzMTU5OX0.PjvLvaqncoiyiB4m0lNenaCpjp6shml1-dx4vcGlGO4';
+        const saiDB = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        async function checkAuth() {
+            const { data: { session } } = await saiDB.auth.getSession();
+            return session;
+        }
+    </script>
+    <script src="js/admin.js?v=5"></script>
 </body>
 </html>
