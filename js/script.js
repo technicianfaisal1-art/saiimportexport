@@ -192,7 +192,7 @@ Company & Export Information:
 - Certifications: FSSAI, APEDA registered, ISO 22000, HACCP Compliant
 - Payment terms: LC at sight, T/T (30% advance)
 - Incoterms: FOB, CIF, CFR available
-- Contact: exports@saiimportexportagro.com | +91 63868 54875
+- Contact: saiimportexportagro0@gmail.com | +91 85958 27184
 
 Rules:
 - Keep responses concise (2-4 sentences max). Do not write long paragraphs.
@@ -278,7 +278,7 @@ const fallbackReplies = {
   'shipping': 'We ship from Nhava Sheva, Mundra, Haldia, and Chennai ports.',
   'port': 'Our main export ports are Nhava Sheva, Mundra, Haldia, and Chennai.',
   'price': "Pricing depends on product, quantity, and destination. Share your requirements and we'll prepare a custom FOB/CIF quote!",
-  'quote': 'To prepare a quote I need: 1) Product, 2) Quantity, 3) Destination port. You can also email us at exports@saiimportexportagro.com',
+  'quote': 'To prepare a quote I need: 1) Product, 2) Quantity, 3) Destination port. You can also email us at saiimportexportagro0@gmail.com',
   'payment': 'We accept LC at sight and T/T (30% advance, 70% against BL copy).',
   'certificate': 'We hold FSSAI, APEDA registration, and ISO 22000 certifications.',
   'hello': 'Hello! Welcome to SAI Import Export Agro. How can I help you today? 😊',
@@ -290,7 +290,7 @@ function getFallbackReply(msg) {
   for (const [key, reply] of Object.entries(fallbackReplies)) {
     if (lower.includes(key)) return reply;
   }
-  return "Thanks for your message! For detailed inquiries, please email us at exports@saiimportexportagro.com or call +91 63868 54875. I can also help with product info, MOQ, or shipping details!";
+  return "Thanks for your message! For detailed inquiries, please email us at saiimportexportagro0@gmail.com or call +91 85958 27184. I can also help with product info, MOQ, or shipping details!";
 }
 
 async function getGeminiReply(userMsg) {
@@ -479,7 +479,7 @@ async function sendMessage() {
         formData.append('_captcha', 'false');
         formData.append('_template', 'table');
         formData.append('_replyto', leadEmail);
-        formData.append('_autoresponse', `Thank you for chatting with SAI Import Export Agro! 🍚\n\nWe have noted your requirements and our export team is preparing a personalized quotation for you.\n\nYou will hear from us within 24 hours.\n\n📧 exports@saiimportexportagro.com\n📞 +91 63868 54875\n\nWarm regards,\nSAI Import Export Agro Export Team`);
+        formData.append('_autoresponse', `Thank you for chatting with SAI Import Export Agro! 🍚\n\nWe have noted your requirements and our export team is preparing a personalized quotation for you.\n\nYou will hear from us within 24 hours.\n\n📧 saiimportexportagro0@gmail.com\n📞 +91 85958 27184\n\nWarm regards,\nSAI Import Export Agro Export Team`);
         formData.append('Name', leadName);
         formData.append('Email', leadEmail);
         formData.append('Requirements', leadReqs);
@@ -597,7 +597,7 @@ Certifications Included:
 ✅ Phytosanitary Certificate ✅ Certificate of Origin
 
 For any questions, contact us:
-📧 exports@saiimportexportagro.com | 📞 +91 63868 54875
+📧 saiimportexportagro0@gmail.com | 📞 +91 85958 27184
 
 Best regards,
 SAI Import Export Agro Export Team

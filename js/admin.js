@@ -435,7 +435,7 @@ async function generatePDF() {
     w.document.write('.spec{background:#f5f5f5;padding:2px 8px;border-radius:6px;font-size:11px;color:#555}');
     w.document.write('.footer{text-align:center;margin-top:30px;padding-top:15px;border-top:2px solid #2d5a3c;font-size:12px;color:#888}');
     w.document.write('@media print{body{padding:10px}.product img{width:80px;height:80px}}</style></head><body>');
-    w.document.write('<div class="header"><h1>🌾 SAI Import Export Agro</h1><p>Premium Indian Rice Exporter | Product Catalog ' + new Date().getFullYear() + '</p><p style="margin-top:4px;font-size:12px">📧 admin@saiimportexportagro.com | 📱 +91 6386854875</p></div>');
+    w.document.write('<div class="header"><h1>🌾 SAI Import Export Agro</h1><p>Premium Indian Rice Exporter | Product Catalog ' + new Date().getFullYear() + '</p><p style="margin-top:4px;font-size:12px">📧 admin@saiimportexportagro.com | 📱 +91 8595827184</p></div>');
     currentProducts.forEach(function(p) {
         var specsHtml = '';
         if (p.specs) { Object.keys(p.specs).forEach(function(k) { if (k !== 'price') specsHtml += '<span class="spec"><strong>'+k+':</strong> '+p.specs[k]+'</span>'; }); }

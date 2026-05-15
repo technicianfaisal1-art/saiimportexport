@@ -89,7 +89,7 @@
   // Update WhatsApp link with product name
   const waLink = document.querySelector('.btn-whatsapp');
   if (waLink) {
-    waLink.href = `https://wa.me/916386854875?text=Hello%20FARMEXO,%20I%20am%20interested%20in%20your%20${encodeURIComponent(p.name)}.%20Please%20share%20pricing%20and%20details.`;
+    waLink.href = `https://wa.me/918595827184?text=Hello%20FARMEXO,%20I%20am%20interested%20in%20your%20${encodeURIComponent(p.name)}.%20Please%20share%20pricing%20and%20details.`;
   }
 
   // Key Specs Grid
