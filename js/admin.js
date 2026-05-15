@@ -30,18 +30,33 @@ loginForm.addEventListener('submit', async (e) => {
     
     btn.innerText = 'Logging in...';
     
-    const { data, error } = await supabase.auth.signInWithPassword({
-        email: email,
-        password: password,
-    });
-    
-    if (error) {
-        loginError.style.display = 'block';
-        loginError.innerText = error.message;
+    try {
+        // Check supabase is initialized
+        if (typeof supabase === 'undefined') {
+            alert('ERROR: Supabase client not initialized. Check console.');
+            btn.innerText = 'Log In';
+            return;
+        }
+
+        const { data, error } = await supabase.auth.signInWithPassword({
+            email: email,
+            password: password,
+        });
+        
+        if (error) {
+            loginError.style.display = 'block';
+            loginError.innerText = '❌ ' + error.message;
+            loginError.style.color = 'red';
+            loginError.style.fontSize = '1rem';
+            loginError.style.padding = '10px';
+            btn.innerText = 'Log In';
+        } else {
+            loginError.style.display = 'none';
+            showDashboard();
+        }
+    } catch (err) {
+        alert('JS Error: ' + err.message);
         btn.innerText = 'Log In';
-    } else {
-        loginError.style.display = 'none';
-        showDashboard();
     }
 });
 
