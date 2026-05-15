@@ -50,11 +50,10 @@ async function renderProducts() {
 
   productContainer.innerHTML = '';
   productsToRender.forEach((p, index) => {
-    const delayClass = `animate-delay-${(index % 4) + 1}`;
     const card = document.createElement('div');
     const imageSrc = p.img || PRODUCT_IMAGES[p.id]; // Fallback to local image mapping if missing
     
-    card.className = `product-card animate-in ${delayClass}`;
+    card.className = `product-card`;
     card.innerHTML = `
       <a href="product.html?id=${p.id}" class="product-card-img">
         <img src="${imageSrc}" alt="${p.name}" loading="lazy">
@@ -72,14 +71,6 @@ async function renderProducts() {
       </div>`;
     productContainer.appendChild(card);
   });
-
-  // Re-observe dynamically created product cards for scroll animations
-  // The global IntersectionObserver runs before these cards exist
-  setTimeout(() => {
-    document.querySelectorAll('#product-container .animate-in').forEach(el => {
-      el.classList.add('visible'); // Make them visible immediately since they're already in view
-    });
-  }, 100);
 }
 
 renderProducts();
