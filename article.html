@@ -320,8 +320,15 @@
                     </div>
                 </div>
             `;
-        });
 
+            // Force Google Translate to re-translate the newly injected dynamic content
+            setTimeout(() => {
+                const selectEl = document.querySelector('.goog-te-combo');
+                if (selectEl && selectEl.value) {
+                    selectEl.dispatchEvent(new Event('change'));
+                }
+            }, 500);
+        });
         function showError() {
             document.getElementById('article-container').innerHTML = `
                 <div class="article-error">

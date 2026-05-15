@@ -235,4 +235,12 @@
     observer.observe(el);
   });
 
+  // Force Google Translate to re-translate the newly injected dynamic content
+  setTimeout(() => {
+    const selectEl = document.querySelector('.goog-te-combo');
+    if (selectEl && selectEl.value) {
+      selectEl.dispatchEvent(new Event('change'));
+    }
+  }, 500); // slight delay to ensure DOM is ready and Google Translate is loaded
+
 })();

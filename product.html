@@ -34,6 +34,10 @@
 
 <body>
 
+</head>
+
+<body>
+
     <!-- NAVBAR -->
     <nav class="navbar scrolled" id="navbar">
         <a href="index.html" class="logo">
@@ -46,6 +50,31 @@
             <li><a href="index.html#logistics">Logistics</a></li>
             <li><a href="index.html#contact">Contact Us</a></li>
         </ul>
+        <!-- Language Picker -->
+        <div class="lang-picker notranslate" id="lang-picker" translate="no">
+            <button class="lang-picker-btn" id="lang-picker-btn" aria-label="Change language">
+                <svg class="lang-globe" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10A15.3 15.3 0 0 1 12 2z" />
+                </svg>
+                <span class="lang-picker-label" id="lang-picker-label">English</span>
+                <svg class="lang-chevron" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M7 10l5 5 5-5z" />
+                </svg>
+            </button>
+            <div class="lang-dropdown" id="lang-dropdown">
+                <div class="lang-search-wrap">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2">
+                        <circle cx="11" cy="11" r="8" />
+                        <path d="m21 21-4.35-4.35" />
+                    </svg>
+                    <input type="text" class="lang-search" id="lang-search" placeholder="Search language..." autocomplete="off">
+                </div>
+                <div class="lang-list" id="lang-list"></div>
+            </div>
+        </div>
+        <!-- Google Translate Engine -->
+        <div id="google_translate_element"></div>
         <button class="hamburger" id="hamburger" aria-label="Toggle menu" title="Toggle menu"><span></span><span></span><span></span></button>
     </nav>
 
@@ -300,7 +329,21 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="js/supabase-client.js?v=6"></script>
     <script src="js/product-data.js?v=6"></script>
-    <script src="js/product-page.js?v=6"></script>
+    <!-- We load script.js for language picker logic (renderProducts will just gracefully exit) -->
+    <script src="js/script.js?v=8"></script>
+    <script src="js/product-page.js?v=7"></script>
+
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: '',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
     <script>
         if ('serviceWorker' in navigator) {
