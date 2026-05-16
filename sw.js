@@ -1,4 +1,4 @@
-const CACHE_NAME = 'sai-agro-v6';
+const CACHE_NAME = 'sai-agro-v7';
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',
@@ -14,6 +14,7 @@ const ASSETS_TO_CACHE = [
   '/js/script.js',
   '/js/product-data.js',
   '/js/supabase-client.js',
+  '/docs/SAI_Import_Export_Catalog.pdf',
   '/images/sai_logo_full.webp',
   '/images/sai_logo_icon.webp'
 ];
