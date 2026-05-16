@@ -8,12 +8,18 @@ export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   const RESEND_API_KEY = process.env.RESEND_API_KEY;
-  if (!RESEND_API_KEY) return res.status(500).json({ error: 'Email service not configured' });
+  if (!RESEND_API_KEY) {
+    console.error('RESEND_API_KEY not found in env');
+    return res.status(500).json({ error: 'Email service not configured' });
+  }
 
   try {
     const { to, name, email, phone, company, country, products, message, subject, source } = req.body;
 
+    console.log('send-email called with:', { to, name, email: email?.substring(0, 5) + '...', source });
+
     if (!to || !name || !email) {
+      console.error('Missing required fields:', { to: !!to, name: !!name, email: !!email });
       return res.status(400).json({ error: 'Missing required fields: to, name, email' });
     }
 
@@ -52,7 +58,7 @@ export default async function handler(req, res) {
           <p>We have received your inquiry and our export team is reviewing your requirements. You will receive a detailed Proforma Invoice (PI) within <strong>24 hours</strong> with:</p>
           <ul>
             <li>✅ FOB / CIF pricing for your destination port</li>
-            <li>✅ Product specifications & packaging options</li>
+            <li>✅ Product specifications &amp; packaging options</li>
             <li>✅ Payment terms (LC / T/T)</li>
             <li>✅ Estimated shipping schedule</li>
           </ul>
@@ -64,37 +70,51 @@ export default async function handler(req, res) {
     `;
 
     // Send email to admin
+    console.log('Sending admin email to:', to);
+    const adminPayload = {
+      from: 'SAI Import Export Agro <onboarding@resend.dev>',
+      to: [to],
+      reply_to: email,
+      subject: subject || `🍚 New Inquiry from ${name}`,
+      html: adminHtml
+    };
+
     const adminResponse = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { 'Authorization': `Bearer ${RESEND_API_KEY}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        from: 'SAI Import Export Agro <onboarding@resend.dev>',
-        to: [to],
-        subject: subject || `🍚 New Inquiry from ${name}`,
-        html: adminHtml
-      })
+      body: JSON.stringify(adminPayload)
     });
 
+    const adminResult = await adminResponse.json();
+    console.log('Admin email response:', adminResponse.status, JSON.stringify(adminResult));
+
     if (!adminResponse.ok) {
-      const err = await adminResponse.json();
-      return res.status(500).json({ error: 'Failed to send admin email', details: err });
+      return res.status(500).json({ error: 'Failed to send admin email', details: adminResult });
     }
 
-    // Send auto-response to buyer
-    await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: { 'Authorization': `Bearer ${RESEND_API_KEY}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({
+    // Send auto-response to buyer (non-blocking, don't fail if this errors)
+    try {
+      const buyerPayload = {
         from: 'SAI Import Export Agro <onboarding@resend.dev>',
         to: [email],
         subject: `Thank you for contacting SAI Import Export Agro! 🌾`,
         html: buyerHtml
-      })
-    });
+      };
+
+      const buyerResponse = await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${RESEND_API_KEY}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify(buyerPayload)
+      });
+      const buyerResult = await buyerResponse.json();
+      console.log('Buyer email response:', buyerResponse.status, JSON.stringify(buyerResult));
+    } catch (buyerErr) {
+      console.error('Buyer auto-response failed (non-critical):', buyerErr.message);
+    }
 
     return res.status(200).json({ success: true, message: 'Inquiry sent successfully' });
   } catch (error) {
-    console.error('Email error:', error);
-    return res.status(500).json({ error: 'Internal server error' });
+    console.error('Email error:', error.message || error);
+    return res.status(500).json({ error: 'Internal server error', details: error.message });
   }
 }
