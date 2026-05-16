@@ -25,14 +25,19 @@ async function loadHeroSection() {
         const heroImg = document.getElementById('hero-img');
         if (heroImg) heroImg.src = v.bg_img;
       }
+      /* 
+        Permanently Disabled DB text overrides.
+        This forces the website to always show the hardcoded premium text:
+        "Crafted by nature, delivered by SAI Agro."
+        The DB will ONLY override the background image now.
+      */
+      /*
       if (v.tagline) {
         const tag = document.getElementById('hero-tag');
-        // Ensure premium emoji is present
         tag.innerHTML = v.tagline.includes('🌾') ? v.tagline : `🌾 ${v.tagline}`;
       }
       if (v.heading) {
         const head = document.getElementById('hero-head');
-        // If DB text doesn't have HTML tags, automatically format it to look premium
         if (v.heading.includes('<')) {
           head.innerHTML = v.heading;
         } else {
@@ -58,6 +63,7 @@ async function loadHeroSection() {
           btn.href = v.cta_link;
         }
       }
+      */
     }
   } catch (e) {
     console.warn("Failed to load hero from Supabase, using local fallback.", e);
