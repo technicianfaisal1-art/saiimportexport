@@ -1,6 +1,7 @@
 {
   "name": "SAI Import Export Agro",
   "short_name": "SAI Agro",
+  "id": "/main-site",
   "description": "Premium Indian Agricultural Exporter",
   "start_url": "/index.html",
   "display": "standalone",

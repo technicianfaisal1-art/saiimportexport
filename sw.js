@@ -1,4 +1,4 @@
-const CACHE_NAME = 'sai-agro-v16';
+const CACHE_NAME = 'sai-agro-v17';
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',

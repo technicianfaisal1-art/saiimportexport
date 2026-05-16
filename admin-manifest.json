@@ -1,6 +1,7 @@
 {
   "name": "SAI Admin",
   "short_name": "SAI Admin",
+  "id": "/admin-panel",
   "description": "Admin Dashboard for SAI Import Export Agro",
   "start_url": "/admin.html",
   "display": "standalone",
