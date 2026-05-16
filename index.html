@@ -119,7 +119,7 @@
             <p class="hero-desc" id="hero-sub">We source, process, and export India's finest rice varieties — 1121 Basmati, 1509 Basmati, Sona Masoori, Swarna, and more — directly from traditional farms to your doorstep, anywhere on the globe.</p>
             <div class="hero-actions">
                 <a href="#products" class="btn-cta" id="hero-btn">Explore Our Products →</a>
-                <button onclick="openCatalogModal()" class="btn-outline">📄 Download Catalog</button>
+                <a href="#contact" class="btn-outline">Enquire Now →</a>
             </div>
         </div>
         <div class="stats-ribbon">
@@ -156,7 +156,10 @@
                     <div class="cert">ISO 22000</div>
                     <div class="cert">HACCP</div>
                 </div>
-                <a href="#contact" class="btn-cta">Partner With Us →</a>
+                <div style="display:flex;gap:15px;margin-top:20px;flex-wrap:wrap;">
+                    <a href="#contact" class="btn-cta">Partner With Us →</a>
+                    <button onclick="openCatalogModal()" class="btn-outline">📄 Download Catalog</button>
+                </div>
             </div>
         </div>
     </section>
@@ -312,6 +315,11 @@ www.saiimportexportagro.com">
     </footer>
 
     <!-- CHATBOT -->
+    <!-- CHATBOT TOOLTIP -->
+    <div id="chatbot-tooltip" class="chatbot-tooltip" onclick="document.getElementById('chatbot-toggle').click()">
+        Hi! Need help with our export catalog? 👋
+    </div>
+    
     <button class="chatbot-toggle" id="chatbot-toggle" aria-label="Open chat">
         <svg viewBox="0 0 24 24" width="28" height="28" fill="white">
             <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z" />
@@ -391,7 +399,7 @@ www.saiimportexportagro.com">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="js/supabase-client.js?v=6"></script>
     <script src="js/product-data.js?v=6"></script>
-    <script src="js/script.js?v=14"></script>
+    <script src="js/script.js?v=16"></script>
     <script type="text/javascript">
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({
@@ -413,6 +421,7 @@ www.saiimportexportagro.com">
 </body>
 
 </html>
+
 
 
 

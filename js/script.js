@@ -436,25 +436,36 @@ const sendBtn = document.getElementById('send-chat');
 let chatHistory = [];
 
 function openChat() { if (chatWindow) chatWindow.classList.add('active'); }
-if (chatToggle) {
-  chatToggle.addEventListener('click', () => chatWindow.classList.toggle('active'));
-}
 if (closeChat) {
   closeChat.addEventListener('click', () => chatWindow.classList.remove('active'));
 }
 
-// Auto-open chatbot after 4 seconds (once per session)
+// Auto-open chatbot tooltip after 4 seconds (once per session)
 document.addEventListener('DOMContentLoaded', () => {
   if (!sessionStorage.getItem('chatbotAutoOpened') && chatWindow) {
     setTimeout(() => {
-      // Don't auto-open if user already opened it manually
+      // Don't show tooltip if user already opened chat manually
       if (!chatWindow.classList.contains('active')) {
-        openChat();
+        const tooltip = document.getElementById('chatbot-tooltip');
+        if (tooltip) {
+          tooltip.classList.add('show');
+          // Hide tooltip after 10 seconds automatically
+          setTimeout(() => tooltip.classList.remove('show'), 10000);
+        }
       }
       sessionStorage.setItem('chatbotAutoOpened', 'true');
     }, 4000);
   }
 });
+
+// Hide tooltip when chat is manually toggled
+if (chatToggle) {
+  chatToggle.addEventListener('click', () => {
+    chatWindow.classList.toggle('active');
+    const tooltip = document.getElementById('chatbot-tooltip');
+    if (tooltip) tooltip.classList.remove('show');
+  });
+}
 
 function addMsg(text, sender) {
   const d = document.createElement('div');
