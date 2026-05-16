@@ -76,7 +76,7 @@ async function loadGeminiSetting() {
   }
 }
 
-// ==================== FORM SUBMISSION (FormSubmit + Supabase + WhatsApp) ====================
+// ==================== FORM EMAIL CONFIG (FormSubmit + Supabase + WhatsApp) ====================
 let ADMIN_EMAIL = 'saiimportexportagro0@gmail.com'; // Default fallback
 
 async function loadFormEmail() {
@@ -86,33 +86,9 @@ async function loadFormEmail() {
     if (data && data.value && data.value.email) ADMIN_EMAIL = data.value.email;
   } catch (e) { /* use default */ }
 
-  // Update FormSubmit action URLs with admin email from DB
+  // Update all FormSubmit action URLs with admin email from DB
   document.querySelectorAll('form[action*="formsubmit.co"]').forEach(form => {
     form.action = `https://formsubmit.co/${ADMIN_EMAIL}`;
-
-    // Add Supabase + WhatsApp on submit (FormSubmit still handles email)
-    form.addEventListener('submit', () => {
-      const fd = new FormData(form);
-      const name = (fd.get('First Name') || fd.get('Name') || '') + ' ' + (fd.get('Last Name') || '');
-      const email = fd.get('Email') || fd.get('email') || '';
-      const products = fd.getAll('Products').join(', ') || fd.get('Product') || '';
-      const message = fd.get('Message') || fd.get('Requirements') || '';
-      const company = fd.get('Company') || '';
-
-      // Save to Supabase enquiries
-      if (typeof saiDB !== 'undefined') {
-        saiDB.from('enquiries').insert({
-          name: name.trim(), email, company: company || null,
-          products: products || null, message: message || null, status: 'new'
-        }).then(r => {
-          if (r.error) console.error('Supabase save error:', r.error.message);
-          else console.log('Enquiry saved to Supabase');
-        });
-      }
-
-      // Send WhatsApp notification
-      sendWhatsAppNotification(name.trim(), email, company, products, message);
-    });
   });
 }
 
@@ -853,8 +829,9 @@ SAI Import Export Agro Export Team
   formData.append('--- QUOTATION TEMPLATE ---', quotationTemplate);
 
   try {
-    // 1. Send to FormSubmit
-    const formSubmitPromise = fetch(formElement.action, {
+    // 1. Send to FormSubmit using dynamic admin email
+    const formSubmitUrl = `https://formsubmit.co/${ADMIN_EMAIL}`;
+    const formSubmitPromise = fetch(formSubmitUrl, {
       method: 'POST',
       body: formData,
       headers: { 'Accept': 'application/json' }
@@ -874,19 +851,8 @@ SAI Import Export Agro Export Team
       });
     }
 
-    // 3. Send WhatsApp Notification via CallMeBot
-    let waPromise = Promise.resolve();
-    if (typeof saiDB !== 'undefined') {
-      waPromise = saiDB.from('site_settings').select('*').eq('key', 'whatsapp').single().then(res => {
-        if (res.data && res.data.value && res.data.value.phone && res.data.value.apikey) {
-          const waPhone = res.data.value.phone.replace(/[^0-9]/g, '');
-          const waApi = res.data.value.apikey;
-          const waMsg = encodeURIComponent(`*🔔 New Enquiry on Website!*\n\n*👤 Name:* ${buyerName.trim()}\n*📧 Email:* ${buyerEmail}\n*🏢 Company:* ${buyerCompany || 'N/A'}\n*📦 Products:* ${buyerProducts}\n\n*💬 Message:*\n${buyerReqs}`);
-          const waUrl = `https://api.callmebot.com/whatsapp.php?phone=${waPhone}&text=${waMsg}&apikey=${waApi}`;
-          return fetch(waUrl, { mode: 'no-cors' }); // no-cors because callmebot doesn't set CORS headers
-        }
-      }).catch(err => console.error("WhatsApp API Error:", err));
-    }
+    // 3. Send WhatsApp Notification
+    const waPromise = sendWhatsAppNotification(buyerName.trim(), buyerEmail, buyerCompany, buyerProducts, buyerReqs);
 
     // Wait for everything
     await Promise.all([formSubmitPromise, supabasePromise, waPromise]);
