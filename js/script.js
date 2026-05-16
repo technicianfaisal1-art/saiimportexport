@@ -765,116 +765,39 @@ if (chatField) {
   chatField.addEventListener('keypress', e => { if (e.key === 'Enter') sendMessage(); });
 }
 
-// ==================== CONTACT FORM (AJAX FormSubmit) ====================
-// ==================== CONTACT FORM (Supabase + WhatsApp + FormSubmit) ====================
-async function handleContactSubmit(e, formElement) {
-  e.preventDefault();
-  const btn = e.target.querySelector('button[type="submit"]');
-  const originalText = btn.textContent;
-  btn.textContent = 'Sending...';
-  btn.disabled = true;
+// ==================== CONTACT FORM (Native FormSubmit + Supabase + WhatsApp) ====================
+// Forms submit naturally to FormSubmit (which handles email + redirect to thank-you page)
+// We add a non-blocking listener to also save to Supabase and send WhatsApp notification
+function attachFormNotifications(formEl) {
+  if (!formEl) return;
+  formEl.addEventListener('submit', () => {
+    // Extract form data before submission (non-blocking, doesn't call preventDefault)
+    const fd = new FormData(formEl);
+    const name = ((fd.get('First Name') || fd.get('Name') || '') + ' ' + (fd.get('Last Name') || '')).trim();
+    const email = fd.get('Email') || fd.get('email') || '';
+    const products = fd.getAll('Products').join(', ') || fd.get('Product') || 'Not specified';
+    const message = fd.get('Message') || fd.get('Requirements') || '';
+    const company = fd.get('Company') || '';
 
-  const formData = new FormData(formElement);
-
-  // Set _replyto so owner can Reply directly to the buyer
-  const buyerEmail = formData.get('Email') || '';
-  if (buyerEmail) formData.append('_replyto', buyerEmail);
-
-  // Add pre-filled quotation template for easy owner reply
-  const buyerName = (formData.get('First Name') || '') + ' ' + (formData.get('Last Name') || '');
-  const buyerProducts = formData.getAll('Products').join(', ') || 'Not specified';
-  const buyerReqs = formData.get('Requirements') || '';
-  const buyerCompany = formData.get('Company') || '';
-
-  const quotationTemplate = `
-━━━━━━━━━━━━━━━━━━━━━━━━━━━
-📋 READY-TO-SEND QUOTATION TEMPLATE
-━━━━━━━━━━━━━━━━━━━━━━━━━━━
-(Copy-paste this into your Reply and fill the blanks)
-
-Dear ${buyerName.trim()},
-
-Thank you for your interest in SAI Import Export Agro products. Please find below our quotation:
-
-PROFORMA INVOICE
-──────────────────────
-Product(s): ${buyerProducts}
-Quantity: _______ MT
-Unit Price (FOB): USD _______ / MT
-Unit Price (CIF): USD _______ / MT
-Total Value: USD _______
-──────────────────────
-Incoterm: FOB / CIF (circle one)
-Port of Loading: Nhava Sheva / Mundra
-Port of Discharge: _______
-Packaging: _______
-Payment Terms: LC at Sight / T/T 30% Advance
-Validity: 7 days from date of quote
-Estimated Shipment: _______ days from order confirmation
-
-Certifications Included:
-✅ FSSAI ✅ APEDA ✅ ISO 22000 ✅ HACCP
-✅ Phytosanitary Certificate ✅ Certificate of Origin
-
-For any questions, contact us:
-📧 saiimportexportagro0@gmail.com | 📞 +91 85958 27184
-
-Best regards,
-SAI Import Export Agro Export Team
-━━━━━━━━━━━━━━━━━━━━━━━━━━━`;
-
-  formData.append('--- QUOTATION TEMPLATE ---', quotationTemplate);
-
-  try {
-    // 1. Send to FormSubmit (using verified email)
-    const formSubmitPromise = fetch(`https://formsubmit.co/${FORMSUBMIT_EMAIL}`, {
-      method: 'POST',
-      body: formData,
-      headers: { 'Accept': 'application/json' }
-    });
-
-    // 2. Save to Supabase Database (Admin Inbox)
-    let supabasePromise = Promise.resolve();
+    // Save to Supabase (non-blocking)
     if (typeof saiDB !== 'undefined') {
-      supabasePromise = saiDB.from('enquiries').insert({
-        name: buyerName.trim(),
-        email: buyerEmail,
-        phone: formData.get('Phone') || null, // if added in future
-        company: buyerCompany || null,
-        products: buyerProducts,
-        message: buyerReqs,
-        status: 'new'
+      saiDB.from('enquiries').insert({
+        name, email, phone: fd.get('Phone') || null,
+        company: company || null, products, message, status: 'new'
+      }).then(r => {
+        if (r.error) console.error('Supabase save error:', r.error.message);
+        else console.log('Enquiry saved to Supabase');
       });
     }
 
-    // 3. Send WhatsApp Notification
-    const waPromise = sendWhatsAppNotification(buyerName.trim(), buyerEmail, buyerCompany, buyerProducts, buyerReqs);
-
-    // Wait for everything
-    await Promise.all([formSubmitPromise, supabasePromise, waPromise]);
-
-    btn.textContent = '✅ Inquiry Sent Successfully!';
-    btn.style.background = '#1a5c38';
-    formElement.reset();
-
-  } catch (error) {
-    console.error('Error submitting form:', error);
-    btn.textContent = '❌ Failed — Try Again';
-    btn.style.background = '#c0392b';
-  }
-
-  setTimeout(() => {
-    btn.textContent = originalText;
-    btn.style.background = '';
-    btn.disabled = false;
-  }, 4000);
+    // Send WhatsApp (non-blocking)
+    sendWhatsAppNotification(name, email, company, products, message);
+  });
 }
 
-const contactForm = document.getElementById('contact-form');
-if (contactForm) contactForm.addEventListener('submit', (e) => handleContactSubmit(e, contactForm));
-
-const contactPageForm = document.getElementById('contact-page-form');
-if (contactPageForm) contactPageForm.addEventListener('submit', (e) => handleContactSubmit(e, contactPageForm));
+attachFormNotifications(document.getElementById('contact-form'));
+attachFormNotifications(document.getElementById('contact-page-form'));
+attachFormNotifications(document.getElementById('quote-form'));
 
 // ==================== ACTIVE NAV LINK ====================
 const sections = document.querySelectorAll('section[id]');
