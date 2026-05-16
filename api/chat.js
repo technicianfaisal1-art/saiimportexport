@@ -37,7 +37,8 @@ export default async function handler(req, res) {
     const { system_instruction, contents } = req.body;
 
     // 2. Call the Google Gemini API securely from the backend
-    const geminiRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite-preview:generateContent?key=${apiKey}`, {
+    const model = "gemini-1.5-flash-latest";
+    const geminiRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -52,7 +53,13 @@ export default async function handler(req, res) {
     });
 
     const data = await geminiRes.json();
-    return res.status(geminiRes.status).json(data);
+    
+    if (!geminiRes.ok) {
+      console.error('Gemini API Error details:', data);
+      return res.status(geminiRes.status).json({ error: 'Gemini API failed', details: data });
+    }
+
+    return res.status(200).json(data);
 
   } catch (error) {
     console.error('Chat API Error:', error);

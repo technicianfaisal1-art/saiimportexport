@@ -58,7 +58,23 @@ document.addEventListener('DOMContentLoaded', async () => {
   buildProductInterestCheckboxes();
   buildFooterProducts();
   loadFormEmail();
+  loadGeminiSetting();
 });
+
+let IS_GEMINI_CONFIGURED = false;
+
+// Check if Gemini API is configured in Supabase
+async function loadGeminiSetting() {
+  if (typeof saiDB === 'undefined') return;
+  try {
+    const { data } = await saiDB.from('site_settings').select('value').eq('key', 'gemini').single();
+    if (data && data.value && data.value.apikey) {
+      IS_GEMINI_CONFIGURED = true;
+    }
+  } catch (e) {
+    IS_GEMINI_CONFIGURED = false;
+  }
+}
 
 // ==================== FORM SUBMISSION VIA RESEND ====================
 let ADMIN_EMAIL = 'saiimportexportagro0@gmail.com'; // Default fallback
@@ -502,7 +518,7 @@ function getFallbackReply(msg) {
 
 async function getGeminiReply(userMsg) {
   // If API key not configured, use fallback
-  if (!GEMINI_API_KEY || GEMINI_API_KEY === 'YOUR_GEMINI_API_KEY_HERE') {
+  if (!IS_GEMINI_CONFIGURED) {
     return getFallbackReply(userMsg);
   }
 
@@ -515,14 +531,19 @@ async function getGeminiReply(userMsg) {
   try {
     let res;
     // Production & Local: Call our secure serverless function
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 15000);
+
     res = await fetch('/api/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         system_instruction: { parts: [{ text: getSystemPrompt() }] },
         contents: recentHistory
-      })
+      }),
+      signal: controller.signal
     });
+    clearTimeout(timeoutId);
 
     if (!res.ok) throw new Error(`API error: ${res.status}`);
 
