@@ -76,8 +76,10 @@ async function loadGeminiSetting() {
   }
 }
 
-// ==================== FORM EMAIL CONFIG (FormSubmit + Supabase + WhatsApp) ====================
-let ADMIN_EMAIL = 'saiimportexportagro0@gmail.com'; // Default fallback
+// ==================== FORM EMAIL CONFIG ====================
+// FormSubmit verified email (do NOT change unless re-verified on formsubmit.co)
+const FORMSUBMIT_EMAIL = 'faisal.khan1192519@gmail.com';
+let ADMIN_EMAIL = 'saiimportexportagro0@gmail.com'; // For display/notifications
 
 async function loadFormEmail() {
   if (typeof saiDB === 'undefined') return;
@@ -85,11 +87,6 @@ async function loadFormEmail() {
     const { data } = await saiDB.from('site_settings').select('value').eq('key', 'form_email').single();
     if (data && data.value && data.value.email) ADMIN_EMAIL = data.value.email;
   } catch (e) { /* use default */ }
-
-  // Update all FormSubmit action URLs with admin email from DB
-  document.querySelectorAll('form[action*="formsubmit.co"]').forEach(form => {
-    form.action = `https://formsubmit.co/${ADMIN_EMAIL}`;
-  });
 }
 
 // Reusable WhatsApp notification sender
@@ -720,7 +717,7 @@ async function sendMessage() {
         formData.append('Email', leadEmail);
         formData.append('Requirements', leadReqs);
         
-        fetch(`https://formsubmit.co/${ADMIN_EMAIL}`, {
+        fetch(`https://formsubmit.co/${FORMSUBMIT_EMAIL}`, {
           method: 'POST',
           body: formData,
           headers: { 'Accept': 'application/json' }
@@ -829,9 +826,8 @@ SAI Import Export Agro Export Team
   formData.append('--- QUOTATION TEMPLATE ---', quotationTemplate);
 
   try {
-    // 1. Send to FormSubmit using dynamic admin email
-    const formSubmitUrl = `https://formsubmit.co/${ADMIN_EMAIL}`;
-    const formSubmitPromise = fetch(formSubmitUrl, {
+    // 1. Send to FormSubmit (using verified email)
+    const formSubmitPromise = fetch(`https://formsubmit.co/${FORMSUBMIT_EMAIL}`, {
       method: 'POST',
       body: formData,
       headers: { 'Accept': 'application/json' }
