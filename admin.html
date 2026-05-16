@@ -199,13 +199,13 @@
                 <nav class="sidebar-nav">
                     <button class="nav-btn active" onclick="switchTab('overview')" id="nav-overview">📊 Overview</button>
                     <button class="nav-btn" onclick="switchTab('products')" id="nav-products">📦 Products</button>
-                    <button class="nav-btn" onclick="switchTab('enquiries')" id="nav-enquiries">📩 Enquiries <span id="enquiry-badge" class="tab-badge" style="display:none">0</span></button>
+                    <button class="nav-btn" onclick="switchTab('enquiries')" id="nav-enquiries">📩 Enquiries <span id="enquiry-badge" class="tab-badge tab-badge-hidden">0</span></button>
                     <button class="nav-btn" onclick="switchTab('blog')" id="nav-blog">📝 Blog</button>
                     <button class="nav-btn" onclick="switchTab('hero')" id="nav-hero">🏠 Hero Section</button>
                     <button class="nav-btn" onclick="switchTab('settings')" id="nav-settings">⚙️ Settings</button>
                 </nav>
                 <div class="sidebar-footer">
-                    <a href="index.html" target="_blank" class="nav-btn outline" style="text-decoration: none; text-align: center; display: block; margin-bottom: 8px;">🌐 View Website</a>
+                    <a href="index.html" target="_blank" class="nav-btn outline sidebar-view-site">🌐 View Website</a>
                     <button class="nav-btn outline" onclick="generatePDF()">📄 PDF Catalog</button>
                     <button class="nav-btn danger" id="logout-btn">🚪 Log Out</button>
                 </div>
@@ -377,9 +377,9 @@
                 </div>
                 
                 <div class="form-group">
-                    <label style="display:flex; justify-content:space-between; align-items:center;">
+                    <label class="variants-label">
                         Product Variants / Pricing
-                        <button type="button" class="btn-outline" onclick="addVariantRow()" style="padding:4px 8px; font-size:0.8rem;">+ Add Variant</button>
+                        <button type="button" class="btn-outline btn-sm-inline" onclick="addVariantRow()">+ Add Variant</button>
                     </label>
                     <div id="variants-container">
                         <!-- Variant rows injected by JS -->

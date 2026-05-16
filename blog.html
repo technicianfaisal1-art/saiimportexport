@@ -16,7 +16,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css?v=17">
+    <link rel="stylesheet" href="css/styles.css?v=19">
     <style>
         .page-header {
             padding: 8rem 5% 4rem;
@@ -268,11 +268,50 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="js/supabase-client.js"></script>
     <script src="js/blog-data.js"></script>
-    <script src="js/script.js?v=18"></script>
+    <script src="js/script.js?v=19"></script>
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
             const grid = document.getElementById('blog-grid');
             if (!grid) return;
+
+            // Show blog skeletons immediately
+            const SKELETON_COUNT = 3;
+            for (let i = 0; i < SKELETON_COUNT; i++) {
+                const sk = document.createElement('div');
+                sk.className = 'blog-card';
+                sk.style.cssText = 'pointer-events:none;';
+                sk.innerHTML = `
+                    <div class="blog-img-wrap skeleton-base" style="height:220px;"></div>
+                    <div class="blog-content">
+                        <div class="skeleton-base" style="width:60px;height:14px;margin-bottom:0.8rem;border-radius:4px;"></div>
+                        <div class="skeleton-base" style="width:90%;height:22px;margin-bottom:0.5rem;border-radius:6px;"></div>
+                        <div class="skeleton-base" style="width:75%;height:22px;margin-bottom:1rem;border-radius:6px;"></div>
+                        <div class="skeleton-base" style="width:100%;height:14px;margin-bottom:0.4rem;border-radius:4px;"></div>
+                        <div class="skeleton-base" style="width:100%;height:14px;margin-bottom:0.4rem;border-radius:4px;"></div>
+                        <div class="skeleton-base" style="width:80%;height:14px;margin-bottom:1.5rem;border-radius:4px;"></div>
+                        <div class="skeleton-base" style="width:100px;height:16px;border-radius:4px;"></div>
+                    </div>
+                `;
+                grid.appendChild(sk);
+            }
+
+            // Smart local image fallback based on title keywords
+            function getBlogImage(title, currentImg) {
+                // If it's already a good local relative path, trust it
+                if (currentImg && !currentImg.startsWith('http') && currentImg.endsWith('.webp')) {
+                    return currentImg;
+                }
+                const t = (title || '').toLowerCase();
+                if (t.includes('1121') || t.includes('basmati')) return 'images/1121-basmati.webp';
+                if (t.includes('1509')) return 'images/1509-basmati.webp';
+                if (t.includes('sona') || t.includes('masoori')) return 'images/sona-masoori.webp';
+                if (t.includes('pusa')) return 'images/pusa-basmati.webp';
+                if (t.includes('swarna')) return 'images/swarna-raw.webp';
+                if (t.includes('ir64') || t.includes('parboiled')) return 'images/ir64-parboiled.webp';
+                if (t.includes('broken')) return 'images/broken-rice.webp';
+                if (t.includes('trend') || t.includes('export') || t.includes('market') || t.includes('logistics')) return 'images/logistics.webp';
+                return 'images/hero_bg.webp'; // ultimate fallback
+            }
 
             let postsToRender = [];
 
@@ -282,12 +321,13 @@
                     const { data, error } = await saiDB.from('blog_posts').select('*').eq('status', 'published').order('created_at', { ascending: false });
                     if (!error && data && data.length > 0) {
                         postsToRender = data.map(post => ({
-                            id: post.slug, // Use slug for article URL
+                            id: post.slug,
                             title: post.title,
                             excerpt: post.excerpt,
-                            image: post.cover_img || 'images/hero_bg.webp',
+                            // Always resolve to a safe image — use getBlogImage to pick smart local fallback
+                            image: getBlogImage(post.title, post.cover_img),
                             date: new Date(post.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
-                            category: 'Market Update' // Default category
+                            category: post.category || 'Market Update'
                         }));
                     }
                 } catch (e) {
@@ -300,15 +340,23 @@
                 postsToRender = BLOG_POSTS;
             }
 
-            // 3. Render
-            postsToRender.forEach(post => {
+            // Clear skeletons before rendering real cards
+            grid.innerHTML = '';
+
+            // Ultimate safe fallback image for onerror
+            const SAFE_IMG = 'images/hero_bg.webp';
+
+            // Render real cards with staggered fade-in
+            postsToRender.forEach((post, index) => {
                 const card = document.createElement('a');
                 card.href = `article.html?id=${post.id}`;
                 card.className = 'blog-card';
+                card.style.cssText = 'opacity:0;transform:translateY(16px);transition:opacity 0.5s ease,transform 0.5s ease;';
                 card.innerHTML = `
                     <div class="blog-img-wrap">
                         <span class="blog-category">${post.category}</span>
-                        <img src="${post.image}" alt="${post.title}" loading="lazy">
+                        <img src="${post.image}" alt="${post.title}" loading="lazy"
+                             onerror="this.onerror=null;this.src='${SAFE_IMG}';">
                     </div>
                     <div class="blog-content">
                         <div class="blog-date">${post.date}</div>
@@ -323,6 +371,10 @@
                     </div>
                 `;
                 grid.appendChild(card);
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
             });
 
             // Force Google Translate to re-translate the newly injected dynamic content

@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certifications & Quality Standards | SAI Import Export Agro</title>
+    <meta name="description" content="SAI Import Export Agro holds APEDA, FSSAI, ISO 22000, and HACCP certifications — ensuring every shipment meets the highest international food safety standards.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css?v=19">
+    <link rel="icon" type="image/png" href="images/sai_logo_icon.webp">
+    <link rel="apple-touch-icon" href="images/sai_logo_icon.webp">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2d5a3c">
+    <style>
+        /* PAGE HEADER */
+        .page-header { padding: 8rem 5% 4rem; background: var(--green-dark); color: #fff; text-align: center; position: relative; overflow: hidden; }
+        .page-header::before { content: ''; position: absolute; inset: 0; background: url('images/hero_bg.webp') center/cover no-repeat; opacity: 0.12; }
+        .page-header > * { position: relative; z-index: 1; }
+        .page-header .section-tag { color: var(--orange); }
+        .page-header h1 { font-family: var(--serif); font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 1rem; }
+        .page-header p { font-size: 1.1rem; opacity: 0.85; max-width: 600px; margin: auto; }
+
+        /* TRUST BAR */
+        .trust-bar { background: var(--orange); color: #fff; padding: 1rem 5%; text-align: center; font-weight: 600; font-size: 0.95rem; letter-spacing: 0.5px; }
+
+        /* CERT CARDS SECTION */
+        .certs-section { padding: 6rem 5%; background: var(--off-white); }
+        .certs-section .section-tag { text-align: center; }
+        .certs-section h2 { font-family: var(--serif); font-size: clamp(2rem, 4vw, 3rem); text-align: center; margin-bottom: 0.5rem; color: var(--green-dark); }
+        .certs-subtitle { text-align: center; color: var(--text-mid); max-width: 600px; margin: 0 auto 4rem; }
+
+        .cert-cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; max-width: 1200px; margin: auto; }
+
+        .cert-card { background: #fff; border-radius: 16px; padding: 2.5rem 2rem; border: 1px solid #eee; box-shadow: 0 4px 20px rgba(0,0,0,0.05); transition: all 0.4s ease; position: relative; overflow: hidden; }
+        .cert-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--green); transition: height 0.3s; }
+        .cert-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); border-color: var(--green-light); }
+        .cert-card:hover::before { height: 6px; }
+
+        .cert-icon-wrap { width: 80px; height: 80px; background: var(--green-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; }
+        .cert-abbr { font-family: var(--serif); font-size: 1.3rem; font-weight: 700; color: var(--green); line-height: 1; text-align: center; }
+        .cert-abbr-sm { font-size: 1.1rem; }
+        .cert-card h3 { font-size: 1.2rem; color: var(--green-dark); margin-bottom: 0.5rem; font-family: var(--sans); font-weight: 700; }
+        .cert-card .cert-full-name { font-size: 0.8rem; color: var(--orange); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem; }
+        .cert-card p { color: var(--text-mid); font-size: 0.9rem; line-height: 1.7; margin-bottom: 1.2rem; }
+        .cert-what-it-means { background: var(--green-light); border-radius: 8px; padding: 0.8rem 1rem; }
+        .cert-what-it-means p { color: var(--green-dark); font-size: 0.82rem; margin: 0; font-weight: 500; }
+        .cert-what-it-means p::before { content: '✓ '; font-weight: 700; }
+
+        /* COMPLIANCE SECTION */
+        .compliance-section { padding: 6rem 5%; background: var(--white); }
+        .compliance-inner { max-width: 1000px; margin: auto; }
+        .compliance-section .section-tag { text-align: center; }
+        .compliance-section h2 { font-family: var(--serif); font-size: clamp(2rem, 4vw, 2.8rem); text-align: center; margin-bottom: 0.5rem; color: var(--green-dark); }
+        .compliance-subtitle { text-align: center; color: var(--text-mid); margin-bottom: 4rem; }
+
+        .compliance-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; }
+        .comp-item { background: var(--off-white); border-radius: 12px; padding: 1.5rem; border-left: 4px solid var(--green); }
+        .comp-item .comp-emoji { font-size: 1.8rem; margin-bottom: 0.6rem; }
+        .comp-item h4 { font-size: 0.95rem; font-weight: 700; color: var(--green-dark); margin-bottom: 0.4rem; }
+        .comp-item p { font-size: 0.82rem; color: var(--text-mid); margin: 0; line-height: 1.6; }
+
+        /* PROCESS SECTION */
+        .process-section { padding: 6rem 5%; background: var(--green-dark); color: #fff; }
+        .process-inner { max-width: 1000px; margin: auto; text-align: center; }
+        .process-section .section-tag { color: var(--orange); }
+        .process-section h2 { font-family: var(--serif); font-size: clamp(2rem, 4vw, 2.8rem); margin-bottom: 0.5rem; }
+        .process-section > .process-inner > p { opacity: 0.8; margin-bottom: 4rem; }
+
+        .process-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1.5rem; }
+        .step { position: relative; }
+        .step-num { width: 52px; height: 52px; background: var(--orange); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-size: 1.4rem; font-weight: 700; margin: 0 auto 1rem; }
+        .step h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.4rem; }
+        .step p { font-size: 0.82rem; opacity: 0.75; margin: 0; }
+
+        /* CTA SECTION */
+        .cert-cta { padding: 5rem 5%; background: var(--off-white); text-align: center; }
+        .cert-cta h2 { font-family: var(--serif); font-size: clamp(1.8rem, 3.5vw, 2.5rem); color: var(--green-dark); margin-bottom: 1rem; }
+        .cert-cta p { color: var(--text-mid); max-width: 500px; margin: 0 auto 2rem; }
+        .cert-cta .cta-group { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+        @media (max-width: 600px) {
+            .cert-cards-grid { grid-template-columns: 1fr; }
+            .process-steps { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOP BAR -->
+    <div class="top-bar" id="top-bar">
+        <div class="top-bar-inner">
+            <div class="top-bar-left">
+                <span>📧 saiimportexportagro0@gmail.com</span>
+                <span class="top-bar-divider">|</span>
+                <span>📞 +91 85958 27184</span>
+            </div>
+            <div class="top-bar-right">
+                <span>🌾 APEDA & FSSAI Certified</span>
+                <span class="top-bar-divider">|</span>
+                <span>🚢 FOB / CIF / CFR</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <a href="index.html" class="logo">
+            <img src="images/sai_logo_icon.webp" alt="SAI Import Export Agro" class="nav-logo-img">
+        </a>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="index.html#products">Products</a></li>
+            <li><a href="index.html#logistics">Logistics</a></li>
+            <li><a href="blog.html">Insights</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+        <div class="lang-picker notranslate" id="lang-picker" translate="no">
+            <button class="lang-picker-btn" id="lang-picker-btn" aria-label="Change language">
+                <svg class="lang-globe" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10A15.3 15.3 0 0 1 12 2z"/></svg>
+                <span class="lang-picker-label" id="lang-picker-label">English</span>
+                <svg class="lang-chevron" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+            </button>
+            <div class="lang-dropdown" id="lang-dropdown">
+                <div class="lang-search-wrap">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                    <input type="text" class="lang-search" id="lang-search" placeholder="Search language..." autocomplete="off">
+                </div>
+                <div class="lang-list" id="lang-list"></div>
+            </div>
+        </div>
+        <div id="google_translate_element"></div>
+        <a href="contact.html" class="btn-cta nav-cta">Enquire Now →</a>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    </nav>
+
+    <!-- HEADER -->
+    <header class="page-header">
+        <p class="section-tag">Quality Assurance</p>
+        <h1>Certified.<br><em>Trusted. Verified.</em></h1>
+        <p>Every shipment from SAI Import Export Agro is backed by internationally recognized food safety certifications — giving our global partners full peace of mind.</p>
+    </header>
+
+    <!-- TRUST BAR -->
+    <div class="trust-bar">
+        🏆 APEDA Registered &nbsp;|&nbsp; ✅ FSSAI Certified &nbsp;|&nbsp; 📋 ISO 22000 Compliant &nbsp;|&nbsp; 🔬 HACCP Certified &nbsp;|&nbsp; 🚢 15+ Countries Served
+    </div>
+
+    <!-- CERTIFICATION CARDS -->
+    <section class="certs-section">
+        <p class="section-tag certs-section-tag">Our Certifications</p>
+        <h2>Internationally<br><em>Recognized Standards</em></h2>
+        <p class="certs-subtitle">We don't just claim quality — we prove it. Every certification we hold is renewed, audited, and actively maintained.</p>
+
+        <div class="cert-cards-grid">
+            <!-- APEDA -->
+            <div class="cert-card animate-in">
+                <div class="cert-icon-wrap">
+                    <div class="cert-abbr">APEDA</div>
+                </div>
+                <h3>APEDA Registered</h3>
+                <p class="cert-full-name">Agricultural & Processed Food Products Export Development Authority</p>
+                <p>APEDA is India's government body that regulates and promotes exports of agricultural products. Registration is mandatory for all rice exporters. Our APEDA number is verified and active.</p>
+                <div class="cert-what-it-means">
+                    <p>Your shipment is legally authorized for export from India under government regulation.</p>
+                </div>
+            </div>
+
+            <!-- FSSAI -->
+            <div class="cert-card animate-in animate-delay-1">
+                <div class="cert-icon-wrap">
+                    <div class="cert-abbr">FSSAI</div>
+                </div>
+                <h3>FSSAI Certified</h3>
+                <p class="cert-full-name">Food Safety and Standards Authority of India</p>
+                <p>FSSAI is India's apex food regulatory body. Our FSSAI license confirms that our processing facilities meet India's food safety standards — covering hygiene, storage, and handling.</p>
+                <div class="cert-what-it-means">
+                    <p>The rice you import has been processed in a hygiene-audited, food-safe facility.</p>
+                </div>
+            </div>
+
+            <!-- ISO 22000 -->
+            <div class="cert-card animate-in animate-delay-2">
+                <div class="cert-icon-wrap">
+                    <div class="cert-abbr cert-abbr-sm">ISO<br>22000</div>
+                </div>
+                <h3>ISO 22000 Certified</h3>
+                <p class="cert-full-name">International Organization for Standardization — Food Safety Management</p>
+                <p>ISO 22000 is a globally accepted food safety management system standard. It covers the entire supply chain — from raw material sourcing to final shipment — ensuring zero contamination risk.</p>
+                <div class="cert-what-it-means">
+                    <p>Our entire supply chain — farm to port — meets international food safety management standards.</p>
+                </div>
+            </div>
+
+            <!-- HACCP -->
+            <div class="cert-card animate-in animate-delay-3">
+                <div class="cert-icon-wrap">
+                    <div class="cert-abbr">HACCP</div>
+                </div>
+                <h3>HACCP Compliant</h3>
+                <p class="cert-full-name">Hazard Analysis and Critical Control Points</p>
+                <p>HACCP is a systematic preventive approach to food safety. It identifies, evaluates, and controls biological, chemical, and physical hazards in food production — accepted by USA, EU, and GCC importers.</p>
+                <div class="cert-what-it-means">
+                    <p>Hazards are identified and eliminated before your cargo leaves our facility.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMPLIANCE CHECKLIST -->
+    <section class="compliance-section">
+        <div class="compliance-inner">
+            <p class="section-tag compliance-section-tag">Full Compliance</p>
+            <h2>What We Deliver<br><em>With Every Shipment</em></h2>
+            <p class="compliance-subtitle">Beyond certifications, every export order comes with a complete documentation package.</p>
+
+            <div class="compliance-grid">
+                <div class="comp-item">
+                    <div class="comp-emoji">📄</div>
+                    <h4>Phytosanitary Certificate</h4>
+                    <p>Issued by government authority — confirms the rice is free from pests and diseases. Required by all importing countries.</p>
+                </div>
+                <div class="comp-item">
+                    <div class="comp-emoji">🌐</div>
+                    <h4>Certificate of Origin</h4>
+                    <p>Confirms the rice originates from India — essential for customs clearance and tariff benefits in destination country.</p>
+                </div>
+                <div class="comp-item">
+                    <div class="comp-emoji">🧪</div>
+                    <h4>Lab Test Reports</h4>
+                    <p>SGS / Bureau Veritas or equivalent third-party quality testing — moisture, broken %, pesticide residue, grain length.</p>
+                </div>
+                <div class="comp-item">
+                    <div class="comp-emoji">🚢</div>
+                    <h4>Bill of Lading</h4>
+                    <p>Shipping document confirming your cargo is loaded and in transit — issued by the shipping line at port departure.</p>
+                </div>
+                <div class="comp-item">
+                    <div class="comp-emoji">📦</div>
+                    <h4>Packing List & Invoice</h4>
+                    <p>Detailed commercial invoice and packing list for customs — with correct HS codes and product specifications.</p>
+                </div>
+                <div class="comp-item">
+                    <div class="comp-emoji">🔬</div>
+                    <h4>FSSAI Analysis Report</h4>
+                    <p>Food safety analysis confirming compliance with India's regulatory standards — requested by many importers.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- QUALITY PROCESS -->
+    <section class="process-section">
+        <div class="process-inner">
+            <p class="section-tag">Our Process</p>
+            <h2>How We Ensure<br><em>Zero Compromise</em></h2>
+            <p>A strict 6-step quality control process — from farm selection to vessel loading.</p>
+
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <h4>Farm Sourcing</h4>
+                    <p>Directly from verified, certified farming communities in Punjab, Haryana & Andhra Pradesh.</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <h4>Raw Inspection</h4>
+                    <p>Grain samples tested for moisture, purity, and contamination before procurement.</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <h4>Processing</h4>
+                    <p>Milling, sorting, and grading in our FSSAI-certified, ISO-compliant processing units.</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">4</div>
+                    <h4>Sortex Cleaning</h4>
+                    <p>Optical sortex machines remove broken grains, discolorations, and foreign matter.</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">5</div>
+                    <h4>Pre-Shipment Test</h4>
+                    <p>Third-party SGS/BV lab testing on final packed cargo before container sealing.</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">6</div>
+                    <h4>Vessel Loading</h4>
+                    <p>Supervised container stuffing with moisture-proof lining at major Indian ports.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cert-cta">
+        <h2>Need Certification<br><em>Documents for Your Order?</em></h2>
+        <p>Contact our export team and we'll provide all required documentation for your import clearance — before and after shipment.</p>
+        <div class="cta-group">
+            <a href="contact.html" class="btn-cta">Request Documents →</a>
+            <a href="index.html#products" class="btn-outline-dark">View Our Products</a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="index.html" class="logo footer-logo">
+                    <img src="images/sai_logo_full.webp" alt="SAI Import Export Agro" class="footer-logo-img">
+                </a>
+                <p>India's trusted exporter of premium rice. Quality, trust, and reliability.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="index.html#products">Products</a></li>
+                    <li><a href="certifications.html">Certifications</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Certifications</h4>
+                <ul>
+                    <li><a href="#">APEDA Registered</a></li>
+                    <li><a href="#">FSSAI Certified</a></li>
+                    <li><a href="#">ISO 22000</a></li>
+                    <li><a href="#">HACCP Compliant</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="terms-conditions.html">Terms & Conditions</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="mailto:saiimportexportagro0@gmail.com">saiimportexportagro0@gmail.com</a></li>
+                    <li><a href="tel:+918595827184">+91 85958 27184</a></li>
+                    <li><a href="#">Mumbai, India</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 SAI Import Export Agro. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase-client.js?v=6"></script>
+    <script src="js/product-data.js?v=6"></script>
+    <script src="js/script.js?v=19"></script>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({ pageLanguage: 'en', includedLanguages: '', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js');</script>
+</body>
+</html>

@@ -4,7 +4,7 @@ const BLOG_POSTS = [
         title: "1121 Basmati vs 1509 Basmati: A Complete Buyer's Guide",
         date: "May 10, 2026",
         category: "Product Guide",
-        image: "images/1121-basmati.png",
+        image: "images/1121-basmati.webp",
         excerpt: "Understanding the key differences in grain length, aroma, and price between the two most popular Indian Basmati rice varieties to make the best purchasing decision.",
         content: `
             <p>For international buyers of premium Indian rice, choosing between <strong>1121 Basmati</strong> and <strong>1509 Basmati</strong> is one of the most common dilemmas. Both are exceptional varieties, but they cater to slightly different market needs.</p>
@@ -25,7 +25,7 @@ const BLOG_POSTS = [
         title: "Indian Rice Export Trends: What Buyers Need to Know in 2026",
         date: "April 28, 2026",
         category: "Market Trends",
-        image: "images/hero_bg.png",
+        image: "images/hero_bg.webp",
         excerpt: "An in-depth analysis of the recent shifts in Indian rice export policies, monsoon impacts, and how global buyers can secure their supply chains.",
         content: `
             <p>India remains the world's largest exporter of rice, playing a critical role in global food security. As we move through 2026, several factors are shaping the export landscape that B2B buyers must monitor.</p>
@@ -45,7 +45,7 @@ const BLOG_POSTS = [
         title: "Sona Masoori vs Basmati: Which Rice is Right for Your Market?",
         date: "April 15, 2026",
         category: "Product Comparison",
-        image: "images/sona-masoori.png",
+        image: "images/sona-masoori.webp",
         excerpt: "Comparing the aromatic, long-grain Basmati with the lightweight, medium-grain Sona Masoori to help importers target the right consumer demographics.",
         content: `
             <p>When sourcing rice from India, Basmati and Sona Masoori are two of the most requested varieties. However, they serve very different culinary purposes and consumer demographics.</p>

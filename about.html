@@ -252,8 +252,8 @@
                 
                 <h3 class="section-subheading">Our Vision</h3>
                 <p>To be recognized globally as the most reliable, quality-driven export house bridging Indian agriculture with international markets.</p>
-                <div style="margin-top:25px;">
-                    <button onclick="openCatalogModal()" style="padding:12px 28px;border:2px solid #2d5a3c;background:#2d5a3c;color:#fff;font-size:1rem;font-weight:600;border-radius:6px;cursor:pointer;transition:all 0.3s;" onmouseover="this.style.background='transparent';this.style.color='#2d5a3c'" onmouseout="this.style.background='#2d5a3c';this.style.color='#fff'">📄 Download Catalog</button>
+                <div class="cta-btn-group">
+                    <button onclick="openCatalogModal()" class="btn-cta">📄 Download Catalog</button>
                 </div>
             </div>
             <div class="about-image flex-col-gap-2">
@@ -353,18 +353,18 @@
     </footer>
 
     <!-- CATALOG DOWNLOAD MODAL -->
-    <div id="catalog-modal" class="modal-overlay" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:9999;align-items:center;justify-content:center;backdrop-filter:blur(5px);">
-        <div class="modal-content" style="background:#fff;padding:2rem;border-radius:12px;width:90%;max-width:400px;text-align:center;position:relative;">
-            <button onclick="closeCatalogModal()" style="position:absolute;top:10px;right:15px;background:none;border:none;font-size:1.5rem;cursor:pointer;color:#333;">&times;</button>
-            <h3 style="color:#2d5a3c;margin-bottom:10px;">📄 Download Catalog</h3>
-            <p style="font-size:0.9rem;color:#666;margin-bottom:20px;">Please enter your details to download our complete product catalog & specifications.</p>
-            <form id="catalog-form" style="display:flex;flex-direction:column;gap:10px;">
-                <input type="text" id="cat-name" placeholder="Full Name" required style="padding:10px;border:1px solid #ddd;border-radius:6px;">
-                <input type="email" id="cat-email" placeholder="Email Address" required style="padding:10px;border:1px solid #ddd;border-radius:6px;">
-                <input type="text" id="cat-phone" placeholder="WhatsApp / Phone (Optional)" style="padding:10px;border:1px solid #ddd;border-radius:6px;">
-                <button type="submit" class="btn-cta" style="margin-top:10px;width:100%;">Download Now</button>
+    <div id="catalog-modal" class="catalog-modal-overlay">
+        <div class="catalog-modal-box">
+            <button onclick="closeCatalogModal()" class="catalog-modal-close">&times;</button>
+            <h3 class="catalog-modal-title">📄 Download Catalog</h3>
+            <p class="catalog-modal-desc">Please enter your details to download our complete product catalog &amp; specifications.</p>
+            <form id="catalog-form" class="catalog-modal-form">
+                <input type="text" id="cat-name" placeholder="Full Name" required class="catalog-modal-input">
+                <input type="email" id="cat-email" placeholder="Email Address" required class="catalog-modal-input">
+                <input type="text" id="cat-phone" placeholder="WhatsApp / Phone (Optional)" class="catalog-modal-input">
+                <button type="submit" class="btn-cta btn-full">Download Now</button>
             </form>
-            <p id="cat-msg" style="display:none;color:#2d5a3c;font-size:0.9rem;margin-top:15px;font-weight:600;">✅ Downloading Catalog...</p>
+            <p id="cat-msg" class="catalog-modal-msg">&#x2705; Downloading Catalog...</p>
         </div>
     </div>
 

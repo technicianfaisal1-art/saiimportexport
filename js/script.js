@@ -59,6 +59,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   buildFooterProducts();
   loadFormEmail();
   loadGeminiSetting();
+  initTestimonials();
 });
 
 let IS_GEMINI_CONFIGURED = false;
@@ -75,6 +76,63 @@ async function loadGeminiSetting() {
     IS_GEMINI_CONFIGURED = false;
   }
 }
+
+// ==================== TESTIMONIALS ====================
+function initTestimonials() {
+  const track = document.getElementById('testimonials-track');
+  const dotsWrap = document.getElementById('testimonials-dots');
+  if (!track || !dotsWrap) return;
+
+  const cards = track.querySelectorAll('.tcard');
+  if (!cards.length) return;
+
+  // Build dots
+  cards.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'tdot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', 'Go to testimonial ' + (i + 1));
+    dot.addEventListener('click', () => scrollToCard(i));
+    dotsWrap.appendChild(dot);
+  });
+
+  function scrollToCard(index) {
+    const card = cards[index];
+    track.scrollTo({ left: card.offsetLeft - track.offsetLeft, behavior: 'smooth' });
+  }
+
+  function updateDots() {
+    const scrollLeft = track.scrollLeft;
+    const trackW = track.offsetWidth;
+    let closest = 0, minDist = Infinity;
+    cards.forEach((card, i) => {
+      const dist = Math.abs(card.offsetLeft - track.offsetLeft - scrollLeft);
+      if (dist < minDist) { minDist = dist; closest = i; }
+    });
+    dotsWrap.querySelectorAll('.tdot').forEach((d, i) => d.classList.toggle('active', i === closest));
+  }
+
+  track.addEventListener('scroll', updateDots, { passive: true });
+
+  // Auto-advance every 5s, pause on hover
+  let autoplay = setInterval(() => {
+    const dots = dotsWrap.querySelectorAll('.tdot');
+    let current = 0;
+    dots.forEach((d, i) => { if (d.classList.contains('active')) current = i; });
+    const next = (current + 1) % cards.length;
+    scrollToCard(next);
+  }, 5000);
+
+  track.addEventListener('mouseenter', () => clearInterval(autoplay));
+  track.addEventListener('mouseleave', () => {
+    autoplay = setInterval(() => {
+      const dots = dotsWrap.querySelectorAll('.tdot');
+      let current = 0;
+      dots.forEach((d, i) => { if (d.classList.contains('active')) current = i; });
+      scrollToCard((current + 1) % cards.length);
+    }, 5000);
+  });
+}
+
 
 // ==================== FORM EMAIL CONFIG ====================
 // FormSubmit verified email (do NOT change unless re-verified on formsubmit.co)
@@ -192,12 +250,49 @@ function buildFooterProducts() {
   }
 }
 
+// ==================== SKELETON HELPERS ====================
+function createSkeletonCard() {
+  const s = document.createElement('div');
+  s.className = 'product-card-skeleton';
+  s.innerHTML = `
+    <div class="skeleton-img skeleton-base"></div>
+    <div class="skeleton-body">
+      <div class="skeleton-tag skeleton-base"></div>
+      <div class="skeleton-title skeleton-base"></div>
+      <div class="skeleton-price skeleton-base"></div>
+      <div class="skeleton-text skeleton-base"></div>
+      <div class="skeleton-text-short skeleton-base"></div>
+      <div class="skeleton-btns">
+        <div class="skeleton-btn skeleton-base"></div>
+        <div class="skeleton-btn skeleton-base"></div>
+      </div>
+    </div>`;
+  return s;
+}
+
+function showProductSkeletons(count = 6) {
+  if (!productContainer) return;
+  productContainer.innerHTML = '';
+  for (let i = 0; i < count; i++) {
+    productContainer.appendChild(createSkeletonCard());
+  }
+}
+
 // ==================== RENDER PRODUCTS ====================
 const productContainer = document.getElementById('product-container');
 
 async function renderProducts() {
   if (!productContainer) return;
-  
+
+  // 1. Determine initial product count from static data for skeleton count
+  const staticCount = typeof PRODUCT_DETAILS !== 'undefined'
+    ? Object.keys(PRODUCT_DETAILS).length
+    : 6;
+
+  // 2. Show skeletons immediately so users see structure right away
+  showProductSkeletons(staticCount);
+
+  // 3. Build product list from static fallback first
   let productsToRender = Object.values(PRODUCT_DETAILS).map(p => {
     let displayPrice = p.specs?.price || '';
     if (p.specs?.variants && p.specs.variants.length > 0) {
@@ -216,8 +311,8 @@ async function renderProducts() {
       img: p.image
     };
   });
-  
-  // Try to fetch from Supabase if keys are set
+
+  // 4. Try to fetch from Supabase if keys are set
   if (saiDB && typeof SUPABASE_URL !== 'undefined' && SUPABASE_URL !== 'YOUR_SUPABASE_URL_HERE') {
     try {
       const { data, error } = await saiDB.from('products').select('*');
@@ -246,12 +341,13 @@ async function renderProducts() {
     }
   }
 
+  // 5. Replace skeleton with real cards, staggered one-by-one
   productContainer.innerHTML = '';
   productsToRender.forEach((p, index) => {
     const card = document.createElement('div');
-    const imageSrc = p.img || PRODUCT_IMAGES[p.id]; // Fallback to local image mapping if missing
-    
-    card.className = `product-card`;
+    const imageSrc = p.img || PRODUCT_IMAGES[p.id];
+
+    card.className = 'product-card';
     card.innerHTML = `
       <a href="product.html?id=${p.id}" class="product-card-img">
         <img src="${imageSrc}" alt="${p.name}" loading="lazy">
@@ -267,10 +363,15 @@ async function renderProducts() {
           <button class="product-btn" style="background:var(--orange);flex:1;" onclick="openCheckout('${p.id}')">Get Quote</button>
         </div>
       </div>`;
+
     productContainer.appendChild(card);
+
+    // Stagger fade-in: each card animates in 60ms after the previous one
+    setTimeout(() => {
+      card.classList.add('card-visible');
+    }, index * 60);
   });
 }
-
 
 
 // ==================== NAVBAR SCROLL ====================

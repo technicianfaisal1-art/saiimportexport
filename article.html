@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css?v=17">
+    <link rel="stylesheet" href="css/styles.css?v=19">
     <style>
         .article-hero {
             padding: 8rem 5% 4rem;
@@ -135,7 +135,7 @@
             .article-hero-img { height: 250px; }
         }
     </style>
-    <link rel="icon" type="image/jpeg" href="images/sai_logo_icon.png">
+    <link rel="icon" type="image/jpeg" href="images/sai_logo_icon.webp">
 </head>
 
 <body>
@@ -159,7 +159,7 @@
     <!-- NAVBAR -->
     <nav class="navbar" id="navbar">
         <a href="index.html" class="logo">
-            <img src="images/sai_logo_icon.png" alt="SAI Import Export Agro Icon" class="nav-logo-img">
+            <img src="images/sai_logo_icon.webp" alt="SAI Import Export Agro Icon" class="nav-logo-img">
         </a>
         <ul class="nav-links" id="nav-links">
             <li><a href="index.html">Home</a></li>
@@ -204,7 +204,7 @@
         <div class="footer-grid">
             <div class="footer-brand">
                 <a href="index.html" class="logo footer-logo">
-                    <img src="images/sai_logo_full.png" alt="SAI Import Export Agro Logo" class="footer-logo-img">
+                    <img src="images/sai_logo_full.webp" alt="SAI Import Export Agro Logo" class="footer-logo-img">
                 </a>
                 <p>India's trusted exporter of premium rice. Quality, trust, and reliability.</p>
             </div>
@@ -246,12 +246,32 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="js/supabase-client.js"></script>
     <script src="js/blog-data.js"></script>
-    <script src="js/script.js?v=18"></script>
+    <script src="js/script.js?v=19"></script>
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
             const params = new URLSearchParams(window.location.search);
             const articleId = params.get('id');
             const container = document.getElementById('article-container');
+
+            // Show article skeleton immediately
+            container.innerHTML = `
+                <div class="article-hero" style="min-height:340px;padding-top:8rem;">
+                    <div class="skeleton-base" style="width:120px;height:28px;border-radius:50px;margin:0 auto 1.5rem;"></div>
+                    <div class="skeleton-base" style="width:70%;height:48px;margin:0 auto 1rem;border-radius:8px;"></div>
+                    <div class="skeleton-base" style="width:40%;height:20px;margin:0 auto;border-radius:6px;"></div>
+                </div>
+                <div class="article-body">
+                    <div class="skeleton-base" style="width:140px;height:20px;margin-bottom:2rem;border-radius:6px;"></div>
+                    <div class="skeleton-base" style="width:100%;height:350px;border-radius:12px;margin-bottom:3rem;"></div>
+                    <div class="skeleton-base" style="width:100%;height:18px;margin-bottom:12px;border-radius:4px;"></div>
+                    <div class="skeleton-base" style="width:95%;height:18px;margin-bottom:12px;border-radius:4px;"></div>
+                    <div class="skeleton-base" style="width:88%;height:18px;margin-bottom:24px;border-radius:4px;"></div>
+                    <div class="skeleton-base" style="width:50%;height:28px;margin-bottom:16px;border-radius:6px;"></div>
+                    <div class="skeleton-base" style="width:100%;height:18px;margin-bottom:12px;border-radius:4px;"></div>
+                    <div class="skeleton-base" style="width:92%;height:18px;margin-bottom:12px;border-radius:4px;"></div>
+                    <div class="skeleton-base" style="width:80%;height:18px;border-radius:4px;"></div>
+                </div>
+            `;
 
             if (!articleId) {
                 showError();
@@ -259,6 +279,23 @@
             }
 
             let article = null;
+
+            // Smart local image fallback based on title keywords
+            function getBlogImage(title, currentImg) {
+                if (currentImg && !currentImg.startsWith('http') && currentImg.endsWith('.webp')) {
+                    return currentImg;
+                }
+                const t = (title || '').toLowerCase();
+                if (t.includes('1121') || t.includes('basmati')) return 'images/1121-basmati.webp';
+                if (t.includes('1509')) return 'images/1509-basmati.webp';
+                if (t.includes('sona') || t.includes('masoori')) return 'images/sona-masoori.webp';
+                if (t.includes('pusa')) return 'images/pusa-basmati.webp';
+                if (t.includes('swarna')) return 'images/swarna-raw.webp';
+                if (t.includes('ir64') || t.includes('parboiled')) return 'images/ir64-parboiled.webp';
+                if (t.includes('broken')) return 'images/broken-rice.webp';
+                if (t.includes('trend') || t.includes('export') || t.includes('market') || t.includes('logistics')) return 'images/logistics.webp';
+                return 'images/hero_bg.webp';
+            }
 
             // 1. Try to fetch from Supabase
             if (typeof saiDB !== 'undefined' && saiDB) {
@@ -268,9 +305,9 @@
                         article = {
                             id: data.slug,
                             title: data.title,
-                            category: 'Market Update',
+                            category: data.category || 'Market Update',
                             date: new Date(data.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
-                            image: data.cover_img || 'images/hero_bg.webp',
+                            image: getBlogImage(data.title, data.cover_img),
                             content: data.content_html
                         };
                     }
@@ -306,7 +343,8 @@
                     <a href="blog.html" class="back-link">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Back to Insights
                     </a>
-                    <img src="${article.image}" alt="${article.title}" class="article-hero-img">
+                    <img src="${article.image}" alt="${article.title}" class="article-hero-img"
+                         onerror="this.onerror=null;this.src='images/hero_bg.webp';">
                     <div class="article-content">
                         ${article.content}
                     </div>

@@ -37,7 +37,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css?v=18">
+    <link rel="stylesheet" href="css/styles.css?v=19">
     <link rel="icon" type="image/png" href="images/sai_logo_icon.webp">
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#2d5a3c">
@@ -74,6 +74,7 @@
             <li><a href="#products">Products</a></li>
             <li><a href="#logistics">Logistics</a></li>
             <li><a href="blog.html">Insights</a></li>
+            <li><a href="certifications.html">Certifications</a></li>
             <li><a href="contact.html">Contact Us</a></li>
         </ul>
         <!-- Language Picker -->
@@ -156,9 +157,9 @@
                     <div class="cert">ISO 22000</div>
                     <div class="cert">HACCP</div>
                 </div>
-                <div style="display:flex;gap:15px;margin-top:20px;flex-wrap:wrap;">
+                <div class="cta-btn-group">
                     <a href="#contact" class="btn-cta">Partner With Us →</a>
-                    <button onclick="openCatalogModal()" style="padding:12px 28px;border:2px solid #2d5a3c;background:transparent;color:#2d5a3c;font-size:1rem;font-weight:600;border-radius:6px;cursor:pointer;transition:all 0.3s;" onmouseover="this.style.background='#2d5a3c';this.style.color='#fff'" onmouseout="this.style.background='transparent';this.style.color='#2d5a3c'">📄 Download Catalog</button>
+                    <button onclick="openCatalogModal()" class="btn-catalog-outline">📄 Download Catalog</button>
                 </div>
             </div>
         </div>
@@ -206,7 +207,140 @@
         </div>
     </section>
 
+    <!-- TESTIMONIALS -->
+    <section id="testimonials" class="testimonials">
+        <div class="testimonials-header animate-scale">
+            <p class="section-tag">Buyer Reviews</p>
+            <h2>Trusted by Importers<br><em>Across the Globe.</em></h2>
+            <p class="testimonials-subtitle">Real feedback from our long-term B2B partners — businesses that rely on SAI Agro for consistent, certified rice supply.</p>
+        </div>
+
+        <div class="testimonials-track-wrap">
+            <div class="testimonials-track" id="testimonials-track">
+
+                <div class="tcard">
+                    <div class="tcard-top">
+                        <div class="tcard-avatar tcard-avatar-green">AK</div>
+                        <div class="tcard-info">
+                            <strong>Ahmed Al-Kathiri</strong>
+                            <span>Al-Kathiri Trading Co.</span>
+                            <span class="tcard-location">🇦🇪 Dubai, UAE</span>
+                        </div>
+                        <div class="tcard-stars">★★★★★</div>
+                    </div>
+                    <p class="tcard-quote">"We have been sourcing 1121 Basmati from SAI Agro for over 3 years. Every container — 150 MT per shipment — arrives exactly on spec. Grain length, moisture, broken percentage — all within agreed tolerances. Our Dubai retail clients have never complained."</p>
+                    <div class="tcard-meta">
+                        <span class="tcard-product">📦 1121 Basmati — Steam</span>
+                        <span class="tcard-volume">150 MT/month</span>
+                        <span class="tcard-verified">✓ Verified Buyer</span>
+                    </div>
+                </div>
+
+                <div class="tcard">
+                    <div class="tcard-top">
+                        <div class="tcard-avatar tcard-avatar-orange">MR</div>
+                        <div class="tcard-info">
+                            <strong>Mohammed Al-Rashidi</strong>
+                            <span>Gulf Foods Import LLC</span>
+                            <span class="tcard-location">🇸🇦 Jeddah, Saudi Arabia</span>
+                        </div>
+                        <div class="tcard-stars">★★★★★</div>
+                    </div>
+                    <p class="tcard-quote">"The documentation process is seamless — phytosanitary, COO, lab reports — everything is ready before vessel departure. We import both 1121 and Sona Masoori. SAI Agro is our primary supplier for the KSA market and we have no reason to change."</p>
+                    <div class="tcard-meta">
+                        <span class="tcard-product">📦 1121 Basmati + Sona Masoori</span>
+                        <span class="tcard-volume">200 MT/shipment</span>
+                        <span class="tcard-verified">✓ Verified Buyer</span>
+                    </div>
+                </div>
+
+                <div class="tcard">
+                    <div class="tcard-top">
+                        <div class="tcard-avatar tcard-avatar-blue">PT</div>
+                        <div class="tcard-info">
+                            <strong>Priya Tharmalingam</strong>
+                            <span>Ceylon Rice Distributors</span>
+                            <span class="tcard-location">🇬🇧 Leicester, United Kingdom</span>
+                        </div>
+                        <div class="tcard-stars">★★★★★</div>
+                    </div>
+                    <p class="tcard-quote">"We supply South Asian grocery chains across the UK. SAI Agro's Sona Masoori quality is consistently excellent — low broken percentage, clean sortex, and the packaging holds well during transit. Our first order was 25 MT and we now order 75 MT every 6 weeks."</p>
+                    <div class="tcard-meta">
+                        <span class="tcard-product">📦 Sona Masoori Steam</span>
+                        <span class="tcard-volume">75 MT/6 weeks</span>
+                        <span class="tcard-verified">✓ Verified Buyer</span>
+                    </div>
+                </div>
+
+                <div class="tcard">
+                    <div class="tcard-top">
+                        <div class="tcard-avatar tcard-avatar-red">YN</div>
+                        <div class="tcard-info">
+                            <strong>Yusuf Al-Nabulsi</strong>
+                            <span>Nabulsi Foodstuff Trading</span>
+                            <span class="tcard-location">🇯🇴 Amman, Jordan</span>
+                        </div>
+                        <div class="tcard-stars">★★★★★</div>
+                    </div>
+                    <p class="tcard-quote">"Price negotiation is transparent and fair. We receive proforma invoice within 24 hours of inquiry. The FOB Nhava Sheva pricing is competitive — better than other Indian suppliers we have dealt with. Highly recommended for Middle East buyers."</p>
+                    <div class="tcard-meta">
+                        <span class="tcard-product">📦 1509 Basmati — Sella</span>
+                        <span class="tcard-volume">100 MT/quarter</span>
+                        <span class="tcard-verified">✓ Verified Buyer</span>
+                    </div>
+                </div>
+
+                <div class="tcard">
+                    <div class="tcard-top">
+                        <div class="tcard-avatar tcard-avatar-green">SO</div>
+                        <div class="tcard-info">
+                            <strong>Samuel Okonkwo</strong>
+                            <span>West Africa Grain Imports</span>
+                            <span class="tcard-location">🇳🇬 Lagos, Nigeria</span>
+                        </div>
+                        <div class="tcard-stars">★★★★★</div>
+                    </div>
+                    <p class="tcard-quote">"We import IR 64 Parboiled in bulk for retail distribution. SAI Agro has never missed a vessel booking in 2 years. Communication is excellent — WhatsApp response within hours. The quality reports match exactly what is in the container."</p>
+                    <div class="tcard-meta">
+                        <span class="tcard-product">📦 IR 64 Parboiled</span>
+                        <span class="tcard-volume">500 MT/shipment</span>
+                        <span class="tcard-verified">✓ Verified Buyer</span>
+                    </div>
+                </div>
+
+                <div class="tcard">
+                    <div class="tcard-top">
+                        <div class="tcard-avatar tcard-avatar-navy">RL</div>
+                        <div class="tcard-info">
+                            <strong>Rajesh Lokuhettige</strong>
+                            <span>Lanka Premium Foods</span>
+                            <span class="tcard-location">🇱🇰 Colombo, Sri Lanka</span>
+                        </div>
+                        <div class="tcard-stars">★★★★★</div>
+                    </div>
+                    <p class="tcard-quote">"What sets SAI Agro apart is their post-shipment follow-up. They track BL, send arrival notifications, and resolve any customs queries promptly. Jeerakasala rice from them is consistently fragrant and well-processed. Will continue long-term."</p>
+                    <div class="tcard-meta">
+                        <span class="tcard-product">📦 Jeerakasala + Sona Masoori</span>
+                        <span class="tcard-volume">50 MT/month</span>
+                        <span class="tcard-verified">✓ Verified Buyer</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="testimonials-dots" id="testimonials-dots"></div>
+
+        <div class="testimonials-stats animate-scale">
+            <div class="tstat"><span class="tstat-num">15+</span><span class="tstat-label">Countries Served</span></div>
+            <div class="tstat"><span class="tstat-num">98%</span><span class="tstat-label">Repeat Buyer Rate</span></div>
+            <div class="tstat"><span class="tstat-num">5,000+</span><span class="tstat-label">MT Exported Annually</span></div>
+            <div class="tstat"><span class="tstat-num">5.0</span><span class="tstat-label">★ Average Rating</span></div>
+        </div>
+    </section>
+
     <!-- CONTACT -->
+
     <section id="contact" class="contact">
         <div class="contact-grid">
             <div class="contact-info animate-left">
@@ -381,18 +515,18 @@ www.saiimportexportagro.com">
     </div>
 
     <!-- CATALOG DOWNLOAD MODAL -->
-    <div id="catalog-modal" class="modal-overlay" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:9999;align-items:center;justify-content:center;backdrop-filter:blur(5px);">
-        <div class="modal-content" style="background:#fff;padding:2rem;border-radius:12px;width:90%;max-width:400px;text-align:center;position:relative;">
-            <button onclick="closeCatalogModal()" style="position:absolute;top:10px;right:15px;background:none;border:none;font-size:1.5rem;cursor:pointer;color:#333;">&times;</button>
-            <h3 style="color:#2d5a3c;margin-bottom:10px;">📄 Download Catalog</h3>
-            <p style="font-size:0.9rem;color:#666;margin-bottom:20px;">Please enter your details to download our complete product catalog & specifications.</p>
-            <form id="catalog-form" style="display:flex;flex-direction:column;gap:10px;">
-                <input type="text" id="cat-name" placeholder="Full Name" required style="padding:10px;border:1px solid #ddd;border-radius:6px;">
-                <input type="email" id="cat-email" placeholder="Email Address" required style="padding:10px;border:1px solid #ddd;border-radius:6px;">
-                <input type="text" id="cat-phone" placeholder="WhatsApp / Phone (Optional)" style="padding:10px;border:1px solid #ddd;border-radius:6px;">
-                <button type="submit" class="btn-cta" style="margin-top:10px;width:100%;">Download Now</button>
+    <div id="catalog-modal" class="catalog-modal-overlay">
+        <div class="catalog-modal-box">
+            <button onclick="closeCatalogModal()" class="catalog-modal-close">&times;</button>
+            <h3 class="catalog-modal-title">📄 Download Catalog</h3>
+            <p class="catalog-modal-desc">Please enter your details to download our complete product catalog &amp; specifications.</p>
+            <form id="catalog-form" class="catalog-modal-form">
+                <input type="text" id="cat-name" placeholder="Full Name" required class="catalog-modal-input">
+                <input type="email" id="cat-email" placeholder="Email Address" required class="catalog-modal-input">
+                <input type="text" id="cat-phone" placeholder="WhatsApp / Phone (Optional)" class="catalog-modal-input">
+                <button type="submit" class="btn-cta btn-full">Download Now</button>
             </form>
-            <p id="cat-msg" style="display:none;color:#2d5a3c;font-size:0.9rem;margin-top:15px;font-weight:600;">✅ Downloading Catalog...</p>
+            <p id="cat-msg" class="catalog-modal-msg">✅ Downloading Catalog...</p>
         </div>
     </div>
 
@@ -406,7 +540,7 @@ www.saiimportexportagro.com">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="js/supabase-client.js?v=6"></script>
     <script src="js/product-data.js?v=6"></script>
-    <script src="js/script.js?v=18"></script>
+    <script src="js/script.js?v=20"></script>
     <script type="text/javascript">
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({
