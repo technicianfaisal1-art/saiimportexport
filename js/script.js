@@ -767,13 +767,16 @@ if (chatField) {
   chatField.addEventListener('keypress', e => { if (e.key === 'Enter') sendMessage(); });
 }
 
-// ==================== CONTACT FORM (Native FormSubmit + Supabase + WhatsApp) ====================
-// Forms submit naturally to FormSubmit (which handles email + redirect to thank-you page)
-// We add a non-blocking listener to also save to Supabase and send WhatsApp notification
+// ==================== CONTACT FORM (AJAX FormSubmit + Supabase + WhatsApp) ====================
 function attachFormNotifications(formEl) {
   if (!formEl) return;
-  formEl.addEventListener('submit', () => {
-    // Extract form data before submission (non-blocking, doesn't call preventDefault)
+  formEl.addEventListener('submit', async (e) => {
+    e.preventDefault(); // Prevent native redirect to FormSubmit
+
+    const btn = formEl.querySelector('button[type="submit"], .btn-cta');
+    const origText = btn ? btn.textContent : '';
+    if (btn) { btn.textContent = 'Sending...'; btn.disabled = true; }
+
     const fd = new FormData(formEl);
     const name = ((fd.get('First Name') || fd.get('Name') || '') + ' ' + (fd.get('Last Name') || '')).trim();
     const email = fd.get('Email') || fd.get('email') || '';
@@ -781,7 +784,7 @@ function attachFormNotifications(formEl) {
     const message = fd.get('Message') || fd.get('Requirements') || '';
     const company = fd.get('Company') || '';
 
-    // Save to Supabase (non-blocking)
+    // 1. Save to Supabase (always works even if FormSubmit is down)
     if (typeof saiDB !== 'undefined') {
       var formEnq = { name, email, phone: fd.get('Phone') || null, company: company || null, products, message, status: 'new', source: '📋 Contact Form' };
       saiDB.from('enquiries').insert(formEnq).then(r => {
@@ -794,8 +797,34 @@ function attachFormNotifications(formEl) {
       });
     }
 
-    // Send WhatsApp (non-blocking)
+    // 2. Send WhatsApp notification (non-blocking)
     sendWhatsAppNotification(name, email, company, products, message);
+
+    // 3. Try FormSubmit via AJAX endpoint (for email delivery)
+    try {
+      fd.append('_captcha', 'false');
+      fd.append('_template', 'table');
+      if (email) fd.append('_replyto', email);
+      
+      const controller = new AbortController();
+      setTimeout(() => controller.abort(), 10000); // 10s timeout
+
+      const res = await fetch(`https://formsubmit.co/ajax/${FORMSUBMIT_EMAIL}`, {
+        method: 'POST',
+        body: fd,
+        headers: { 'Accept': 'application/json' },
+        signal: controller.signal
+      });
+
+      if (res.ok) console.log('FormSubmit email sent');
+      else console.warn('FormSubmit returned:', res.status);
+    } catch (err) {
+      console.warn('FormSubmit unavailable (data saved to Supabase):', err.message);
+    }
+
+    // 4. Always redirect to thank-you page (data is in Supabase regardless)
+    formEl.reset();
+    window.location.href = 'thank-you.html';
   });
 }
 
