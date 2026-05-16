@@ -52,7 +52,7 @@
         .res-section ul { padding-left: 1.2rem; font-size: 0.9rem; color: var(--text-mid); }
         .res-section li { margin-bottom: 0.3rem; }
         
-        .disclaimer { font-size: 0.8rem; color: var(--text-light); text-align: center; margin-top: 2rem; font-style: italic; }
+        .disclaimer { font-size: 0.75rem; color: var(--text-light); text-align: center; margin-top: 2rem; font-style: italic; }
         .grounding-badge { display: inline-flex; align-items: center; gap: 5px; background: #e8f0ea; color: var(--green-dark); padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; margin-bottom: 1rem; }
         
         /* Utility classes for inline style removal */
@@ -232,7 +232,7 @@
 
                 <a href="contact.html" class="btn-outline-dark btn-full mt-1rem">Request Binding Quote</a>
                 
-                <p class="disclaimer" id="res-disclaimer"></p>
+                <p class="disclaimer">⚠️ This is an approximate AI estimate based on current market trends. Please <a href="contact.html" style="color:var(--green); text-decoration:underline;">contact our team</a> for an exact and binding quote.</p>
             </div>
             
             <div id="calc-error" class="calc-error">
@@ -336,8 +336,6 @@
 
                 const risksHtml = est.risk_factors.map(r => `<li>${r}</li>`).join('');
                 document.getElementById('res-risks').innerHTML = risksHtml;
-
-                document.getElementById('res-disclaimer').textContent = est.disclaimer;
                 
                 if (json.grounded) {
                     document.getElementById('res-badge').style.display = 'inline-flex';
