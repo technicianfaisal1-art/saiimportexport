@@ -25,14 +25,27 @@ async function loadHeroSection() {
         const heroImg = document.getElementById('hero-img');
         if (heroImg) heroImg.src = v.bg_img;
       }
-      /* Disabled DB text overrides to preserve premium hardcoded HTML design
       if (v.tagline) {
         const tag = document.getElementById('hero-tag');
-        if (tag) tag.textContent = v.tagline;
+        // Ensure premium emoji is present
+        tag.innerHTML = v.tagline.includes('🌾') ? v.tagline : `🌾 ${v.tagline}`;
       }
       if (v.heading) {
         const head = document.getElementById('hero-head');
-        if (head) head.innerHTML = v.heading; // allow <br> and <em>
+        // If DB text doesn't have HTML tags, automatically format it to look premium
+        if (v.heading.includes('<')) {
+          head.innerHTML = v.heading;
+        } else {
+          const words = v.heading.split(' ');
+          if (words.length > 3) {
+            const splitIndex = Math.floor(words.length / 2);
+            const p1 = words.slice(0, splitIndex).join(' ');
+            const p2 = words.slice(splitIndex).join(' ');
+            head.innerHTML = `${p1},<br><em>${p2}.</em>`;
+          } else {
+            head.innerHTML = v.heading;
+          }
+        }
       }
       if (v.subheading) {
         const sub = document.getElementById('hero-sub');
@@ -45,7 +58,6 @@ async function loadHeroSection() {
           btn.href = v.cta_link;
         }
       }
-      */
     }
   } catch (e) {
     console.warn("Failed to load hero from Supabase, using local fallback.", e);
