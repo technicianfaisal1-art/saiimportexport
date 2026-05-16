@@ -730,7 +730,8 @@ async function sendMessage() {
         if (typeof saiDB !== 'undefined') {
           saiDB.from('enquiries').insert({
             name: leadName, email: leadEmail,
-            products: leadReqs, message: 'Collected via AI Chatbot', status: 'new'
+            products: leadReqs, message: 'Collected via AI Chatbot', status: 'new',
+            source: '🤖 AI Chatbot'
           }).then(r => {
             if (r.error) console.error('Chatbot Supabase save error:', r.error.message);
             else console.log('Chatbot lead saved to Supabase');
@@ -783,7 +784,8 @@ function attachFormNotifications(formEl) {
     if (typeof saiDB !== 'undefined') {
       saiDB.from('enquiries').insert({
         name, email, phone: fd.get('Phone') || null,
-        company: company || null, products, message, status: 'new'
+        company: company || null, products, message, status: 'new',
+        source: '📋 Contact Form'
       }).then(r => {
         if (r.error) console.error('Supabase save error:', r.error.message);
         else console.log('Enquiry saved to Supabase');

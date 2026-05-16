@@ -244,28 +244,54 @@ async function uploadImageToStorage(pid) {
 // ==================== ENQUIRIES ====================
 async function loadEnquiries() {
     var tbody = document.getElementById('enquiry-table-body');
-    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center">Loading...</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="7" style="text-align:center">Loading...</td></tr>';
     var r = await saiDB.from('enquiries').select('*').order('created_at', { ascending: false });
-    if (r.error) { tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:red">'+r.error.message+'</td></tr>'; return; }
+    if (r.error) { tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:red">'+r.error.message+'</td></tr>'; return; }
     currentEnquiries = r.data;
     loadOverviewStats();
     var newCount = currentEnquiries.filter(function(e) { return e.status === 'new'; }).length;
-    var badge = document.getElementById('enquiry-badge');
-    if (newCount > 0) { badge.style.display = 'inline'; badge.innerText = newCount; } else { badge.style.display = 'none'; }
-    if (!currentEnquiries.length) { tbody.innerHTML = '<tr><td colspan="6" style="text-align:center">No enquiries yet.</td></tr>'; return; }
+    var bdg = document.getElementById('enquiry-badge');
+    if (newCount > 0) { bdg.style.display = 'inline'; bdg.innerText = newCount; } else { bdg.style.display = 'none'; }
+    if (!currentEnquiries.length) { tbody.innerHTML = '<tr><td colspan="7" style="text-align:center">No enquiries yet.</td></tr>'; return; }
     tbody.innerHTML = currentEnquiries.map(function(e) {
         var d = new Date(e.created_at).toLocaleDateString('en-IN', { day:'2-digit', month:'short' });
-        var badge = e.status === 'new' ? 'badge-new' : e.status === 'replied' ? 'badge-replied' : 'badge-read';
-        return '<tr><td>'+d+'</td><td>'+e.name+'</td><td style="font-size:0.72rem">'+e.email+'</td><td style="max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+(e.products||'-')+'</td><td><span class="badge '+badge+'">'+e.status+'</span></td><td><div class="actions"><button class="btn-sm btn-view" onclick="viewEnquiry('+e.id+')">View</button><button class="btn-sm btn-delete" onclick="deleteEnquiry('+e.id+')">Del</button></div></td></tr>';
+        var sBadge = e.status === 'new' ? 'badge-new' : e.status === 'replied' ? 'badge-replied' : 'badge-read';
+        var src = e.source || 'Contact Form';
+        var srcColor = src.indexOf('Chatbot') !== -1 ? '#9b59b6' : '#3498db';
+        var srcTag = '<span style="background:'+srcColor+';color:#fff;font-size:0.62rem;padding:2px 6px;border-radius:8px;white-space:nowrap">'+src+'</span>';
+        return '<tr><td>'+d+'</td><td><strong>'+e.name+'</strong></td><td style="font-size:0.72rem">'+e.email+'</td><td>'+srcTag+'</td><td style="max-width:110px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+(e.products||'-')+'</td><td><span class="badge '+sBadge+'">'+e.status+'</span></td><td><div class="actions"><button class="btn-sm btn-view" onclick="viewEnquiry('+e.id+')">View</button><button class="btn-sm btn-delete" onclick="deleteEnquiry('+e.id+')">Del</button></div></td></tr>';
     }).join('');
 }
 
 function viewEnquiry(id) {
     var e = currentEnquiries.find(function(x) { return x.id === id; });
     if (!e) return;
-    var d = new Date(e.created_at).toLocaleString('en-IN');
-    document.getElementById('enquiry-detail').innerHTML = 
-        '<div style="font-size:0.82rem;line-height:1.8"><p><strong>📅 Date:</strong> '+d+'</p><p><strong>👤 Name:</strong> '+e.name+'</p><p><strong>📧 Email:</strong> <a href="mailto:'+e.email+'">'+e.email+'</a></p><p><strong>📱 Phone:</strong> '+(e.phone||'N/A')+'</p><p><strong>🏢 Company:</strong> '+(e.company||'N/A')+'</p><p><strong>📦 Products:</strong> '+(e.products||'N/A')+'</p><p><strong>💬 Message:</strong></p><div style="background:#f9f9f9;padding:10px;border-radius:8px;margin-top:4px">'+(e.message||'No message')+'</div><div style="margin-top:12px;display:flex;gap:6px"><button class="btn-cta" onclick="markEnquiry('+e.id+',\'read\')">✓ Mark Read</button><button class="btn-sm btn-reply" style="padding:8px 14px" onclick="markEnquiry('+e.id+',\'replied\')">✉ Replied</button><a href="mailto:'+e.email+'?subject=Re: Enquiry from SAI Import Export Agro" class="btn-sm btn-view" style="padding:8px 14px;text-decoration:none">📧 Email</a></div></div>';
+    var d = new Date(e.created_at).toLocaleString('en-IN', { day:'2-digit', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' });
+    var src = e.source || 'Contact Form';
+    var srcColor = src.indexOf('Chatbot') !== -1 ? '#9b59b6' : '#3498db';
+    var srcTag = '<span style="display:inline-block;background:'+srcColor+';color:#fff;font-size:0.75rem;padding:3px 10px;border-radius:12px">'+src+'</span>';
+    var stColor = e.status === 'new' ? '#e74c3c' : e.status === 'replied' ? '#27ae60' : '#7f8c8d';
+    var stTag = '<span style="display:inline-block;background:'+stColor+';color:#fff;font-size:0.75rem;padding:3px 10px;border-radius:12px;text-transform:capitalize">'+e.status+'</span>';
+
+    var html = '<div style="font-size:0.85rem;line-height:1.8">';
+    html += '<div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap">'+srcTag+stTag+'</div>';
+    html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">';
+    html += '<div style="background:#f0f7f2;padding:10px 12px;border-radius:8px;border-left:3px solid #2d5a3c"><div style="font-size:0.68rem;color:#888;text-transform:uppercase;letter-spacing:0.5px">Date</div><div style="font-weight:600;margin-top:2px">'+d+'</div></div>';
+    html += '<div style="background:#f0f7f2;padding:10px 12px;border-radius:8px;border-left:3px solid #2d5a3c"><div style="font-size:0.68rem;color:#888;text-transform:uppercase;letter-spacing:0.5px">Name</div><div style="font-weight:600;margin-top:2px">'+e.name+'</div></div>';
+    html += '<div style="background:#f0f7f2;padding:10px 12px;border-radius:8px;border-left:3px solid #c87533"><div style="font-size:0.68rem;color:#888;text-transform:uppercase;letter-spacing:0.5px">Email</div><div style="margin-top:2px"><a href="mailto:'+e.email+'" style="color:#2d5a3c;font-weight:500">'+e.email+'</a></div></div>';
+    html += '<div style="background:#f0f7f2;padding:10px 12px;border-radius:8px;border-left:3px solid #c87533"><div style="font-size:0.68rem;color:#888;text-transform:uppercase;letter-spacing:0.5px">Phone</div><div style="font-weight:500;margin-top:2px">'+(e.phone||'N/A')+'</div></div>';
+    html += '</div>';
+    if (e.company) html += '<div style="background:#fff8f0;padding:8px 12px;border-radius:8px;margin-bottom:10px;border:1px solid #f0e0cc"><span style="font-size:0.68rem;color:#888">COMPANY</span><div style="font-weight:600;margin-top:2px">'+e.company+'</div></div>';
+    html += '<div style="background:#f0f4ff;padding:8px 12px;border-radius:8px;margin-bottom:10px;border:1px solid #d0d8f0"><span style="font-size:0.68rem;color:#888">PRODUCTS</span><div style="font-weight:600;margin-top:3px;color:#2d5a3c">'+(e.products||'Not specified')+'</div></div>';
+    html += '<div style="margin-bottom:14px"><span style="font-size:0.68rem;color:#888;text-transform:uppercase;letter-spacing:0.5px">Message / Requirements</span><div style="background:#f9f9f9;padding:10px;border-radius:8px;margin-top:4px;border:1px solid #eee;white-space:pre-wrap">'+(e.message||'No message')+'</div></div>';
+    html += '<div style="display:flex;gap:6px;flex-wrap:wrap">';
+    html += '<button class="btn-cta" onclick="markEnquiry('+e.id+',\'read\')" style="font-size:0.8rem">✓ Read</button>';
+    html += '<button class="btn-cta" onclick="markEnquiry('+e.id+',\'replied\')" style="background:#27ae60;font-size:0.8rem">✉ Replied</button>';
+    html += '<a href="mailto:'+e.email+'?subject=Re: Your Enquiry — SAI Import Export Agro" class="btn-cta" style="background:#3498db;text-decoration:none;font-size:0.8rem">📧 Email</a>';
+    if (e.phone) html += '<a href="https://wa.me/'+e.phone.replace(/[^0-9]/g,'')+'" target="_blank" class="btn-cta" style="background:#25D366;text-decoration:none;font-size:0.8rem">📱 WhatsApp</a>';
+    html += '</div></div>';
+
+    document.getElementById('enquiry-detail').innerHTML = html;
     document.getElementById('enquiry-modal').classList.add('active');
     if (e.status === 'new') markEnquiry(e.id, 'read');
 }
