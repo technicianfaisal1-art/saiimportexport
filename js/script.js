@@ -736,57 +736,52 @@ async function sendMessage() {
           chatField.disabled = false; sendBtn.disabled = false; chatField.focus();
           return;
         }
-        // ========== VALIDATION PASSED — SEND EMAIL ==========
+        // ========== VALIDATION PASSED — SEND VIA RESEND + WHATSAPP + SUPABASE ==========
 
-        const formData = new FormData();
-        formData.append('_subject', '🤖 AI Chatbot Lead — SAI Import Export Agro');
-        formData.append('_captcha', 'false');
-        formData.append('_template', 'table');
-        formData.append('_replyto', leadEmail);
-        formData.append('_autoresponse', `Thank you for chatting with SAI Import Export Agro! 🍚\n\nWe have noted your requirements and our export team is preparing a personalized quotation for you.\n\nYou will hear from us within 24 hours.\n\n📧 saiimportexportagro0@gmail.com\n📞 +91 85958 27184\n\nWarm regards,\nSAI Import Export Agro Export Team`);
-        formData.append('Name', leadName);
-        formData.append('Email', leadEmail);
-        formData.append('Requirements', leadReqs);
-
-        const chatQuotation = `
-━━━━━━━━━━━━━━━━━━━━━━━━━━━
-📋 READY-TO-SEND QUOTATION TEMPLATE
-━━━━━━━━━━━━━━━━━━━━━━━━━━━
-(Hit Reply and fill the blanks)
-
-Dear ${leadName},
-
-Thank you for your interest in SAI Import Export Agro products. Please find below our quotation:
-
-PROFORMA INVOICE
-──────────────────────
-Product(s): ${leadReqs}
-Quantity: _______ MT
-Unit Price (FOB): USD _______ / MT
-Unit Price (CIF): USD _______ / MT
-Total Value: USD _______
-──────────────────────
-Incoterm: FOB / CIF
-Port of Loading: Nhava Sheva / Mundra
-Port of Discharge: _______
-Packaging: _______
-Payment Terms: LC at Sight / T/T 30% Advance
-Validity: 7 days from date of quote
-Estimated Shipment: _______ days from confirmation
-
-Certifications: FSSAI | APEDA | ISO 22000 | HACCP
-
-Best regards,
-SAI Import Export Agro Export Team
-━━━━━━━━━━━━━━━━━━━━━━━━━━━`;
-
-        formData.append('--- QUOTATION TEMPLATE ---', chatQuotation);
-        
-        fetch('https://formsubmit.co/faisal.khan1192519@gmail.com', {
+        // 1. Send email via Resend API (admin notification + buyer auto-response)
+        fetch('/api/send-email', {
           method: 'POST',
-          body: formData,
-          headers: { 'Accept': 'application/json' }
-        }).catch(err => console.error('Chatbot email failed', err));
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            to: ADMIN_EMAIL,
+            name: leadName,
+            email: leadEmail,
+            products: leadReqs,
+            message: `Collected via AI Chatbot conversation`,
+            source: '🤖 AI Chatbot Lead',
+            subject: `🤖 AI Chatbot Lead — ${leadName}`
+          })
+        }).then(r => {
+          if (r.ok) console.log('Chatbot lead email sent successfully');
+          else console.error('Chatbot lead email failed:', r.status);
+        }).catch(err => console.error('Chatbot email error:', err));
+
+        // 2. Save to Supabase enquiries table
+        if (typeof saiDB !== 'undefined') {
+          saiDB.from('enquiries').insert({
+            name: leadName,
+            email: leadEmail,
+            products: leadReqs,
+            message: 'Collected via AI Chatbot',
+            status: 'new'
+          }).then(r => {
+            if (r.error) console.error('Chatbot Supabase save error:', r.error.message);
+            else console.log('Chatbot lead saved to Supabase');
+          });
+        }
+
+        // 3. Send WhatsApp notification via CallMeBot
+        if (typeof saiDB !== 'undefined') {
+          saiDB.from('site_settings').select('*').eq('key', 'whatsapp').single().then(res => {
+            if (res.data && res.data.value && res.data.value.phone && res.data.value.apikey) {
+              const waPhone = res.data.value.phone.replace(/[^0-9]/g, '');
+              const waApi = res.data.value.apikey;
+              const waMsg = encodeURIComponent(`*🤖 AI Chatbot Lead!*\n\n*👤 Name:* ${leadName}\n*📧 Email:* ${leadEmail}\n*📦 Requirements:* ${leadReqs}\n\n_Reply within 24 hours_`);
+              const waUrl = `https://api.callmebot.com/whatsapp.php?phone=${waPhone}&text=${waMsg}&apikey=${waApi}`;
+              fetch(waUrl, { mode: 'no-cors' }).catch(err => console.error('Chatbot WhatsApp error:', err));
+            }
+          }).catch(err => console.error('WhatsApp settings fetch error:', err));
+        }
       }
     }
 
