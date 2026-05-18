@@ -91,9 +91,10 @@ Return ONLY this JSON structure (fill in real numbers based on current market re
 
     // 4. Call AI with JSON response type enabled
     const MODELS = [
+      'gemini-2.5-pro',
+      'gemini-1.5-pro',
       'gemini-2.5-flash',
-      'gemini-2.5-flash-lite',
-      'gemini-1.5-flash'
+      'gemini-2.5-flash-lite'
     ];
 
     let lastError = null;
