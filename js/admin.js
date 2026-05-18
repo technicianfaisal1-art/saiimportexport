@@ -85,7 +85,8 @@ async function loadProducts() {
         } else if (p.specs && p.specs.price) {
             priceDisplay = p.specs.price;
         }
-        return '<tr><td><img src="'+p.img+'" alt="'+p.name+'"></td><td>'+p.id+'</td><td><strong>'+p.name+'</strong></td><td><span class="badge badge-published">'+p.tag+'</span></td><td>'+priceDisplay+'</td><td><div class="actions"><button class="btn-sm btn-edit" onclick="editProduct(\''+p.id+'\')">Edit</button><button class="btn-sm btn-delete" onclick="deleteProduct(\''+p.id+'\')">Del</button></div></td></tr>';
+        var imgSrc = (p.img && p.img.startsWith('http')) ? p.img : '../' + p.img;
+        return '<tr><td><img src="'+imgSrc+'" alt="'+p.name+'"></td><td>'+p.id+'</td><td><strong>'+p.name+'</strong></td><td><span class="badge badge-published">'+p.tag+'</span></td><td>'+priceDisplay+'</td><td><div class="actions"><button class="btn-sm btn-edit" onclick="editProduct(\''+p.id+'\')">Edit</button><button class="btn-sm btn-delete" onclick="deleteProduct(\''+p.id+'\')">Del</button></div></td></tr>';
     }).join('');
 }
 
