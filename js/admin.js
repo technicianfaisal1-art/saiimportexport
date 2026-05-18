@@ -85,7 +85,7 @@ async function loadProducts() {
         } else if (p.specs && p.specs.price) {
             priceDisplay = p.specs.price;
         }
-        var imgSrc = (p.img && p.img.startsWith('http')) ? p.img : '../' + p.img;
+        var imgSrc = (p.img && p.img.startsWith('http')) ? p.img : '/' + (p.img || '');
         return '<tr><td><img src="'+imgSrc+'" alt="'+p.name+'"></td><td>'+p.id+'</td><td><strong>'+p.name+'</strong></td><td><span class="badge badge-published">'+p.tag+'</span></td><td>'+priceDisplay+'</td><td><div class="actions"><button class="btn-sm btn-edit" onclick="editProduct(\''+p.id+'\')">Edit</button><button class="btn-sm btn-delete" onclick="deleteProduct(\''+p.id+'\')">Del</button></div></td></tr>';
     }).join('');
 }
@@ -323,7 +323,8 @@ async function loadBlogPosts() {
         var d = new Date(p.created_at).toLocaleDateString('en-IN', { day:'2-digit', month:'short', year:'numeric' });
         var badge = p.published ? 'badge-published' : 'badge-draft';
         var label = p.published ? 'Live' : 'Draft';
-        return '<tr><td><strong>'+p.title+'</strong></td><td style="font-size:0.72rem;color:#888">'+p.slug+'</td><td><span class="badge '+badge+'">'+label+'</span></td><td>'+d+'</td><td><div class="actions"><button class="btn-sm btn-edit" onclick="editBlog('+p.id+')">Edit</button><button class="btn-sm btn-delete" onclick="deleteBlog('+p.id+')">Del</button></div></td></tr>';
+        var imgSrc = (p.cover_img && p.cover_img.startsWith('http')) ? p.cover_img : '/' + (p.cover_img || 'images/hero_bg.webp');
+        return '<tr><td><img src="'+imgSrc+'" alt="'+p.title+'" style="width:50px;height:50px;object-fit:cover;border-radius:6px;"></td><td><strong>'+p.title+'</strong></td><td style="font-size:0.72rem;color:#888">'+p.slug+'</td><td><span class="badge '+badge+'">'+label+'</span></td><td>'+d+'</td><td><div class="actions"><button class="btn-sm btn-edit" onclick="editBlog('+p.id+')">Edit</button><button class="btn-sm btn-delete" onclick="deleteBlog('+p.id+')">Del</button></div></td></tr>';
     }).join('');
 }
 
