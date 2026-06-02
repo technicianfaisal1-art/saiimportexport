@@ -23,13 +23,14 @@ const PRODUCT_DETAILS_STATIC = {
       loadPerContainer: '24 MT (20ft FCL)'
     },
     specTable: [
-      { param: 'Variety', value: '1121 Basmati (White/Golden Sella, Steam)' },
-      { param: 'Grain Length', value: '8.30mm - 8.40mm' },
-      { param: 'Broken %', value: '1% Max' },
+      { param: 'Average Grain Length', value: '8.30mm - 8.40mm' },
       { param: 'Moisture', value: '12.5% Max' },
-      { param: 'Elongation', value: 'Over 20mm upon cooking' },
-      { param: 'Packing', value: '10kg / 25kg / 50kg (BOPP, Jute, Non-Woven)' },
-      { param: 'Certifications', value: 'FSSAI, APEDA, ISO 22000' }
+      { param: 'Broken Grains', value: '1% Max' },
+      { param: 'Discolor/Damage', value: '1% Max' },
+      { param: 'Foreign Matter', value: 'Nil' },
+      { param: 'Sortex', value: '100% Clean' },
+      { param: 'Variants', value: 'White Sella, Golden Sella, Steam' },
+      { param: 'Packaging', value: '10kg / 25kg / 50kg' }
     ],
     packaging: [
       { type: 'BOPP Bags', sizes: '10kg / 25kg / 50kg', icon: '📦', desc: 'Durable, moisture-resistant BOPP bags' },
@@ -67,13 +68,14 @@ const PRODUCT_DETAILS_STATIC = {
       loadPerContainer: '24 MT (20ft FCL)'
     },
     specTable: [
-      { param: 'Variety', value: '1509 Basmati (White/Golden Sella, Steam)' },
-      { param: 'Grain Length', value: '8.20mm - 8.40mm' },
-      { param: 'Broken %', value: '1% - 2% Max' },
+      { param: 'Average Grain Length', value: '8.20mm - 8.40mm' },
       { param: 'Moisture', value: '12.5% Max' },
-      { param: 'Elongation', value: 'Excellent expansion' },
-      { param: 'Packing', value: '10kg / 25kg / 50kg (PP, BOPP, Jute)' },
-      { param: 'Certifications', value: 'FSSAI, APEDA, ISO 22000' }
+      { param: 'Broken Grains', value: '1% - 2% Max' },
+      { param: 'Discolor/Damage', value: '1% Max' },
+      { param: 'Foreign Matter', value: 'Nil' },
+      { param: 'Sortex', value: '100% Clean' },
+      { param: 'Variants', value: 'White Sella, Golden Sella, Steam' },
+      { param: 'Packaging', value: '10kg / 25kg / 50kg' }
     ],
     packaging: [
       { type: 'PP Bags', sizes: '25kg / 50kg', icon: '📦', desc: 'Standard woven polypropylene bags' },
@@ -111,13 +113,14 @@ const PRODUCT_DETAILS_STATIC = {
       loadPerContainer: '24 MT (20ft FCL)'
     },
     specTable: [
-      { param: 'Variety', value: 'Sona Masoori (Steam)' },
-      { param: 'Grain Length', value: 'Medium Grain' },
-      { param: 'Broken %', value: '5% Max' },
+      { param: 'Grain Type', value: 'Medium Grain' },
       { param: 'Moisture', value: '13% Max' },
-      { param: 'Elongation', value: 'Normal' },
-      { param: 'Packing', value: '10kg / 25kg / 50kg (Non-Woven, PP, BOPP)' },
-      { param: 'Certifications', value: 'FSSAI, APEDA, ISO 22000' }
+      { param: 'Broken Grains', value: '5% Max' },
+      { param: 'Discolor/Damage', value: '1% Max' },
+      { param: 'Foreign Matter', value: 'Nil' },
+      { param: 'Sortex', value: '100% Clean' },
+      { param: 'Variant', value: 'Steam' },
+      { param: 'Packaging', value: '10kg / 25kg / 50kg' }
     ],
     packaging: [
       { type: 'Non-Woven Bags', sizes: '10kg / 20kg', icon: '🛍️', desc: 'Popular choice for retail Sona Masoori' },
@@ -155,13 +158,14 @@ const PRODUCT_DETAILS_STATIC = {
       loadPerContainer: '24 MT (20ft FCL)'
     },
     specTable: [
-      { param: 'Variety', value: 'Pusa Basmati (Steam)' },
-      { param: 'Grain Length', value: '7.40mm - 7.50mm' },
-      { param: 'Broken %', value: '1% Max' },
+      { param: 'Average Grain Length', value: '7.40mm - 7.50mm' },
       { param: 'Moisture', value: '12.5% Max' },
-      { param: 'Elongation', value: 'High' },
-      { param: 'Packing', value: '10kg / 25kg / 50kg (Jute, BOPP, PP)' },
-      { param: 'Certifications', value: 'FSSAI, APEDA, ISO 22000' }
+      { param: 'Broken Grains', value: '1% Max' },
+      { param: 'Discolor/Damage', value: '1% Max' },
+      { param: 'Foreign Matter', value: 'Nil' },
+      { param: 'Aroma', value: 'Strong, Natural' },
+      { param: 'Variant', value: 'Steam' },
+      { param: 'Packaging', value: '10kg / 25kg / 50kg' }
     ],
     packaging: [
       { type: 'Jute Bags', sizes: '25kg / 50kg', icon: '🧶', desc: 'Traditional packaging to preserve aroma' },
@@ -199,13 +203,14 @@ const PRODUCT_DETAILS_STATIC = {
       loadPerContainer: '24 MT (20ft FCL)'
     },
     specTable: [
-      { param: 'Variety', value: '1401 Basmati (Steam)' },
-      { param: 'Grain Length', value: '7.70mm - 7.90mm' },
-      { param: 'Broken %', value: '1% Max' },
+      { param: 'Average Grain Length', value: '7.70mm - 7.90mm' },
       { param: 'Moisture', value: '12.5% Max' },
-      { param: 'Elongation', value: 'High' },
-      { param: 'Packing', value: '10kg / 25kg / 50kg (BOPP, Jute, PP)' },
-      { param: 'Certifications', value: 'FSSAI, APEDA, ISO 22000' }
+      { param: 'Broken Grains', value: '1% Max' },
+      { param: 'Discolor/Damage', value: '1% Max' },
+      { param: 'Foreign Matter', value: 'Nil' },
+      { param: 'Sortex', value: '100% Clean' },
+      { param: 'Variant', value: 'Steam' },
+      { param: 'Packaging', value: '10kg / 25kg / 50kg' }
     ],
     packaging: [
       { type: 'BOPP Bags', sizes: '10kg / 25kg', icon: '🛍️', desc: 'Premium retail-ready packaging' },
@@ -243,13 +248,14 @@ const PRODUCT_DETAILS_STATIC = {
       loadPerContainer: '26 MT (20ft FCL)'
     },
     specTable: [
-      { param: 'Variety', value: 'Swarna Raw White' },
-      { param: 'Grain Length', value: 'Short Grain' },
-      { param: 'Broken %', value: '5% Max' },
+      { param: 'Grain Type', value: 'Short Grain' },
       { param: 'Moisture', value: '14% Max' },
-      { param: 'Elongation', value: 'Normal' },
-      { param: 'Packing', value: '25kg / 50kg (PP, Non-Woven)' },
-      { param: 'Certifications', value: 'FSSAI, APEDA, ISO 22000' }
+      { param: 'Broken Grains', value: '5% Max' },
+      { param: 'Discolor/Damage', value: '2% Max' },
+      { param: 'Foreign Matter', value: '0.5% Max' },
+      { param: 'Variant', value: 'Raw (White)' },
+      { param: 'Sortex', value: '100% Clean' },
+      { param: 'Packaging', value: '25kg / 50kg' }
     ],
     packaging: [
       { type: 'PP Bags', sizes: '25kg / 50kg', icon: '📦', desc: 'Standard woven polypropylene bags' },
@@ -287,13 +293,14 @@ const PRODUCT_DETAILS_STATIC = {
       loadPerContainer: '26 MT (20ft FCL)'
     },
     specTable: [
-      { param: 'Variety', value: 'IR 64 Parboiled' },
-      { param: 'Grain Length', value: '5.80mm - 6.20mm' },
-      { param: 'Broken %', value: '5% Max' },
+      { param: 'Average Grain Length', value: '5.80mm - 6.20mm' },
       { param: 'Moisture', value: '14% Max' },
-      { param: 'Elongation', value: 'Normal' },
-      { param: 'Packing', value: '25kg / 50kg (PP, BOPP)' },
-      { param: 'Certifications', value: 'FSSAI, APEDA, ISO 22000' }
+      { param: 'Broken Grains', value: '5% Max' },
+      { param: 'Discolor/Damage', value: '1% - 2% Max' },
+      { param: 'Foreign Matter', value: '0.5% Max' },
+      { param: 'Variant', value: 'Parboiled (Golden/Yellowish)' },
+      { param: 'Sortex', value: '100% Clean' },
+      { param: 'Packaging', value: '25kg / 50kg' }
     ],
     packaging: [
       { type: 'PP Bags', sizes: '25kg / 50kg', icon: '📦', desc: 'Standard woven polypropylene for bulk export' },
@@ -331,13 +338,14 @@ const PRODUCT_DETAILS_STATIC = {
       loadPerContainer: '24 MT (20ft FCL)'
     },
     specTable: [
-      { param: 'Variety', value: 'Jeerakasala (Kaima)' },
-      { param: 'Grain Length', value: 'Short Grain' },
-      { param: 'Broken %', value: '2% Max' },
+      { param: 'Grain Type', value: 'Short Grain' },
       { param: 'Moisture', value: '13% Max' },
-      { param: 'Elongation', value: 'Low (Flavor absorbing)' },
-      { param: 'Packing', value: '5kg / 10kg / 25kg (Non-Woven, Jute, PP)' },
-      { param: 'Certifications', value: 'FSSAI, APEDA, ISO 22000' }
+      { param: 'Broken Grains', value: '2% Max' },
+      { param: 'Aroma', value: 'Strong, Distinctive' },
+      { param: 'Foreign Matter', value: 'Nil' },
+      { param: 'Sortex', value: '100% Clean' },
+      { param: 'Variant', value: 'Raw / Aged' },
+      { param: 'Packaging', value: '5kg / 10kg / 25kg' }
     ],
     packaging: [
       { type: 'Non-Woven Bags', sizes: '5kg / 10kg', icon: '🛍️', desc: 'Premium retail packaging' },
@@ -375,13 +383,14 @@ const PRODUCT_DETAILS_STATIC = {
       loadPerContainer: '26 MT (20ft FCL)'
     },
     specTable: [
-      { param: 'Variety', value: '100% Broken Raw White' },
-      { param: 'Grain Length', value: '100% Broken' },
-      { param: 'Broken %', value: '100%' },
+      { param: 'Broken Percentage', value: '100%' },
       { param: 'Moisture', value: '14% Max' },
-      { param: 'Elongation', value: 'N/A' },
-      { param: 'Packing', value: '25kg / 50kg (PP, Jumbo)' },
-      { param: 'Certifications', value: 'FSSAI, APEDA, ISO 22000' }
+      { param: 'Discolor/Damage', value: '1% Max' },
+      { param: 'Foreign Matter', value: '0.5% Max' },
+      { param: 'Sortex', value: '100% Clean (Silky)' },
+      { param: 'Variant', value: 'Raw White' },
+      { param: 'Chalky Grains', value: '5% Max' },
+      { param: 'Packaging', value: '25kg / 50kg' }
     ],
     packaging: [
       { type: 'PP Bags', sizes: '25kg / 50kg', icon: '📦', desc: 'Standard woven polypropylene bags' },
@@ -419,13 +428,14 @@ const PRODUCT_DETAILS_STATIC = {
       loadPerContainer: '24 MT (20ft FCL)'
     },
     specTable: [
-      { param: 'Variety', value: 'Sona Masoori Raw (Aged 12-18 Months)' },
-      { param: 'Grain Length', value: 'Medium Grain' },
-      { param: 'Broken %', value: '5% Max' },
+      { param: 'Grain Type', value: 'Medium Grain' },
+      { param: 'Age', value: '12 - 18 Months' },
       { param: 'Moisture', value: '12% Max' },
-      { param: 'Elongation', value: 'High Expansion' },
-      { param: 'Packing', value: '10kg / 25kg / 50kg (Non-Woven, PP, Jute)' },
-      { param: 'Certifications', value: 'FSSAI, APEDA, ISO 22000' }
+      { param: 'Broken Grains', value: '5% Max' },
+      { param: 'Discolor/Damage', value: '1% Max' },
+      { param: 'Foreign Matter', value: 'Nil' },
+      { param: 'Variant', value: 'Raw (Aged)' },
+      { param: 'Packaging', value: '10kg / 25kg / 50kg' }
     ],
     packaging: [
       { type: 'Non-Woven Bags', sizes: '10kg / 25kg', icon: '🛍️', desc: 'Premium retail bags denoting "Old Crop"' },

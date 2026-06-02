@@ -301,7 +301,7 @@ function showProductSkeletons(count = 6) {
 // ==================== RENDER PRODUCTS ====================
 const productContainer = document.getElementById('product-container');
 
-async function renderProducts(filterCategory = 'all') {
+async function renderProducts() {
   if (!productContainer) return;
 
   // 1. Determine initial product count from static data for skeleton count
@@ -361,19 +361,8 @@ async function renderProducts(filterCategory = 'all') {
     }
   }
 
-  // Filter products based on selected tab
-  if (filterCategory !== 'all') {
-    productsToRender = productsToRender.filter(p => p.tag === filterCategory);
-  }
-
   // 5. Replace skeleton with real cards, staggered one-by-one
   productContainer.innerHTML = '';
-  
-  if (productsToRender.length === 0) {
-    productContainer.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--gray-text);">No products found in this category.</p>';
-    return;
-  }
-  
   productsToRender.forEach((p, index) => {
     const card = document.createElement('div');
     const imageSrc = p.img || PRODUCT_IMAGES[p.id];
@@ -403,32 +392,6 @@ async function renderProducts(filterCategory = 'all') {
     }, index * 60);
   });
 }
-
-// Add event listeners for product tabs
-document.addEventListener('DOMContentLoaded', () => {
-    const tabBtns = document.querySelectorAll('.tab-btn');
-    tabBtns.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            // Update active state
-            tabBtns.forEach(b => {
-                b.classList.remove('active');
-                b.style.background = 'transparent';
-                b.style.color = 'var(--primary-color)';
-                b.style.border = '1px solid var(--primary-color)';
-            });
-            
-            const targetBtn = e.target;
-            targetBtn.classList.add('active');
-            targetBtn.style.background = 'var(--primary-color)';
-            targetBtn.style.color = 'white';
-            targetBtn.style.border = 'none';
-            
-            // Re-render products
-            const category = targetBtn.getAttribute('data-category');
-            renderProducts(category);
-        });
-    });
-});
 
 
 // ==================== NAVBAR SCROLL ====================

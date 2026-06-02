@@ -73,13 +73,6 @@
   // Hero
   document.getElementById('pdp-image').src = p.image;
   document.getElementById('pdp-image').alt = p.name;
-  
-  const cookedImgEl = document.getElementById('pdp-cooked-image');
-  if (cookedImgEl) {
-    cookedImgEl.src = p.cookedImage || 'https://via.placeholder.com/600x400?text=Cooked+Rice+Photo';
-    cookedImgEl.alt = p.name + ' Cooked';
-  }
-
   document.getElementById('pdp-tag').textContent = p.tag;
   document.getElementById('pdp-name').textContent = p.name;
   document.getElementById('pdp-tagline').textContent = p.heroTagline || '';
