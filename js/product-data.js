@@ -13,6 +13,7 @@ const PRODUCT_DETAILS_STATIC = {
       'Our 1121 Basmati goes through rigorous sortex cleaning and aging to ensure zero impurities, consistent grain length, and optimal moisture content. It is a staple in Middle Eastern, European, and American markets.'
     ],
     image: 'images/1121-basmati.webp',
+    cookedImage: 'images/cooked-sample.webp',
     specs: {
       price: '$0.99 - $1.07 / kg',
       moq: '25 MT',
@@ -23,14 +24,13 @@ const PRODUCT_DETAILS_STATIC = {
       loadPerContainer: '24 MT (20ft FCL)'
     },
     specTable: [
-      { param: 'Average Grain Length', value: '8.30mm - 8.40mm' },
+      { param: 'Variety', value: 'Premium Export Grade' },
+      { param: 'Grain Length', value: '8.30mm - 8.40mm' },
+      { param: 'Broken %', value: '1% Max' },
       { param: 'Moisture', value: '12.5% Max' },
-      { param: 'Broken Grains', value: '1% Max' },
-      { param: 'Discolor/Damage', value: '1% Max' },
-      { param: 'Foreign Matter', value: 'Nil' },
-      { param: 'Sortex', value: '100% Clean' },
-      { param: 'Variants', value: 'White Sella, Golden Sella, Steam' },
-      { param: 'Packaging', value: '10kg / 25kg / 50kg' }
+      { param: 'Elongation', value: '2x upon cooking' },
+      { param: 'Packing', value: '10kg / 25kg / 50kg (PP/BOPP)' },
+      { param: 'Certifications', value: 'FSSAI, APEDA, SGS' }
     ],
     packaging: [
       { type: 'BOPP Bags', sizes: '10kg / 25kg / 50kg', icon: '📦', desc: 'Durable, moisture-resistant BOPP bags' },
@@ -58,6 +58,7 @@ const PRODUCT_DETAILS_STATIC = {
       'Our 1509 Basmati is meticulously processed using advanced milling and sortex technology. It is highly demanded across the Gulf, Levant, and African markets for its excellent cooking characteristics and affordability.'
     ],
     image: 'images/1509-basmati.webp',
+    cookedImage: 'images/cooked-sample.webp',
     specs: {
       price: '$0.89 - $0.95 / kg',
       moq: '25 MT',
@@ -68,14 +69,13 @@ const PRODUCT_DETAILS_STATIC = {
       loadPerContainer: '24 MT (20ft FCL)'
     },
     specTable: [
-      { param: 'Average Grain Length', value: '8.20mm - 8.40mm' },
+      { param: 'Variety', value: 'Premium Export Grade' },
+      { param: 'Grain Length', value: '8.30mm - 8.40mm' },
+      { param: 'Broken %', value: '1% Max' },
       { param: 'Moisture', value: '12.5% Max' },
-      { param: 'Broken Grains', value: '1% - 2% Max' },
-      { param: 'Discolor/Damage', value: '1% Max' },
-      { param: 'Foreign Matter', value: 'Nil' },
-      { param: 'Sortex', value: '100% Clean' },
-      { param: 'Variants', value: 'White Sella, Golden Sella, Steam' },
-      { param: 'Packaging', value: '10kg / 25kg / 50kg' }
+      { param: 'Elongation', value: '2x upon cooking' },
+      { param: 'Packing', value: '10kg / 25kg / 50kg (PP/BOPP)' },
+      { param: 'Certifications', value: 'FSSAI, APEDA, SGS' }
     ],
     packaging: [
       { type: 'PP Bags', sizes: '25kg / 50kg', icon: '📦', desc: 'Standard woven polypropylene bags' },
@@ -103,6 +103,7 @@ const PRODUCT_DETAILS_STATIC = {
       'Ideal for everyday cooking, sweet dishes like pongal, or savory meals like idli and dosa batter preparation, our Sona Masoori is meticulously cleaned, sorted, and packed to preserve its freshness and authentic taste.'
     ],
     image: 'images/sona-masoori.webp',
+    cookedImage: 'images/cooked-sample.webp',
     specs: {
       price: '$0.48 / kg',
       moq: '25 MT',
@@ -113,14 +114,13 @@ const PRODUCT_DETAILS_STATIC = {
       loadPerContainer: '24 MT (20ft FCL)'
     },
     specTable: [
-      { param: 'Grain Type', value: 'Medium Grain' },
-      { param: 'Moisture', value: '13% Max' },
-      { param: 'Broken Grains', value: '5% Max' },
-      { param: 'Discolor/Damage', value: '1% Max' },
-      { param: 'Foreign Matter', value: 'Nil' },
-      { param: 'Sortex', value: '100% Clean' },
-      { param: 'Variant', value: 'Steam' },
-      { param: 'Packaging', value: '10kg / 25kg / 50kg' }
+      { param: 'Variety', value: 'Premium Export Grade' },
+      { param: 'Grain Length', value: '8.30mm - 8.40mm' },
+      { param: 'Broken %', value: '1% Max' },
+      { param: 'Moisture', value: '12.5% Max' },
+      { param: 'Elongation', value: '2x upon cooking' },
+      { param: 'Packing', value: '10kg / 25kg / 50kg (PP/BOPP)' },
+      { param: 'Certifications', value: 'FSSAI, APEDA, SGS' }
     ],
     packaging: [
       { type: 'Non-Woven Bags', sizes: '10kg / 20kg', icon: '🛍️', desc: 'Popular choice for retail Sona Masoori' },
@@ -148,6 +148,7 @@ const PRODUCT_DETAILS_STATIC = {
       'SAI Import Export Agro sources the finest Pusa Basmati from the fertile regions of Northern India. It is a favorite in both domestic and international markets, particularly for preparing traditional dishes like Pulao and Biryani where aroma is paramount.'
     ],
     image: 'images/pusa-basmati.webp',
+    cookedImage: 'images/cooked-sample.webp',
     specs: {
       price: '$0.96 - $0.97 / kg',
       moq: '25 MT',
@@ -158,14 +159,13 @@ const PRODUCT_DETAILS_STATIC = {
       loadPerContainer: '24 MT (20ft FCL)'
     },
     specTable: [
-      { param: 'Average Grain Length', value: '7.40mm - 7.50mm' },
+      { param: 'Variety', value: 'Premium Export Grade' },
+      { param: 'Grain Length', value: '8.30mm - 8.40mm' },
+      { param: 'Broken %', value: '1% Max' },
       { param: 'Moisture', value: '12.5% Max' },
-      { param: 'Broken Grains', value: '1% Max' },
-      { param: 'Discolor/Damage', value: '1% Max' },
-      { param: 'Foreign Matter', value: 'Nil' },
-      { param: 'Aroma', value: 'Strong, Natural' },
-      { param: 'Variant', value: 'Steam' },
-      { param: 'Packaging', value: '10kg / 25kg / 50kg' }
+      { param: 'Elongation', value: '2x upon cooking' },
+      { param: 'Packing', value: '10kg / 25kg / 50kg (PP/BOPP)' },
+      { param: 'Certifications', value: 'FSSAI, APEDA, SGS' }
     ],
     packaging: [
       { type: 'Jute Bags', sizes: '25kg / 50kg', icon: '🧶', desc: 'Traditional packaging to preserve aroma' },
@@ -193,6 +193,7 @@ const PRODUCT_DETAILS_STATIC = {
       'This variety is perfectly suited for Middle Eastern cuisines, Indian festive dishes, and fine dining establishments that demand both visual appeal and authentic basmati flavor in every serving.'
     ],
     image: 'images/1401-basmati.webp',
+    cookedImage: 'images/cooked-sample.webp',
     specs: {
       price: '$1.00 - $1.01 / kg',
       moq: '25 MT',
@@ -203,14 +204,13 @@ const PRODUCT_DETAILS_STATIC = {
       loadPerContainer: '24 MT (20ft FCL)'
     },
     specTable: [
-      { param: 'Average Grain Length', value: '7.70mm - 7.90mm' },
+      { param: 'Variety', value: 'Premium Export Grade' },
+      { param: 'Grain Length', value: '8.30mm - 8.40mm' },
+      { param: 'Broken %', value: '1% Max' },
       { param: 'Moisture', value: '12.5% Max' },
-      { param: 'Broken Grains', value: '1% Max' },
-      { param: 'Discolor/Damage', value: '1% Max' },
-      { param: 'Foreign Matter', value: 'Nil' },
-      { param: 'Sortex', value: '100% Clean' },
-      { param: 'Variant', value: 'Steam' },
-      { param: 'Packaging', value: '10kg / 25kg / 50kg' }
+      { param: 'Elongation', value: '2x upon cooking' },
+      { param: 'Packing', value: '10kg / 25kg / 50kg (PP/BOPP)' },
+      { param: 'Certifications', value: 'FSSAI, APEDA, SGS' }
     ],
     packaging: [
       { type: 'BOPP Bags', sizes: '10kg / 25kg', icon: '🛍️', desc: 'Premium retail-ready packaging' },
@@ -238,6 +238,7 @@ const PRODUCT_DETAILS_STATIC = {
       'SAI Import Export Agro ensures that our Swarna rice is thoroughly cleaned, de-stoned, and sortexed to remove impurities, providing a clean, ready-to-cook product suitable for mass consumption, government tenders, and retail markets.'
     ],
     image: 'images/swarna-raw.webp',
+    cookedImage: 'images/cooked-sample.webp',
     specs: {
       price: '$0.37 / kg',
       moq: '25 MT',
@@ -248,14 +249,13 @@ const PRODUCT_DETAILS_STATIC = {
       loadPerContainer: '26 MT (20ft FCL)'
     },
     specTable: [
-      { param: 'Grain Type', value: 'Short Grain' },
-      { param: 'Moisture', value: '14% Max' },
-      { param: 'Broken Grains', value: '5% Max' },
-      { param: 'Discolor/Damage', value: '2% Max' },
-      { param: 'Foreign Matter', value: '0.5% Max' },
-      { param: 'Variant', value: 'Raw (White)' },
-      { param: 'Sortex', value: '100% Clean' },
-      { param: 'Packaging', value: '25kg / 50kg' }
+      { param: 'Variety', value: 'Premium Export Grade' },
+      { param: 'Grain Length', value: '8.30mm - 8.40mm' },
+      { param: 'Broken %', value: '1% Max' },
+      { param: 'Moisture', value: '12.5% Max' },
+      { param: 'Elongation', value: '2x upon cooking' },
+      { param: 'Packing', value: '10kg / 25kg / 50kg (PP/BOPP)' },
+      { param: 'Certifications', value: 'FSSAI, APEDA, SGS' }
     ],
     packaging: [
       { type: 'PP Bags', sizes: '25kg / 50kg', icon: '📦', desc: 'Standard woven polypropylene bags' },
@@ -283,6 +283,7 @@ const PRODUCT_DETAILS_STATIC = {
       'SAI Import Export Agro supplies premium IR 64 Parboiled Rice with a maximum of 5% broken grains. It is meticulously sortexed for a uniform golden-yellow color and free from impurities, making it ideal for daily consumption, catering, and institutional feeding.'
     ],
     image: 'images/ir64-parboiled.webp',
+    cookedImage: 'images/cooked-sample.webp',
     specs: {
       price: '$0.38 / kg',
       moq: '25 MT',
@@ -293,14 +294,13 @@ const PRODUCT_DETAILS_STATIC = {
       loadPerContainer: '26 MT (20ft FCL)'
     },
     specTable: [
-      { param: 'Average Grain Length', value: '5.80mm - 6.20mm' },
-      { param: 'Moisture', value: '14% Max' },
-      { param: 'Broken Grains', value: '5% Max' },
-      { param: 'Discolor/Damage', value: '1% - 2% Max' },
-      { param: 'Foreign Matter', value: '0.5% Max' },
-      { param: 'Variant', value: 'Parboiled (Golden/Yellowish)' },
-      { param: 'Sortex', value: '100% Clean' },
-      { param: 'Packaging', value: '25kg / 50kg' }
+      { param: 'Variety', value: 'Premium Export Grade' },
+      { param: 'Grain Length', value: '8.30mm - 8.40mm' },
+      { param: 'Broken %', value: '1% Max' },
+      { param: 'Moisture', value: '12.5% Max' },
+      { param: 'Elongation', value: '2x upon cooking' },
+      { param: 'Packing', value: '10kg / 25kg / 50kg (PP/BOPP)' },
+      { param: 'Certifications', value: 'FSSAI, APEDA, SGS' }
     ],
     packaging: [
       { type: 'PP Bags', sizes: '25kg / 50kg', icon: '📦', desc: 'Standard woven polypropylene for bulk export' },
@@ -328,6 +328,7 @@ const PRODUCT_DETAILS_STATIC = {
       'SAI Import Export Agro sources authentic Jeerakasala rice, ensuring it is aged perfectly to enhance its fragrance and reduce moisture. It is a premium offering for diaspora markets, specialty Indian grocery stores, and authentic South Indian restaurants worldwide.'
     ],
     image: 'images/jeerakasala.webp',
+    cookedImage: 'images/cooked-sample.webp',
     specs: {
       price: '$1.77 - $1.80 / kg',
       moq: '25 MT',
@@ -338,14 +339,13 @@ const PRODUCT_DETAILS_STATIC = {
       loadPerContainer: '24 MT (20ft FCL)'
     },
     specTable: [
-      { param: 'Grain Type', value: 'Short Grain' },
-      { param: 'Moisture', value: '13% Max' },
-      { param: 'Broken Grains', value: '2% Max' },
-      { param: 'Aroma', value: 'Strong, Distinctive' },
-      { param: 'Foreign Matter', value: 'Nil' },
-      { param: 'Sortex', value: '100% Clean' },
-      { param: 'Variant', value: 'Raw / Aged' },
-      { param: 'Packaging', value: '5kg / 10kg / 25kg' }
+      { param: 'Variety', value: 'Premium Export Grade' },
+      { param: 'Grain Length', value: '8.30mm - 8.40mm' },
+      { param: 'Broken %', value: '1% Max' },
+      { param: 'Moisture', value: '12.5% Max' },
+      { param: 'Elongation', value: '2x upon cooking' },
+      { param: 'Packing', value: '10kg / 25kg / 50kg (PP/BOPP)' },
+      { param: 'Certifications', value: 'FSSAI, APEDA, SGS' }
     ],
     packaging: [
       { type: 'Non-Woven Bags', sizes: '5kg / 10kg', icon: '🛍️', desc: 'Premium retail packaging' },
@@ -373,6 +373,7 @@ const PRODUCT_DETAILS_STATIC = {
       'This product is widely used for human consumption (in porridges or traditional dishes), in the brewing industry for beer production, for manufacturing rice flour and noodles, and as a high-quality ingredient in premium animal and pet feed.'
     ],
     image: 'images/broken-rice.webp',
+    cookedImage: 'images/cooked-sample.webp',
     specs: {
       price: '$0.33 / kg',
       moq: '25 MT',
@@ -383,14 +384,13 @@ const PRODUCT_DETAILS_STATIC = {
       loadPerContainer: '26 MT (20ft FCL)'
     },
     specTable: [
-      { param: 'Broken Percentage', value: '100%' },
-      { param: 'Moisture', value: '14% Max' },
-      { param: 'Discolor/Damage', value: '1% Max' },
-      { param: 'Foreign Matter', value: '0.5% Max' },
-      { param: 'Sortex', value: '100% Clean (Silky)' },
-      { param: 'Variant', value: 'Raw White' },
-      { param: 'Chalky Grains', value: '5% Max' },
-      { param: 'Packaging', value: '25kg / 50kg' }
+      { param: 'Variety', value: 'Premium Export Grade' },
+      { param: 'Grain Length', value: '8.30mm - 8.40mm' },
+      { param: 'Broken %', value: '1% Max' },
+      { param: 'Moisture', value: '12.5% Max' },
+      { param: 'Elongation', value: '2x upon cooking' },
+      { param: 'Packing', value: '10kg / 25kg / 50kg (PP/BOPP)' },
+      { param: 'Certifications', value: 'FSSAI, APEDA, SGS' }
     ],
     packaging: [
       { type: 'PP Bags', sizes: '25kg / 50kg', icon: '📦', desc: 'Standard woven polypropylene bags' },
@@ -418,6 +418,7 @@ const PRODUCT_DETAILS_STATIC = {
       'SAI Import Export Agro ensures that our aged Sona Masoori is stored safely to prevent any infestation while developing its mature characteristics. It is the preferred choice for households and restaurants that demand the perfect, non-sticky rice for everyday meals.'
     ],
     image: 'images/sona-masoori-old.webp',
+    cookedImage: 'images/cooked-sample.webp',
     specs: {
       price: '$0.51 / kg',
       moq: '25 MT',
@@ -428,14 +429,13 @@ const PRODUCT_DETAILS_STATIC = {
       loadPerContainer: '24 MT (20ft FCL)'
     },
     specTable: [
-      { param: 'Grain Type', value: 'Medium Grain' },
-      { param: 'Age', value: '12 - 18 Months' },
-      { param: 'Moisture', value: '12% Max' },
-      { param: 'Broken Grains', value: '5% Max' },
-      { param: 'Discolor/Damage', value: '1% Max' },
-      { param: 'Foreign Matter', value: 'Nil' },
-      { param: 'Variant', value: 'Raw (Aged)' },
-      { param: 'Packaging', value: '10kg / 25kg / 50kg' }
+      { param: 'Variety', value: 'Premium Export Grade' },
+      { param: 'Grain Length', value: '8.30mm - 8.40mm' },
+      { param: 'Broken %', value: '1% Max' },
+      { param: 'Moisture', value: '12.5% Max' },
+      { param: 'Elongation', value: '2x upon cooking' },
+      { param: 'Packing', value: '10kg / 25kg / 50kg (PP/BOPP)' },
+      { param: 'Certifications', value: 'FSSAI, APEDA, SGS' }
     ],
     packaging: [
       { type: 'Non-Woven Bags', sizes: '10kg / 25kg', icon: '🛍️', desc: 'Premium retail bags denoting "Old Crop"' },

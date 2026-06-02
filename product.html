@@ -88,9 +88,15 @@
     <!-- PRODUCT HERO -->
     <section class="pdp-hero">
         <div class="pdp-hero-grid">
-            <div class="pdp-hero-img">
-                <img id="pdp-image" src="" alt="" loading="eager">
-                <span class="pdp-tag" id="pdp-tag"></span>
+            <div class="pdp-hero-img" style="display:flex; flex-direction:column; gap:15px;">
+                <div style="position:relative;">
+                    <img id="pdp-image" src="" alt="" loading="eager" style="width:100%; border-radius:12px; box-shadow:0 10px 30px rgba(0,0,0,0.1);">
+                    <span class="pdp-tag" id="pdp-tag"></span>
+                </div>
+                <div id="pdp-cooked-wrapper" style="display:none;">
+                    <h4 style="margin-bottom:8px; color:var(--green-dark); font-size:1.1rem;">Cooked Rice Profile</h4>
+                    <img id="pdp-cooked-image" src="" alt="Cooked Rice" loading="lazy" style="width:100%; border-radius:12px; box-shadow:0 5px 15px rgba(0,0,0,0.1); border: 2px solid #e8f0ea;">
+                </div>
             </div>
             <div class="pdp-hero-info">
                 <h1 id="pdp-name"></h1>

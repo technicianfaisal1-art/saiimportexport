@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Shipment | SAI Import Export Agro</title>
+    <meta name="description" content="Track your rice shipment from SAI Import Export Agro using your Bill of Lading (BL) number.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css?v=20">
+    <link rel="icon" type="image/png" href="images/sai_logo_icon.webp">
+    <link rel="apple-touch-icon" href="images/sai_logo_icon_192.png">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2d5a3c">
+    <style>
+        .tracking-header { padding: 8rem 5% 4rem; background: var(--green-dark); color: #fff; text-align: center; }
+        .tracking-header h1 { font-family: var(--serif); font-size: 3rem; margin-bottom: 0.5rem; color: var(--orange); }
+        .tracking-header p { opacity: 0.8; max-width: 600px; margin: 0 auto; }
+        
+        .tracking-container { max-width: 600px; margin: -2rem auto 4rem; padding: 0 5%; position: relative; z-index: 10; }
+        .tracking-box { background: #fff; border-radius: var(--radius-lg); box-shadow: 0 10px 30px rgba(0,0,0,0.05); padding: 3rem 2rem; text-align: center; }
+        
+        .tracking-input { width: 100%; padding: 15px 20px; font-size: 1.1rem; border: 2px solid #eaeaea; border-radius: 8px; margin-bottom: 20px; outline: none; transition: border-color 0.3s; }
+        .tracking-input:focus { border-color: var(--green); }
+        
+        .tracking-result { margin-top: 20px; display: none; padding: 20px; background: #f9f9f9; border-radius: 8px; text-align: left; border: 1px solid #eaeaea; }
+        .tracking-result h3 { color: var(--green-dark); margin-bottom: 10px; }
+        .tracking-result p { margin-bottom: 5px; color: var(--text-mid); }
+        .tracking-result strong { color: var(--text-dark); }
+        
+        .loader { border: 4px solid #f3f3f3; border-top: 4px solid var(--green); border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; margin: 20px auto; display: none; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+    <!-- TOP BAR -->
+    <div class="top-bar" id="top-bar">
+        <div class="top-bar-inner">
+            <div class="top-bar-left">
+                <span>✉ saiimportexportagro0@gmail.com</span>
+                <span class="top-bar-divider">|</span>
+                <span>📞 +91 85958 27184</span>
+            </div>
+            <div class="top-bar-right">
+                <span>✅ APEDA &amp; FSSAI Certified</span>
+                <span class="top-bar-divider">|</span>
+                <span>🚢 FOB / CIF / CFR</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <a href="index.html" class="logo">
+            <img src="images/sai_logo_icon.webp" alt="SAI Import Export Agro Icon" class="nav-logo-img">
+        </a>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="index.html#products">Products</a></li>
+            <li><a href="calculator.html">Calculator</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+        <a href="contact.html" class="btn-cta nav-cta">Enquire Now →</a>
+        <button class="hamburger" id="hamburger" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+    </nav>
+
+    <header class="tracking-header">
+        <h1>Track Your Shipment</h1>
+        <p>Enter your Bill of Lading (BL) number to check the real-time status of your cargo.</p>
+    </header>
+
+    <div class="tracking-container">
+        <div class="tracking-box">
+            <h2 style="margin-bottom: 20px; color: var(--green-dark);">Enter BL Number</h2>
+            <input type="text" id="bl-input" class="tracking-input" placeholder="e.g. BL-123456789">
+            <button class="btn-cta btn-full" onclick="trackShipment()" style="font-size: 1.2rem; padding: 15px;">Track Cargo</button>
+            
+            <div class="loader" id="tracking-loader"></div>
+            
+            <div class="tracking-result" id="tracking-result">
+                <h3>Shipment Status: In Transit 🚢</h3>
+                <p><strong>BL Number:</strong> <span id="res-bl"></span></p>
+                <p><strong>Origin:</strong> Nhava Sheva, India</p>
+                <p><strong>Destination:</strong> Jebel Ali, UAE</p>
+                <p><strong>Estimated Arrival:</strong> 5 Days</p>
+                <p style="margin-top: 15px; font-size: 0.9rem; color: #888;">Note: This is a demo tracking result. Actual integration requires shipping line API.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="index.html" class="logo footer-logo"><img src="images/sai_logo_full.webp" alt="SAI Import Export Agro Logo" class="footer-logo-img"></a>
+                <p>India's trusted exporter of premium rice. Quality, trust, and reliability.</p>
+            </div>
+            <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About Us</a></li><li><a href="index.html#products">Products</a></li><li><a href="calculator.html">Calculator</a></li><li><a href="faq.html">FAQ</a></li></ul></div>
+            <div class="footer-col"><h4>Products</h4><ul id="footer-products-list"></ul></div>
+            <div class="footer-col"><h4>Legal</h4><ul><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="terms-conditions.html">Terms & Conditions</a></li></ul></div>
+            <div class="footer-col"><h4>Contact</h4><ul><li><a href="mailto:saiimportexportagro0@gmail.com">saiimportexportagro0@gmail.com</a></li><li><a href="tel:+918595827184">+91 85958 27184</a></li><li><a href="https://maps.app.goo.gl/KnddEXYAAbevAWq36" target="_blank" rel="noopener noreferrer">Indirapuram, Ghaziabad</a></li></ul>
+            </div>
+        </div>
+        <div class="footer-bottom"><p>&copy; 2026 SAI Import Export Agro. All rights reserved.</p></div>
+    </footer>
+
+    <script src="js/script.js?v=20"></script>
+    <script>
+        function trackShipment() {
+            const bl = document.getElementById('bl-input').value;
+            if(!bl) {
+                alert('Please enter a BL number');
+                return;
+            }
+            document.getElementById('tracking-result').style.display = 'none';
+            document.getElementById('tracking-loader').style.display = 'block';
+            
+            setTimeout(() => {
+                document.getElementById('tracking-loader').style.display = 'none';
+                document.getElementById('res-bl').textContent = bl;
+                document.getElementById('tracking-result').style.display = 'block';
+            }, 1500);
+        }
+    </script>
+</body>
+</html>

@@ -79,10 +79,26 @@ document.addEventListener('DOMContentLoaded', async () => {
   buildFooterProducts();
   loadFormEmail();
   loadGeminiSetting();
+  loadFeatureSettings();
   initTestimonials();
 });
 
 let IS_GEMINI_CONFIGURED = false;
+
+// Check if features like Calculator are enabled
+async function loadFeatureSettings() {
+  if (typeof saiDB === 'undefined') return;
+  try {
+    const { data } = await saiDB.from('site_settings').select('value').eq('key', 'features').single();
+    if (data && data.value) {
+      if (data.value.calculator_enabled === false) {
+        document.querySelectorAll('a[href="calculator.html"]').forEach(el => el.style.display = 'none');
+      }
+    }
+  } catch (e) {
+    console.warn("Failed to load feature settings", e);
+  }
+}
 
 // Check if Gemini API is configured in Supabase
 async function loadGeminiSetting() {
@@ -300,6 +316,14 @@ function showProductSkeletons(count = 6) {
 
 // ==================== RENDER PRODUCTS ====================
 const productContainer = document.getElementById('product-container');
+let currentProductFilter = 'basmati';
+
+window.filterProducts = function(type) {
+  currentProductFilter = type;
+  document.getElementById('tab-basmati').className = type === 'basmati' ? 'btn-cta active' : 'btn-outline-dark';
+  document.getElementById('tab-nonbasmati').className = type === 'non-basmati' ? 'btn-cta active' : 'btn-outline-dark';
+  renderProducts();
+};
 
 async function renderProducts() {
   if (!productContainer) return;
@@ -361,7 +385,17 @@ async function renderProducts() {
     }
   }
 
-  // 5. Replace skeleton with real cards, staggered one-by-one
+  // 5. Filter products based on active tab
+  productsToRender = productsToRender.filter(p => {
+    const isNonBasmati = p.tag.toLowerCase().includes('non-basmati') || p.name.toLowerCase().includes('sona') || p.name.toLowerCase().includes('swarna') || p.name.toLowerCase().includes('jeerakasala') || p.name.toLowerCase().includes('ir64');
+    if (currentProductFilter === 'basmati') {
+      return !isNonBasmati;
+    } else {
+      return isNonBasmati;
+    }
+  });
+
+  // 6. Replace skeleton with real cards, staggered one-by-one
   productContainer.innerHTML = '';
   productsToRender.forEach((p, index) => {
     const card = document.createElement('div');
@@ -380,7 +414,7 @@ async function renderProducts() {
         <p>${p.desc}</p>
         <div class="product-actions" style="display:flex;gap:0.5rem;">
           <a href="product.html?id=${p.id}" class="product-btn" style="text-align:center;flex:1;">View Details →</a>
-          <button class="product-btn" style="background:var(--orange);flex:1;" onclick="openCheckout('${p.id}')">Get Quote</button>
+          <button class="product-btn" style="background:var(--orange);flex:1;" onclick="openFreeSampleWA('${p.name}')">Free Sample</button>
         </div>
       </div>`;
 
@@ -470,6 +504,14 @@ if (modal) {
     modalTitle.textContent = selectedProduct.name;
     modal.classList.add('active');
   };
+  
+  window.openFreeSampleWA = function(productName) {
+    const msg = `Hello SAI IMPORT EXPORT AGRO Team,\n\nI want to book FREE rice sample for my company.\n\nProduct Required: ${productName}\nCompany Name: \nCountry: \nWhatsApp Number: \nMonthly Import Quantity: \n\nPlease send PI + Specification Sheet.\n\nThank you.`;
+    const encodedMsg = encodeURIComponent(msg);
+    // You can replace the number below with the actual company WhatsApp number if needed.
+    window.open(`https://wa.me/918595827184?text=${encodedMsg}`, '_blank');
+  };
+
   [modalClose, cancelBtn].forEach(b => b.addEventListener('click', () => modal.classList.remove('active')));
   modal.addEventListener('click', e => { if (e.target === modal) modal.classList.remove('active'); });
 

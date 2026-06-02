@@ -78,6 +78,15 @@
   document.getElementById('pdp-tagline').textContent = p.heroTagline || '';
   document.getElementById('pdp-short-desc').textContent = p.shortDesc;
 
+  // Cooked Rice Image
+  if (p.cookedImage) {
+    const cookedImgEl = document.getElementById('pdp-cooked-image');
+    if (cookedImgEl) {
+      cookedImgEl.src = p.cookedImage;
+      document.getElementById('pdp-cooked-wrapper').style.display = 'block';
+    }
+  }
+
   // Price & Variants
   if (p.specs && p.specs.variants && p.specs.variants.length > 0) {
     // Hide default simple price

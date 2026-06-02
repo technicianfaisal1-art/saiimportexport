@@ -38,7 +38,7 @@ document.getElementById('logout-btn').addEventListener('click', async function()
 
 async function showDashboard() {
     loginWrapper.style.display = 'none'; dashboard.style.display = 'flex';
-    loadProducts(); loadEnquiries(); loadBlogPosts(); loadHeroSettings(); loadTelegramSettings(); loadGeminiSettings(); loadFormEmailSettings();
+    loadProducts(); loadEnquiries(); loadBlogPosts(); loadHeroSettings(); loadTelegramSettings(); loadGeminiSettings(); loadFormEmailSettings(); loadFeatureSettings();
 }
 
 // ==================== TABS & SIDEBAR ====================
@@ -446,6 +446,26 @@ async function saveFormEmailSettings() {
     var data = { email: email };
     var r = await saiDB.from('site_settings').upsert({ key: 'form_email', value: data, updated_at: new Date().toISOString() });
     if (r.error) alert('Error: ' + r.error.message); else alert('✅ Form email updated! All forms will now send inquiries to: ' + email);
+}
+
+}
+
+// ==================== FEATURE SETTINGS ====================
+async function loadFeatureSettings() {
+    var r = await saiDB.from('site_settings').select('*').eq('key', 'features').single();
+    if (r.data && r.data.value) {
+        document.getElementById('feature_calculator').checked = r.data.value.calculator_enabled !== false;
+    } else {
+        document.getElementById('feature_calculator').checked = true; // Default true
+    }
+}
+
+async function saveFeatureSettings() {
+    var data = {
+        calculator_enabled: document.getElementById('feature_calculator').checked
+    };
+    var r = await saiDB.from('site_settings').upsert({ key: 'features', value: data, updated_at: new Date().toISOString() });
+    if (r.error) alert('Error: ' + r.error.message); else alert('✅ Feature settings saved! Changes will reflect on the website immediately.');
 }
 
 // Hero image upload
