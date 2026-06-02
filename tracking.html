@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Your Order | SAI Import Export Agro</title>
+    <meta name="description" content="Track your container and shipment from SAI Import Export Agro. Get real-time updates on your rice export orders to UAE and GCC.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css?v=19">
+    <link rel="icon" type="image/png" href="images/sai_logo_icon.webp">
+    <link rel="apple-touch-icon" href="images/sai_logo_icon.webp">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2d5a3c">
+    <style>
+        /* PAGE HEADER */
+        .page-header { padding: 8rem 5% 4rem; background: var(--green-dark); color: #fff; text-align: center; position: relative; overflow: hidden; }
+        .page-header::before { content: ''; position: absolute; inset: 0; background: url('images/hero_bg.webp') center/cover no-repeat; opacity: 0.12; }
+        .page-header > * { position: relative; z-index: 1; }
+        .page-header h1 { font-family: var(--serif); font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 1rem; }
+        .page-header p { font-size: 1.1rem; opacity: 0.85; max-width: 600px; margin: auto; }
+
+        /* TRACKING SECTION */
+        .tracking-section { padding: 6rem 5%; background: var(--off-white); min-height: 50vh; }
+        .tracking-container { max-width: 800px; margin: 0 auto; background: #fff; border-radius: 16px; padding: 3rem; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .tracking-form { display: flex; flex-direction: column; gap: 1.5rem; }
+        .tracking-form .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+        .tracking-form label { font-weight: 600; color: var(--green-dark); }
+        .tracking-form input { padding: 1rem; border: 1px solid #ccc; border-radius: 8px; font-size: 1rem; outline: none; transition: border-color 0.3s; }
+        .tracking-form input:focus { border-color: var(--green); }
+        .tracking-form button { padding: 1rem; font-size: 1.1rem; border-radius: 8px; cursor: pointer; border: none; background: var(--orange); color: #fff; font-weight: 600; transition: background 0.3s; }
+        .tracking-form button:hover { background: #d66520; }
+
+        /* TIMELINE (Hidden by default) */
+        .tracking-result { margin-top: 3rem; display: none; }
+        .tracking-result.active { display: block; animation: fadeIn 0.5s ease; }
+        .tracking-result h3 { color: var(--green-dark); border-bottom: 2px solid var(--green-light); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+
+        .timeline { position: relative; padding-left: 2rem; border-left: 3px solid var(--green-light); }
+        .timeline-item { position: relative; margin-bottom: 2rem; }
+        .timeline-item::before { content: ''; position: absolute; left: -2.6rem; top: 0.2rem; width: 16px; height: 16px; background: var(--green); border-radius: 50%; box-shadow: 0 0 0 4px #fff; }
+        .timeline-item.pending::before { background: #ccc; }
+        .timeline-date { font-size: 0.85rem; color: var(--text-mid); font-weight: 600; margin-bottom: 0.2rem; }
+        .timeline-title { font-size: 1.1rem; font-weight: 700; color: var(--green-dark); margin-bottom: 0.3rem; }
+        .timeline-desc { font-size: 0.95rem; color: var(--text-mid); line-height: 1.5; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        @media (max-width: 600px) {
+            .tracking-container { padding: 2rem 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOP BAR -->
+    <div class="top-bar" id="top-bar">
+        <div class="top-bar-inner">
+            <div class="top-bar-left">
+                <span>📧 saiimportexportagro0@gmail.com</span>
+                <span class="top-bar-divider">|</span>
+                <span>📞 +91 85958 27184</span>
+            </div>
+            <div class="top-bar-right">
+                <span>🌾 APEDA & FSSAI Certified</span>
+                <span class="top-bar-divider">|</span>
+                <div id="google_translate_element"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NAVBAR -->
+    <header class="navbar" id="navbar">
+        <div class="nav-inner">
+            <a href="index.html" class="logo">
+                <img src="images/sai_logo_full.webp" alt="SAI Import Export Agro" class="logo-img">
+            </a>
+            <div class="hamburger" id="hamburger">
+                <span></span><span></span><span></span>
+            </div>
+            <nav class="nav-links" id="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="index.html#products">Products</a>
+                <a href="certifications.html">Certifications</a>
+                <a href="contact.html">Contact</a>
+                <a href="tracking.html" class="active">Track Order</a>
+                <a href="index.html#quote" class="btn-nav">Get a Quote</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- PAGE HEADER -->
+    <header class="page-header">
+        <h1>Track Your Container</h1>
+        <p>Enter your Bill of Lading (BL) number, Booking Reference, or Container Number to get real-time status updates.</p>
+    </header>
+
+    <!-- TRACKING SECTION -->
+    <section class="tracking-section">
+        <div class="tracking-container">
+            <form class="tracking-form" id="tracking-form">
+                <div class="form-group">
+                    <label for="tracking-no">Tracking / Container Number</label>
+                    <input type="text" id="tracking-no" placeholder="e.g. MSCU1234567 or BL98765432" required>
+                </div>
+                <button type="submit" id="track-btn">Track Shipment</button>
+            </form>
+
+            <div class="tracking-result" id="tracking-result">
+                <h3>Shipment Status: <span style="color:var(--orange);">In Transit</span></h3>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">Oct 12, 2026 - 14:30</div>
+                        <div class="timeline-title">Container Loaded on Vessel</div>
+                        <div class="timeline-desc">Vessel: MSC GULSUN. Port of Loading: Mundra Port, India.</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">Oct 10, 2026 - 09:15</div>
+                        <div class="timeline-title">Customs Clearance Completed</div>
+                        <div class="timeline-desc">Export customs clearance processed successfully. Cargo cleared for loading.</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">Oct 08, 2026 - 16:45</div>
+                        <div class="timeline-title">Container Stuffing Completed</div>
+                        <div class="timeline-desc">Rice bags successfully loaded and container sealed at mill. Seal No: IN123456.</div>
+                    </div>
+                    <div class="timeline-item pending">
+                        <div class="timeline-date">Expected: Oct 18, 2026</div>
+                        <div class="timeline-title">Arrival at Destination Port</div>
+                        <div class="timeline-desc">Jebel Ali Port, Dubai, UAE.</div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 2rem; padding: 1rem; background: #e8f5e9; border-radius: 8px; font-size: 0.9rem; color: #2e7d32;">
+                    <strong>Note:</strong> This is a demonstration of the tracking feature. Live tracking API integration will be activated upon your first shipment.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="index.html" class="logo footer-logo">
+                    <img src="images/sai_logo_full.webp" alt="SAI Import Export Agro" class="footer-logo-img">
+                </a>
+                <p>India's trusted exporter of premium rice. Quality, trust, and reliability.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="index.html#products">Products</a></li>
+                    <li><a href="certifications.html">Certifications</a></li>
+                    <li><a href="tracking.html">Track Order</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Certifications</h4>
+                <ul>
+                    <li><a href="certifications.html">APEDA Registered</a></li>
+                    <li><a href="certifications.html">FSSAI Certified</a></li>
+                    <li><a href="certifications.html">ISO 22000</a></li>
+                    <li><a href="certifications.html">HACCP Compliant</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="terms-conditions.html">Terms & Conditions</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="mailto:saiimportexportagro0@gmail.com">saiimportexportagro0@gmail.com</a></li>
+                    <li><a href="tel:+918595827184">+91 85958 27184</a></li>
+                    <li><a href="https://maps.app.goo.gl/KnddEXYAAbevAWq36" target="_blank" rel="noopener noreferrer">Indirapuram, Ghaziabad</a></li>
+                </ul>
+                <h4 style="margin-top:20px;">Follow Us</h4>
+                <ul class="social-links" style="display: flex; gap: 10px; list-style: none; padding: 0;">
+                    <li><a href="https://www.linkedin.com/in/ram-sahare-954730281?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer"><img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn" style="width:24px; height:24px; filter: brightness(0) invert(1);"></a></li>
+                    <li><a href="https://www.facebook.com/share/1B9CGADABd/" target="_blank" rel="noopener noreferrer"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" style="width:24px; height:24px; filter: brightness(0) invert(1);"></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 SAI Import Export Agro. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js?v=19"></script>
+    <script>
+        document.getElementById('tracking-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('track-btn');
+            btn.textContent = 'Searching...';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                document.getElementById('tracking-result').classList.add('active');
+                btn.textContent = 'Track Another Shipment';
+                btn.disabled = false;
+            }, 1000);
+        });
+
+        // Hamburger menu
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('nav-links');
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('mobile-open');
+        });
+    </script>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({ pageLanguage: 'en', includedLanguages: '', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js');</script>
+    
+    <!-- FLOATING WHATSAPP BUTTON -->
+    <a href="https://wa.me/918595827184?text=Hello,%20I%20am%20from%20UAE.%20I%20would%20like%20to%20request%20a%20free%20sample%20of%20Basmati/Non-Basmati%20rice." target="_blank" rel="noopener noreferrer" class="floating-whatsapp" aria-label="Chat on WhatsApp">
+        <svg viewBox="0 0 24 24" width="35" height="35" fill="white">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z" />
+        </svg>
+    </a>
+</body>
+</html>
