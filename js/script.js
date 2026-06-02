@@ -1370,15 +1370,16 @@ document.addEventListener('DOMContentLoaded', function() {
       var varieties = Array.from(document.querySelectorAll('input[name="sample_variety"]:checked')).map(cb => cb.value).join(', ');
       var name = document.getElementById('sample_name').value.trim();
       var country = document.getElementById('sample_country').value.trim();
+      var phone = document.getElementById('sample_phone').value.trim();
       var reqs = document.getElementById('sample_req').value.trim();
       
-      if (!category || !name || !country) {
+      if (!category || !name || !country || !phone || !reqs) {
           alert('Please fill in all required fields.');
           return;
       }
       
       var catValue = category.value;
-      var messageBody = `Free Sample Request:\nCategory: ${catValue}\nVarieties: ${varieties || 'None selected'}\nCountry: ${country}\nReqs: ${reqs}`;
+      var messageBody = `Free Sample Request:\nCategory: ${catValue}\nVarieties: ${varieties || 'None selected'}\nCountry: ${country}\nPhone: ${phone}\nQty: ${reqs}`;
       
       var submitBtn = document.getElementById('sample-submit-btn');
       if (submitBtn) {
@@ -1391,7 +1392,8 @@ document.addEventListener('DOMContentLoaded', function() {
         if (typeof saiDB !== 'undefined') {
           saiDB.from('enquiries').insert({ 
               name: name, 
-              email: country, // storing country in email field if no country field exists
+              email: country, 
+              phone: phone,
               message: messageBody, 
               status: 'new' 
           }).then(function() { console.log('Sample lead saved'); })
@@ -1400,25 +1402,23 @@ document.addEventListener('DOMContentLoaded', function() {
       } catch(e) { console.error('Supabase error:', e); }
 
       // 2. Telegram Alert (using basic fetch if token exists in env/settings)
-      // Since we don't have token hardcoded, we will just simulate it or call existing function
       try {
          if (typeof sendTelegramNotification === 'function') {
-             sendTelegramNotification(name, country, 'Free Sample', messageBody);
+             sendTelegramNotification(name, country, phone, messageBody);
          } else {
-             // Fallback minimal implementation if they add token later
              const tgBot = window.TG_BOT_TOKEN || ''; 
              const tgChatId = window.TG_CHAT_ID || '';
              if (tgBot && tgChatId) {
                  fetch(`https://api.telegram.org/bot${tgBot}/sendMessage`, {
                      method: 'POST',
                      headers: {'Content-Type': 'application/json'},
-                     body: JSON.stringify({ chat_id: tgChatId, text: `New Lead: ${name} from ${country}\n${messageBody}` })
+                     body: JSON.stringify({ chat_id: tgChatId, text: `New Lead: ${name} from ${country}\nPhone: ${phone}\n${messageBody}` })
                  }).catch(err => console.error(err));
              }
          }
       } catch(e) {}
 
-      // 3. FormSubmit Email (using standard fetch to their endpoint if setup)
+      // 3. FormSubmit Email
       try {
           fetch('https://formsubmit.co/ajax/saiimportexportagro0@gmail.com', {
               method: 'POST',
@@ -1428,11 +1428,12 @@ document.addEventListener('DOMContentLoaded', function() {
               },
               body: JSON.stringify({
                   _subject: 'New Free Sample Request - ' + name,
-                  Name: name,
+                  Company_Name: name,
                   Country: country,
+                  WhatsApp_Number: phone,
                   Category: catValue,
                   Varieties: varieties || 'None',
-                  Requirements: reqs
+                  Monthly_Quantity: reqs
               })
           }).catch(err => console.error(err));
       } catch(e) {}
@@ -1442,14 +1443,21 @@ document.addEventListener('DOMContentLoaded', function() {
           sampleForm.style.display = 'none';
           document.getElementById('sample-success').style.display = 'block';
           
-          var waText = `Hello SAI IMPORT EXPORT AGRO Team,\n\nI want to book FREE rice sample for my company.\n\nProduct Required: ${catValue}\nVarieties: ${varieties || 'Any'}\nCompany/Name: ${name}\nCountry: ${country}\nRequirements: ${reqs}\n\nPlease send PI + Specification Sheet.\n\nThank you.`;
+          var autoReplyEl = document.getElementById('success-auto-reply');
+          if (autoReplyEl) {
+              autoReplyEl.innerText = `Thank you ${name} from ${country}!\n\nYour free rice sample request is confirmed.\n\nOur export team will contact you on WhatsApp within 2 hours with:\n1. Sample tracking details\n2. Basmati & Non-Basmati specification sheet + FOB price list\n3. FSSAI, APEDA, Phytosanitary certificate copies\n\nSAI IMPORT EXPORT AGRO\nExporting Premium Quality Rice to 15+ Countries`;
+          }
+          
+          var waText = `Hello SAI IMPORT EXPORT AGRO Team,\n\nI want to book FREE rice sample for my company.\n\nProduct Required: ${catValue}\nCompany Name: ${name}\nCountry: ${country}\nWhatsApp Number: ${phone}\nMonthly Import Quantity: ${reqs}\n\nPlease send PI + Specification Sheet.\n\nThank you.`;
           var waUrl = `https://wa.me/918595827184?text=${encodeURIComponent(waText)}`;
           
           var waBtn = document.getElementById('sample-wa-btn');
-          waBtn.onclick = function() {
-              window.open(waUrl, '_blank');
-              closeSampleModal();
-          };
+          if(waBtn) {
+              waBtn.onclick = function() {
+                  window.open(waUrl, '_blank');
+                  closeSampleModal();
+              };
+          }
       }, 1000);
     });
   }

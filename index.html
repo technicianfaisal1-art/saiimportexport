@@ -147,8 +147,8 @@
             <h1 id="hero-head" style="font-size:clamp(2.5rem, 5vw, 4rem);">Basmati & Non-Basmati Rice Exporter to<br><em>UAE, Dubai & Abu Dhabi</em></h1>
             <p class="hero-desc" id="hero-sub">Premium 1121 Sella, 1509, Ponni, Seeraga Samba. FSSAI + APEDA Certified. Free Sample Worldwide. Direct Mill to Jebel Ali Port.</p>
             <div class="hero-actions" style="display: flex; flex-direction: column; align-items: flex-start; gap: 1rem;">
-                <button class="btn-cta" style="font-size: 1.3rem; padding: 16px 32px; background: #25D366; color: white; border-color: #25D366; box-shadow: 0 4px 15px rgba(37,211,102,0.4);" onclick="openSampleModal()">Get Free Sample</button>
-                <div style="display: flex; gap: 1rem;">
+                <button class="btn-cta" style="font-size: 1.6rem; padding: 20px 40px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; background: #25D366; color: white; border-color: #25D366; box-shadow: 0 8px 25px rgba(37,211,102,0.5);" onclick="openSampleModal()">Book Free Sample Here</button>
+                <div style="display: flex; gap: 1rem; margin-top: 0.5rem;">
                     <a href="#products" class="btn-outline" style="background: rgba(255,255,255,0.1); color: white; border-color: white;">Explore Products</a>
                 </div>
             </div>
@@ -635,9 +635,10 @@ www.saiimportexportagro.com">
 
                 <div>
                     <label style="font-weight: 600; font-size: 0.95rem; margin-bottom: 0.5rem; display: block;">3. Your Details *</label>
-                    <input type="text" id="sample_name" placeholder="Your Name / Company" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin-bottom: 0.5rem; font-family: 'Inter', sans-serif;">
+                    <input type="text" id="sample_name" placeholder="Company Name" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin-bottom: 0.5rem; font-family: 'Inter', sans-serif;">
                     <input type="text" id="sample_country" placeholder="Country (e.g. UAE)" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin-bottom: 0.5rem; font-family: 'Inter', sans-serif;">
-                    <textarea id="sample_req" placeholder="Specific Requirements / Monthly Qty (Optional)" rows="2" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-family: 'Inter', sans-serif; resize: none;"></textarea>
+                    <input type="text" id="sample_phone" placeholder="WhatsApp Number" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin-bottom: 0.5rem; font-family: 'Inter', sans-serif;">
+                    <input type="text" id="sample_req" placeholder="Monthly Import Quantity (e.g. 20 MT)" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-family: 'Inter', sans-serif;">
                 </div>
 
                 <div style="display: flex; gap: 1rem; margin-top: 0.5rem;">
@@ -646,12 +647,13 @@ www.saiimportexportagro.com">
                 </div>
             </form>
 
-            <div id="sample-success" style="display: none; text-align: center; padding: 2rem 0;">
-                <div style="font-size: 3rem; margin-bottom: 1rem;">✅</div>
-                <h3 style="color: var(--green-dark); margin-bottom: 0.5rem;">Request Sent!</h3>
-                <p style="color: var(--text-light); font-size: 0.95rem; margin-bottom: 1.5rem;">We have received your sample request. Do you want to connect with us on WhatsApp right now with these details?</p>
-                <button id="sample-wa-btn" class="btn-cta btn-full" style="background-color: #25D366; border-color: #25D366;">Yes, Chat on WhatsApp</button>
-                <button class="btn-outline-dark btn-full" onclick="closeSampleModal()" style="margin-top: 1rem;">No, maybe later</button>
+            <div id="sample-success" style="display: none; padding: 1.5rem 0; font-size: 0.95rem; line-height: 1.6;">
+                <h3 style="color: var(--green-dark); margin-bottom: 1rem; text-align: center;">Request Confirmed!</h3>
+                <div style="background: #f9f9f9; padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem; border: 1px solid #eee;">
+                    <p id="success-auto-reply" style="white-space: pre-line; color: var(--text-dark); margin: 0;"></p>
+                </div>
+                <button id="sample-wa-btn" class="btn-cta btn-full" style="background-color: #25D366; border-color: #25D366;">Chat on WhatsApp Now</button>
+                <button class="btn-outline-dark btn-full" onclick="closeSampleModal()" style="margin-top: 1rem;">Close</button>
             </div>
         </div>
     </div>
