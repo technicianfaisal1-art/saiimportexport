@@ -1340,7 +1340,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
       // 2. Send Telegram Alert (non-blocking)
       try {
-        sendTelegramNotification(name, email, '', 'Full Catalog Download', 'User downloaded the brochure.');
+        if (typeof sendTelegramNotification === 'function') {
+           sendTelegramNotification(name, email, '', 'Full Catalog Download', 'User downloaded the brochure.');
+        }
       } catch(e) { console.error('Telegram error:', e); }
 
       // 3. Download PDF
@@ -1357,5 +1359,130 @@ document.addEventListener('DOMContentLoaded', function() {
       }, 2000);
     });
   }
+
+  // ================= FREE SAMPLE MODAL LOGIC =================
+  var sampleForm = document.getElementById('sample-form');
+  if (sampleForm) {
+    sampleForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      var category = document.querySelector('input[name="sample_category"]:checked');
+      var varieties = Array.from(document.querySelectorAll('input[name="sample_variety"]:checked')).map(cb => cb.value).join(', ');
+      var name = document.getElementById('sample_name').value.trim();
+      var country = document.getElementById('sample_country').value.trim();
+      var reqs = document.getElementById('sample_req').value.trim();
+      
+      if (!category || !name || !country) {
+          alert('Please fill in all required fields.');
+          return;
+      }
+      
+      var catValue = category.value;
+      var messageBody = `Free Sample Request:\nCategory: ${catValue}\nVarieties: ${varieties || 'None selected'}\nCountry: ${country}\nReqs: ${reqs}`;
+      
+      var submitBtn = document.getElementById('sample-submit-btn');
+      if (submitBtn) {
+          submitBtn.textContent = 'Sending...';
+          submitBtn.disabled = true;
+      }
+
+      // 1. Save Lead to Supabase
+      try {
+        if (typeof saiDB !== 'undefined') {
+          saiDB.from('enquiries').insert({ 
+              name: name, 
+              email: country, // storing country in email field if no country field exists
+              message: messageBody, 
+              status: 'new' 
+          }).then(function() { console.log('Sample lead saved'); })
+            .catch(function(err) { console.error('Sample lead error:', err); });
+        }
+      } catch(e) { console.error('Supabase error:', e); }
+
+      // 2. Telegram Alert (using basic fetch if token exists in env/settings)
+      // Since we don't have token hardcoded, we will just simulate it or call existing function
+      try {
+         if (typeof sendTelegramNotification === 'function') {
+             sendTelegramNotification(name, country, 'Free Sample', messageBody);
+         } else {
+             // Fallback minimal implementation if they add token later
+             const tgBot = window.TG_BOT_TOKEN || ''; 
+             const tgChatId = window.TG_CHAT_ID || '';
+             if (tgBot && tgChatId) {
+                 fetch(`https://api.telegram.org/bot${tgBot}/sendMessage`, {
+                     method: 'POST',
+                     headers: {'Content-Type': 'application/json'},
+                     body: JSON.stringify({ chat_id: tgChatId, text: `New Lead: ${name} from ${country}\n${messageBody}` })
+                 }).catch(err => console.error(err));
+             }
+         }
+      } catch(e) {}
+
+      // 3. FormSubmit Email (using standard fetch to their endpoint if setup)
+      try {
+          fetch('https://formsubmit.co/ajax/saiimportexportagro0@gmail.com', {
+              method: 'POST',
+              headers: { 
+                  'Content-Type': 'application/json',
+                  'Accept': 'application/json'
+              },
+              body: JSON.stringify({
+                  _subject: 'New Free Sample Request - ' + name,
+                  Name: name,
+                  Country: country,
+                  Category: catValue,
+                  Varieties: varieties || 'None',
+                  Requirements: reqs
+              })
+          }).catch(err => console.error(err));
+      } catch(e) {}
+
+      // Show Success UI and Prepare WhatsApp Handoff
+      setTimeout(function() {
+          sampleForm.style.display = 'none';
+          document.getElementById('sample-success').style.display = 'block';
+          
+          var waText = `Hello SAI IMPORT EXPORT AGRO Team,\n\nI want to book FREE rice sample for my company.\n\nProduct Required: ${catValue}\nVarieties: ${varieties || 'Any'}\nCompany/Name: ${name}\nCountry: ${country}\nRequirements: ${reqs}\n\nPlease send PI + Specification Sheet.\n\nThank you.`;
+          var waUrl = `https://wa.me/918595827184?text=${encodeURIComponent(waText)}`;
+          
+          var waBtn = document.getElementById('sample-wa-btn');
+          waBtn.onclick = function() {
+              window.open(waUrl, '_blank');
+              closeSampleModal();
+          };
+      }, 1000);
+    });
+  }
 });
+
+// Modal Helpers
+function openSampleModal() {
+    var modal = document.getElementById('sample-modal');
+    if (modal) {
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Prevent scrolling
+        
+        // Reset state if opened again
+        var form = document.getElementById('sample-form');
+        if (form) {
+            form.reset();
+            form.style.display = 'flex';
+        }
+        var successUI = document.getElementById('sample-success');
+        if (successUI) successUI.style.display = 'none';
+        var submitBtn = document.getElementById('sample-submit-btn');
+        if (submitBtn) {
+            submitBtn.textContent = 'Request Sample';
+            submitBtn.disabled = false;
+        }
+    }
+}
+
+function closeSampleModal() {
+    var modal = document.getElementById('sample-modal');
+    if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+}
 
