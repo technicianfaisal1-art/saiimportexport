@@ -1060,8 +1060,24 @@ function attachFormNotifications(formEl) {
   });
 }
 
-attachFormNotifications(document.getElementById('contact-form'));
-attachFormNotifications(document.getElementById('contact-page-form'));
+function setupQuoteWhatsAppForm(formId, suffix) {
+  const qForm = document.getElementById(formId);
+  if (qForm) {
+    qForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const country = document.getElementById('q_country' + suffix).value;
+      const port = document.getElementById('q_port' + suffix).value;
+      const variety = document.getElementById('q_variety' + suffix).value;
+      const qty = document.getElementById('q_qty' + suffix).value;
+      const msg = `Hello SAI IMPORT EXPORT AGRO Team,\n\nI want to Request a Quote.\n\nCountry: ${country}\nPort: ${port}\nVariety: ${variety}\nQuantity: ${qty} MT\n\nPlease share FOB price. Thank you.`;
+      const encodedMsg = encodeURIComponent(msg);
+      window.open(`https://wa.me/918595827184?text=${encodedMsg}`, '_blank');
+    });
+  }
+}
+
+setupQuoteWhatsAppForm('quote-whatsapp-form', '');
+setupQuoteWhatsAppForm('quote-whatsapp-form-contact', '_c');
 attachFormNotifications(document.getElementById('quote-form'));
 
 // ==================== ACTIVE NAV LINK ====================

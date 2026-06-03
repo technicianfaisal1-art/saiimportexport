@@ -250,46 +250,16 @@
             <h3 class="section-subheading-lg">Request a Quote</h3>
             <div id="contact-page-status" class="form-status"></div>
             
-            <form id="contact-page-form" action="https://formsubmit.co/faisal.khan1192519@gmail.com" method="POST">
-                <input type="hidden" name="_subject" value="🍚 New SAI Import Export Agro Inquiry from Contact Page">
-                <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_next" value="https://saiimportexport.vercel.app/thank-you.html">
-                <input type="hidden" name="_template" value="table">
-                <input type="hidden" name="_autoresponse" value="Thank you for contacting SAI Import Export Agro! 🍚&#10;&#10;We have received your inquiry and our export team is reviewing your requirements.&#10;&#10;You will receive a detailed Proforma Invoice (PI) within 24 hours with:&#10;✅ FOB / CIF pricing for your destination port&#10;✅ Product specifications & packaging options&#10;✅ Payment terms (LC / T/T)&#10;✅ Estimated shipping schedule&#10;&#10;📧 saiimportexportagro0@gmail.com&#10;📞 +91 85958 27184 (WhatsApp)&#10;&#10;Warm regards,&#10;SAI Import Export Agro Export Team">
-                <input type="text" name="_honey" class="hidden" title="honeypot" placeholder="honeypot">
-                
+            <form id="quote-whatsapp-form-contact">
                 <div class="form-row">
-                    <div class="form-group">
-                        <label for="fname">First Name</label>
-                        <input type="text" id="fname" name="First Name" class="form-control" required placeholder="John">
-                    </div>
-                    <div class="form-group">
-                        <label for="lname">Last Name</label>
-                        <input type="text" id="lname" name="Last Name" class="form-control" required placeholder="Doe">
-                    </div>
+                    <div class="form-group"><label for="q_country_c">Country</label><input type="text" id="q_country_c" class="form-control" required placeholder="e.g. UAE"></div>
+                    <div class="form-group"><label for="q_port_c">Destination Port</label><input type="text" id="q_port_c" class="form-control" required placeholder="e.g. Jebel Ali"></div>
                 </div>
-                
-                <div class="form-group">
-                    <label for="company">Company Name</label>
-                    <input type="text" id="company" name="Company" class="form-control" placeholder="Optional">
+                <div class="form-row">
+                    <div class="form-group"><label for="q_variety_c">Rice Variety</label><input type="text" id="q_variety_c" class="form-control" required placeholder="e.g. 1121 Basmati"></div>
+                    <div class="form-group"><label for="q_qty_c">Quantity in MT</label><input type="number" id="q_qty_c" class="form-control" required placeholder="e.g. 25"></div>
                 </div>
-                
-                <div class="form-group">
-                    <label for="email">Business Email</label>
-                    <input type="email" id="email" name="Email" class="form-control" required placeholder="john@company.com">
-                </div>
-                
-                <div class="form-group">
-                    <label>Products of Interest</label>
-                    <div id="product-interest-container"></div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="message">Detailed Requirements</label>
-                    <textarea id="message" name="Requirements" class="form-control" required placeholder="Please provide quantity, destination port (e.g. Jebel Ali, Dubai), and packaging preferences..."></textarea>
-                </div>
-                
-                <button type="submit" id="contact-page-btn" class="btn-cta btn-full">Submit Inquiry →</button>
+                <button type="submit" class="btn-cta btn-full">Send Inquiry on WhatsApp →</button>
             </form>
         </div>
     </section>
