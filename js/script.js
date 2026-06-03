@@ -410,7 +410,7 @@ async function renderProducts() {
       <div class="product-card-body">
         <span class="product-tag">${p.tag}</span>
         <h3><a href="product.html?id=${p.id}" style="color:inherit;">${p.name}</a></h3>
-        ${p.price ? `<div style="color:var(--green-dark);font-weight:700;font-size:1.1rem;margin:5px 0;">${p.price}</div>` : ''}
+
         <p>${p.desc}</p>
         <div class="product-actions" style="display:flex;gap:0.5rem;">
           <a href="product.html?id=${p.id}" class="product-btn" style="text-align:center;flex:1;">View Details →</a>
