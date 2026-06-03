@@ -1,5 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80">
-  <rect width="200" height="80" rx="8" fill="#ffffff" stroke="#138808" stroke-width="2"/>
-  <text x="100" y="40" font-family="Arial" font-size="32" font-weight="bold" fill="#138808" text-anchor="middle" dominant-baseline="middle">IEC</text>
-  <text x="100" y="65" font-family="Arial" font-size="14" fill="#555" text-anchor="middle">CERTIFIED</text>
-</svg>
